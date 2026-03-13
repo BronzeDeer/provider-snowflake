@@ -7,7 +7,7 @@ import (
 
 // Package type metadata.
 const (
-	Group   = "template.crossplane.io"
+	Group   = "snowflake.bronze-deer.de"
 	Version = "v1alpha1"
 )
 

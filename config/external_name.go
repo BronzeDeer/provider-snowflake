@@ -8,7 +8,7 @@ import (
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
-	"null_resource": idWithStub(),
+	"snowflake_database": config.NameAsIdentifier,
 }
 
 func idWithStub() config.ExternalName {

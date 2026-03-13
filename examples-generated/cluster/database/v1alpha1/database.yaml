@@ -1,0 +1,10 @@
+apiVersion: database.snowflake.bronze-deer.de/v1alpha1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: database/v1alpha1/database
+  labels:
+    testing.upbound.io/example-name: primary
+  name: primary
+spec:
+  forProvider: {}
