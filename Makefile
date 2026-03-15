@@ -174,6 +174,12 @@ run: go.build
 	@# To see other arguments that can be provided, run the command with --help instead
 	$(GO_OUT_DIR)/provider --debug
 
+# output a sourceable script which can be used to run the binary with the same settings as "make run"
+print-env:
+	@echo 'export TERRAFORM_VERSION="$(TERRAFORM_VERSION)"'
+	@echo 'export TERRAFORM_PROVIDER_SOURCE="$(TERRAFORM_PROVIDER_SOURCE)"'
+	@echo 'export TERRAFORM_PROVIDER_VERSION="$(TERRAFORM_PROVIDER_VERSION)"'
+
 # ====================================================================================
 # End to End Testing
 CROSSPLANE_NAMESPACE = crossplane-system
