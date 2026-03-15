@@ -29,7 +29,14 @@
           govulncheck
           gotools
           pkgs."terraform-${terraformVersion}"
-        ];
+          delve
+
+        ]
+        # Allow timetravel debugging on linux on all modern intel and many amd ryzen cpus
+        # Note that `sysctl kernel.perf_event_paranoid` needs to be <= 1 in order to record a trace
+        ++ (lib.optionals ( lib.strings.hasSuffix "-linux" system) [rr]);
+
+      hardeningDisable = [ "fortify" ]; # Necessary to allow compiling go builds with debug information
 
       shellHook = ''
         # Set version of our installed terraform to ensure it gets taken up by the Makefile if it differs from the default
