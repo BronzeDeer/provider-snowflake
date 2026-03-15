@@ -1,14 +1,77 @@
 package config
 
 import (
+	"context"
+	"fmt"
+	"strings"
+
+	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/upjet/v2/pkg/config"
 )
 
 // ExternalNameConfigs contains all external name configurations for this
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
-	// Import requires using a randomly generated ID from provider: nl-2e21sda
 	"snowflake_database": config.NameAsIdentifier,
+	// since we might have multiple schemas with the same name from different databases in the same namespace or cluster we need to decouple metadata.name and forProvider.name
+	// name in spec determines externalname and database + "." + "externalName" is the id
+	"snowflake_schema": {
+		GetExternalNameFn: func(tfstate map[string]any) (string, error) {
+			v, ok := tfstate["id"]
+
+			if !ok {
+				return "", errors.New("Could not set external name based on id")
+			}
+
+			vStr, ok := v.(string)
+
+			if !ok {
+				return "", errors.Errorf("provider returned non string value '%v' for property 'id'", v)
+			}
+
+			idParts := strings.Split(vStr, ".")
+			schemaName := idParts[len(idParts)-1]
+			schemaName = strings.Trim(schemaName, "\"")
+
+			return schemaName, nil
+		},
+		GetIDFn: func(ctx context.Context, externalName string, parameters, terraformProviderConfig map[string]any) (string, error) {
+			v, ok := parameters["database"]
+
+			if !ok {
+				return "", errors.New("Missing required field 'database' in terraform state")
+			}
+
+			db, ok := v.(string)
+
+			if !ok {
+				return "", errors.Errorf("provider returned non string value '%v' for property 'database'", v)
+			}
+
+			// Need to build the id from name directly if external name is empty
+			if externalName == "" {
+				v, ok = parameters["name"]
+
+				if !ok {
+					return "", errors.New("Could not set external name based on spec.forProvider.name")
+				}
+
+				externalName, ok = v.(string)
+
+				if !ok {
+					return "", errors.Errorf("provider returned non string value '%v' for property 'name'", v)
+				}
+
+			}
+			return fmt.Sprintf("%s.%s", db, externalName), nil
+		},
+		// External Name value is the same as value of the terraform "name" field
+		SetIdentifierArgumentFn: func(base map[string]any, externalName string) {
+
+		},
+		// Do not take metadata.name as name value, otherwise we will get loads of collisions unless sticking to a "1 DB per NS" rule
+		DisableNameInitializer: true,
+	},
 }
 
 func idWithStub() config.ExternalName {

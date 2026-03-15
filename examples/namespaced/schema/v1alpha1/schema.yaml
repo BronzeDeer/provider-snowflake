@@ -1,0 +1,14 @@
+apiVersion: schema.snowflake.m.bronze-deer.de/v1alpha1
+kind: Schema
+metadata:
+  annotations:
+    meta.upbound.io/example-id: schema/v1alpha1/schema
+  labels:
+    testing.upbound.io/example-name: name-from-spec
+  name: test-schema
+spec:
+  forProvider:
+    name: name-from-spec
+    databaseSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test-crossplane

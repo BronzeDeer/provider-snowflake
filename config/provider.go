@@ -7,7 +7,9 @@ import (
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 
 	databaseCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/database"
+	schemaCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/schema"
 	databaseNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/database"
+	schemaNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/schema"
 )
 
 const (
@@ -34,6 +36,7 @@ func GetProvider() *ujconfig.Provider {
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
 		databaseCluster.Configure,
+		schemaCluster.Configure,
 	} {
 		configure(pc)
 	}
@@ -58,6 +61,7 @@ func GetProviderNamespaced() *ujconfig.Provider {
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
 		databaseNamespaced.Configure,
+		schemaNamespaced.Configure,
 	} {
 		configure(pc)
 	}
