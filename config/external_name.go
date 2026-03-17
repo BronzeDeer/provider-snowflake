@@ -12,7 +12,8 @@ import (
 // ExternalNameConfigs contains all external name configurations for this
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
-	"snowflake_database": config.NameAsIdentifier,
+	"snowflake_account_role": config.NameAsIdentifier,
+	"snowflake_database":     config.NameAsIdentifier,
 	// since we might have multiple schemas with the same name from different databases in the same namespace or cluster we need to decouple metadata.name and forProvider.name
 	// name in spec determines externalname and database + "." + "externalName" is the id
 	"snowflake_schema": {

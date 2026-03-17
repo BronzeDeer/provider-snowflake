@@ -1,0 +1,11 @@
+apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+kind: AccountRole
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountrole
+  labels:
+    testing.upbound.io/example-name: minimal
+  name: minimal
+  namespace: crossplane-system
+spec:
+  forProvider: {}

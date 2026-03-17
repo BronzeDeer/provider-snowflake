@@ -11,6 +11,7 @@ import (
 
 	database "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/database/database"
 	providerconfig "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/providerconfig"
+	accountrole "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/accountrole"
 	schema "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/schema/schema"
 )
 
@@ -20,6 +21,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		database.Setup,
 		providerconfig.Setup,
+		accountrole.Setup,
 		schema.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -35,6 +37,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		database.SetupGated,
 		providerconfig.SetupGated,
+		accountrole.SetupGated,
 		schema.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
