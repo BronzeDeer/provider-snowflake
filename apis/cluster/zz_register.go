@@ -15,6 +15,7 @@ import (
 	v1alpha1schema "github.com/BronzeDeer/provider-snowflake/apis/cluster/schema/v1alpha1"
 	v1alpha1cluster "github.com/BronzeDeer/provider-snowflake/apis/cluster/v1alpha1"
 	v1beta1 "github.com/BronzeDeer/provider-snowflake/apis/cluster/v1beta1"
+	v1alpha1warehouse "github.com/BronzeDeer/provider-snowflake/apis/cluster/warehouse/v1alpha1"
 )
 
 func init() {
@@ -25,6 +26,7 @@ func init() {
 		v1alpha1schema.SchemeBuilder.AddToScheme,
 		v1alpha1cluster.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
+		v1alpha1warehouse.SchemeBuilder.AddToScheme,
 	)
 }
 

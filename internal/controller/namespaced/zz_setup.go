@@ -12,7 +12,10 @@ import (
 	database "github.com/BronzeDeer/provider-snowflake/internal/controller/namespaced/database/database"
 	providerconfig "github.com/BronzeDeer/provider-snowflake/internal/controller/namespaced/providerconfig"
 	accountrole "github.com/BronzeDeer/provider-snowflake/internal/controller/namespaced/rbac/accountrole"
+	accountrolegrant "github.com/BronzeDeer/provider-snowflake/internal/controller/namespaced/rbac/accountrolegrant"
+	user "github.com/BronzeDeer/provider-snowflake/internal/controller/namespaced/rbac/user"
 	schema "github.com/BronzeDeer/provider-snowflake/internal/controller/namespaced/schema/schema"
+	warehouse "github.com/BronzeDeer/provider-snowflake/internal/controller/namespaced/warehouse/warehouse"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -22,7 +25,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		database.Setup,
 		providerconfig.Setup,
 		accountrole.Setup,
+		accountrolegrant.Setup,
+		user.Setup,
 		schema.Setup,
+		warehouse.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -38,7 +44,10 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		database.SetupGated,
 		providerconfig.SetupGated,
 		accountrole.SetupGated,
+		accountrolegrant.SetupGated,
+		user.SetupGated,
 		schema.SetupGated,
+		warehouse.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

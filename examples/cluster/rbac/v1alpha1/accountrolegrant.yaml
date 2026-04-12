@@ -1,0 +1,66 @@
+apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
+kind: AccountRoleGrant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountrolegrant
+  labels:
+    testing.upbound.io/example-name: g
+  name: g
+spec:
+  forProvider:
+    parentRoleName: parent-role
+    roleName: role
+
+---
+
+apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
+kind: AccountRole
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountrolegrant
+  labels:
+    testing.upbound.io/example-name: parent_role
+  name: parent-role
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
+kind: AccountRole
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountrolegrant
+  labels:
+    testing.upbound.io/example-name: role
+  name: role
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountrolegrant
+  labels:
+    testing.upbound.io/example-name: user
+  name: user
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
+kind: AccountRoleGrant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountrolegrant
+  labels:
+    testing.upbound.io/example-name: g
+  name: gu
+spec:
+  forProvider:
+    userName: user
+    roleName: role

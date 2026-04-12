@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	grantaccountrole "github.com/BronzeDeer/provider-snowflake/config/cluster/grant_account_role"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/upjet/v2/pkg/config"
 )
@@ -12,8 +13,11 @@ import (
 // ExternalNameConfigs contains all external name configurations for this
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
-	"snowflake_account_role": config.NameAsIdentifier,
-	"snowflake_database":     config.NameAsIdentifier,
+	"snowflake_account_role":       config.NameAsIdentifier,
+	"snowflake_user":               config.NameAsIdentifier,
+	"snowflake_grant_account_role": grantaccountrole.ExternalName,
+	"snowflake_warehouse":          config.NameAsIdentifier,
+	"snowflake_database":           config.NameAsIdentifier,
 	// since we might have multiple schemas with the same name from different databases in the same namespace or cluster we need to decouple metadata.name and forProvider.name
 	// name in spec determines externalname and database + "." + "externalName" is the id
 	"snowflake_schema": {

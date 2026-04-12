@@ -8,3 +8,9 @@ package v1alpha1
 
 // Hub marks this type as a conversion hub.
 func (tr *AccountRole) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *AccountRoleGrant) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *User) Hub() {}

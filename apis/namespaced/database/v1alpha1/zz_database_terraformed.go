@@ -118,6 +118,15 @@ func (tr *Database) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	opts = append(opts, resource.WithNameFilter("DataRetentionTimeInDays"))
+	opts = append(opts, resource.WithNameFilter("LogLevel"))
+	opts = append(opts, resource.WithNameFilter("MaxDataExtensionTimeInDays"))
+	opts = append(opts, resource.WithNameFilter("StorageSerializationPolicy"))
+	opts = append(opts, resource.WithNameFilter("SuspendTaskAfterNumFailures"))
+	opts = append(opts, resource.WithNameFilter("TraceLevel"))
+	opts = append(opts, resource.WithNameFilter("UserTaskManagedInitialWarehouseSize"))
+	opts = append(opts, resource.WithNameFilter("UserTaskMinimumTriggerIntervalInSeconds"))
+	opts = append(opts, resource.WithNameFilter("UserTaskTimeoutMs"))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)
