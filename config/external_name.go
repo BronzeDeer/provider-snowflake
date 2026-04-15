@@ -79,7 +79,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	},
 }
 
-func idWithStub() config.ExternalName {
+func idWithStub() config.ExternalName { //nolint:unused
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
 		en, _ := config.IDAsExternalName(tfstate)
