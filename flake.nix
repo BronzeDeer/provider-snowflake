@@ -28,6 +28,8 @@
           gopls
           govulncheck
           gotools
+          golangci-lint
+
           pkgs."terraform-${terraformVersion}"
           delve
 
