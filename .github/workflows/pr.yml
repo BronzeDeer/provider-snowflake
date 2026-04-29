@@ -1,0 +1,23 @@
+name: PR integration tests
+
+on:
+  pull_request:
+    types: 
+      - labeled
+    branches:
+      - main
+
+jobs:
+  create-test-account:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Show OIDC claims (right before assume)
+        env:
+          AUDIENCE: "snowflakecomputing.com"
+        run: |
+          TOKEN_JSON=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUDIENCE")
+          ID_TOKEN=$(echo "$TOKEN_JSON" | jq -r .value)
+          echo "$ID_TOKEN" | awk -F. '{print $2}' | base64 -d 2>/dev/null | jq -r
+      - name: Show event
+        run: |
+          echo "${{ github.event.label }}"
