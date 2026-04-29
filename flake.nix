@@ -24,11 +24,18 @@
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
 
-          go_1_24
+          go_1_26
           gopls
           govulncheck
           gotools
           golangci-lint
+
+          # For testing
+          vcluster
+          snowflake-cli
+          yq-go
+          # Needed to generate temporary rsa key pairs
+          openssl
 
           pkgs."terraform-${terraformVersion}"
           delve
@@ -48,7 +55,7 @@
       '';
 
       };
-      defaultPackage = devShells.default; # Allow nix build to also pick up the shell by default
+      defaultPackage = devShells.default.inputDerivation; # Allow nix build to also pick up the shell by default
     }
   );
 }
