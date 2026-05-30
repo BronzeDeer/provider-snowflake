@@ -48,7 +48,7 @@ jobs:
           # if there's no cache hit, restore a cache by this prefix
           restore-prefixes-first-match: nix-${{ runner.os }}-
 
-      - name: Pre-built Nix shell
+      - name: Pre-build Nix shell
         run: |
           nixSystem=$(nix eval --raw --impure --expr 'builtins.currentSystem')
           nix build ".#devShells.${nixSystem}.default" --out-link ${{ runner.temp }}/devshell
