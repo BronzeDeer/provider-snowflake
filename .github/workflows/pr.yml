@@ -2,16 +2,21 @@ name: PR integration tests
 
 on:
   pull_request:
-    types: 
+    types:
       - labeled
     branches:
       - main
 
-permissions:
-  id-token: write
 
 jobs:
   create-test-account:
+    if: ${{ contains( github.event.pull_request.labels.*.name, 'ok-to-test') && !contains( github.event.pull_request.labels.*.name, 'pr-account-deployed') }}
+    permissions:
+      id-token: write
+      # FIXME: Is there anyway to restrict this to itself?
+      pull-requests: write
+
+    environment: int-test
     runs-on: ubuntu-24.04
     steps:
       - name: Show OIDC claims (right before assume)
@@ -20,7 +25,42 @@ jobs:
         run: |
           TOKEN_JSON=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUDIENCE")
           ID_TOKEN=$(echo "$TOKEN_JSON" | jq -r .value)
-          echo "$ID_TOKEN" | awk -F. '{print $2}' | base64 -d 2>/dev/null | jq -r
+          export ID_TOKEN_CONTENT=$(echo "$ID_TOKEN" | awk -F. '{print $2}' | base64 -d 2>/dev/null)
+          echo $ID_TOKEN_CONTENT | jq -r
+          export SUBJECT=$(echo $ID_TOKEN_CONTENT | jq -r .sub)
+          echo "SUBJECT=$SUBJECT" >> $GITHUB_OUTPUT
+          echo $SUBJECT
       - name: Show event
         run: |
-          echo "${{ github.event.label }}"
+          echo "${{ github.event.label.name }}"
+
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      -
+        name: setup
+        env:
+          SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_USER }}
+          SNOWFLAKE_ACCOUNT_NAME: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_ACCOUNT_NAME }}
+          SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_ROLE }}
+          SNOWFLAKE_HOST: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_HOST }}
+        run: |
+          ::add-mask::${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}
+          export SNOWFLAKE_PRIVATE_KEY_PATH="$(mktemp)"
+          echo -n "${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}" > $SNOWFLAKE_PRIVATE_KEYPATH
+          ./hack/ci/acc-isolation/setup-acc.sh ${{ github.event.number }}
+
+
+      - name: label-pr
+        run: |
+          curl -L \
+            -X POST
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{github.token}}" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            https://api.github.com/repos/${{github.repository}}/issues/${{github.event.pull_request.number}}/labels \
+            -d $(yq ' . | to_entries | map(.key + ":" + .value) | . += "pr-account-deployed" | {"labels": .}' pr-account.yaml)
+
+      # contains( github.event.pull_request.labels.*.name, 'My Label')

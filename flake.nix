@@ -30,6 +30,13 @@
           gotools
           golangci-lint
 
+          # For testing
+          vcluster
+          snowflake-cli
+          yq-go
+          # Needed to generate temporary rsa key pairs
+          openssl
+
           pkgs."terraform-${terraformVersion}"
           delve
 
