@@ -1,4 +1,4 @@
-set -xe
+set -e
 TMP_PUB_KEY="$(openssl genrsa 4096 | tee id_rsa | openssl rsa -pubout | grep -v 'PUBLIC KEY' | tr -d '\n')"
 CREATE_QUERY="CALL PROCEDURES.ORGADMIN.CREATE_PR_ACC($1,'$TMP_PUB_KEY');"
 RESULT_JSON="$(snow --config-file config.toml sql --debug --user "$SNOWFLAKE_USER" --accountname "$SNOWFLAKE_ACCOUNT_NAME" --role "$SNOWFLAKE_ROLE" --private-key-file "$SNOWFLAKE_PRIVATE_KEY_PATH" -q "$CREATE_QUERY" --format json)"

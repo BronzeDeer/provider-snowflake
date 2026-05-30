@@ -19,21 +19,6 @@ jobs:
     environment: int-test
     runs-on: ubuntu-24.04
     steps:
-      - name: Show OIDC claims (right before assume)
-        env:
-          AUDIENCE: "snowflakecomputing.com"
-        run: |
-          TOKEN_JSON=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUDIENCE")
-          ID_TOKEN=$(echo "$TOKEN_JSON" | jq -r .value)
-          export ID_TOKEN_CONTENT=$(echo "$ID_TOKEN" | awk -F. '{print $2}' | base64 -d 2>/dev/null)
-          echo $ID_TOKEN_CONTENT | jq -r
-          export SUBJECT=$(echo $ID_TOKEN_CONTENT | jq -r .sub)
-          echo "SUBJECT=$SUBJECT" >> $GITHUB_OUTPUT
-          echo $SUBJECT
-      - name: Show event
-        run: |
-          echo "${{ github.event.label.name }}"
-
       - uses: actions/checkout@v5
       - uses: cachix/install-nix-action@v31
         with:
@@ -71,6 +56,13 @@ jobs:
           working-directory: ${{ github.workspace }}/hack/ci/acc-isolation/scripts/
           flakes-from-devshell: true
           script: |
+            export TOKEN_JSON=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUDIENCE")
+            export ID_TOKEN=$(echo "$TOKEN_JSON" | jq -r .value)
+            export ID_TOKEN_CONTENT=$(echo "$ID_TOKEN" | awk -F. '{print $2}' | base64 -d 2>/dev/null)
+            export PR_SUBJECT=$(echo $ID_TOKEN_CONTENT | jq -r .sub)
+            echo "SUBJECT=$PR_SUBJECT" >> $GITHUB_OUTPUT
+            echo $PR_SUBJECT
+
             export SNOWFLAKE_PRIVATE_KEY_PATH="$(mktemp)"
             echo -n "${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}" > $SNOWFLAKE_PRIVATE_KEY_PATH
             ./setup-acc.sh ${{ github.event.number }}
