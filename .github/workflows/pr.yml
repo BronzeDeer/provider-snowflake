@@ -50,7 +50,7 @@ jobs:
           export SNOWFLAKE_PRIVATE_KEY_PATH="$(mktemp)"
           echo -n "${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}" > $SNOWFLAKE_PRIVATE_KEY_PATH
           ./hack/ci/acc-isolation/scripts/setup-acc.sh ${{ github.event.number }}
-
+        shell: nix develop --command bash ${0}
 
       - name: label-pr
         run: |
