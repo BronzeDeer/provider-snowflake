@@ -57,12 +57,12 @@ jobs:
           SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_ROLE }}
           SNOWFLAKE_HOST: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_HOST }}
         with:
+          working-directory: ${{ github.workspace }}/hack/ci/acc-isolation/scripts/
           flakes-from-devshell: true
           script: |
             export SNOWFLAKE_PRIVATE_KEY_PATH="$(mktemp)"
             echo -n "${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}" > $SNOWFLAKE_PRIVATE_KEY_PATH
-            ./hack/ci/acc-isolation/scripts/setup-acc.sh ${{ github.event.number }}
-        #shell: nix develop --impure --command "bash ${0}"
+            ./setup-acc.sh ${{ github.event.number }}
 
       - name: label-pr
         run: |
