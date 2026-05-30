@@ -50,7 +50,7 @@ jobs:
 
       -
         name: setup
-        uses: workflow/nix-shell-action@v3
+        uses: workflow/nix-shell-action@v4.0.0
         env:
           SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_USER }}
           SNOWFLAKE_ACCOUNT_NAME: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_ACCOUNT_NAME }}
