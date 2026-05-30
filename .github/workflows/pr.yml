@@ -46,6 +46,7 @@ jobs:
         with:
           # restore and save a cache using this key
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
+          gc-max-store-size: 8G
 
       -
         name: setup
