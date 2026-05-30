@@ -49,7 +49,9 @@ jobs:
           restore-prefixes-first-match: nix-${{ runner.os }}-
 
       - name: Pre-built Nix shell
-        run: nix build .#devShells.$system.default
+        run: |
+          nixSystem=$(nix eval --raw --impure --expr 'builtins.currentSystem')
+          nix build ".#devShells.${nixSystem}.default" --out-link ${{ runner.temp }}/devshell
 
       - name: Cache Nix store
         uses: nix-community/cache-nix-action/save@v7.0.0
