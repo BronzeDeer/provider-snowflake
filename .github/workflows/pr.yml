@@ -40,13 +40,22 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
 
-      - name: Restore and save Nix store
-        uses: nix-community/cache-nix-action@v7
+      - name: Restore Nix store
+        uses: nix-community/cache-nix-action/restore@v7.0.0
         with:
           # restore and save a cache using this key
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
           # if there's no cache hit, restore a cache by this prefix
           restore-prefixes-first-match: nix-${{ runner.os }}-
+
+      - name: Pre-built Nix shell
+        run: nix build .#devShells.$system.default
+
+      - name: Cache Nix store
+        uses: nix-community/cache-nix-action/save@v7.0.0
+        with:
+          # restore and save a cache using this key
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
 
       -
         name: setup
