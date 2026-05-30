@@ -57,6 +57,7 @@ jobs:
           SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_ROLE }}
           SNOWFLAKE_HOST: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_HOST }}
         with:
+          flakes-from-devshell: true
           script: |
             export SNOWFLAKE_PRIVATE_KEY_PATH="$(mktemp)"
             echo -n "${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}" > $SNOWFLAKE_PRIVATE_KEY_PATH
