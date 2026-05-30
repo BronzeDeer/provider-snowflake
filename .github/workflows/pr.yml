@@ -47,7 +47,6 @@ jobs:
           SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_ROLE }}
           SNOWFLAKE_HOST: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_HOST }}
         run: |
-          ::add-mask::${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}
           export SNOWFLAKE_PRIVATE_KEY_PATH="$(mktemp)"
           echo -n "${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}" > $SNOWFLAKE_PRIVATE_KEYPATH
           ./hack/ci/acc-isolation/setup-acc.sh ${{ github.event.number }}
