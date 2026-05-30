@@ -39,18 +39,29 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
+
+      - name: Restore and save Nix store
+        uses: nix-community/cache-nix-action@v7
+        with:
+          # restore and save a cache using this key
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
+          # if there's no cache hit, restore a cache by this prefix
+          restore-prefixes-first-match: nix-${{ runner.os }}-
+
       -
         name: setup
+        uses: workflow/nix-shell-action@v3
         env:
           SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_USER }}
           SNOWFLAKE_ACCOUNT_NAME: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_ACCOUNT_NAME }}
           SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_ROLE }}
           SNOWFLAKE_HOST: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_HOST }}
-        run: |
-          export SNOWFLAKE_PRIVATE_KEY_PATH="$(mktemp)"
-          echo -n "${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}" > $SNOWFLAKE_PRIVATE_KEY_PATH
-          ./hack/ci/acc-isolation/scripts/setup-acc.sh ${{ github.event.number }}
-        shell: nix develop --command bash ${0}
+        with:
+          script: |
+            export SNOWFLAKE_PRIVATE_KEY_PATH="$(mktemp)"
+            echo -n "${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}" > $SNOWFLAKE_PRIVATE_KEY_PATH
+            ./hack/ci/acc-isolation/scripts/setup-acc.sh ${{ github.event.number }}
+        #shell: nix develop --impure --command "bash ${0}"
 
       - name: label-pr
         run: |
