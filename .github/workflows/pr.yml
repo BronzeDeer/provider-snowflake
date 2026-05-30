@@ -61,6 +61,6 @@ jobs:
             -H "Authorization: Bearer ${{github.token}}" \
             -H "X-GitHub-Api-Version: 2026-03-10" \
             https://api.github.com/repos/${{github.repository}}/issues/${{github.event.pull_request.number}}/labels \
-            -d $(yq ' . | to_entries | map(.key + ":" + .value) | . += "pr-account-deployed" | {"labels": .}' pr-account.yaml)
+            -d "$(yq ' . | to_entries | map(.key + ":" + .value) | . += "pr-account-deployed" | {"labels": .}' -o json --indent=0 pr-account.yaml)"
 
       # contains( github.event.pull_request.labels.*.name, 'My Label')
