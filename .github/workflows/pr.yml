@@ -34,7 +34,7 @@ jobs:
 
 
       - name: Restore Nix store
-        uses: nix-community/cache-nix-action/restore@v7.0.0
+        uses: nix-community/cache-nix-action/restore@v7.0.2
         with:
           # restore and save a cache using this key
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
@@ -56,7 +56,7 @@ jobs:
           nix build ".#devShells.${nixSystem}.default" --out-link ${{ runner.temp }}/devshell
 
       - name: Cache Nix store
-        uses: nix-community/cache-nix-action/save@v7.0.0
+        uses: nix-community/cache-nix-action/save@v7.0.2
         with:
           # restore and save a cache using this key
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
