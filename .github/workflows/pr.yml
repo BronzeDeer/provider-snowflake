@@ -27,6 +27,10 @@ jobs:
             keep-env-derivations = true
             keep-outputs = true
 
+      - name: debug
+        run: |
+          ls /nix/store/cq1ad27xv42j87g6cxv6zayyhfm8glk9-acl-2.3.1 || true
+
 
       - name: Restore Nix store
         uses: nix-community/cache-nix-action/restore@v7.0.0
@@ -35,6 +39,10 @@ jobs:
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
           # if there's no cache hit, restore a cache by this prefix
           restore-prefixes-first-match: nix-${{ runner.os }}-
+
+      - name: debug
+        run: |
+          ls /nix/store/cq1ad27xv42j87g6cxv6zayyhfm8glk9-acl-2.3.1 || true
 
       - name: Pre-build Nix shell
         run: |
@@ -47,6 +55,9 @@ jobs:
           # restore and save a cache using this key
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
           gc-max-store-size: 8G
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
 
       -
         name: setup

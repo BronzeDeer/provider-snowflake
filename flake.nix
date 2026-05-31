@@ -55,7 +55,7 @@
       '';
 
       };
-      defaultPackage = devShells.default; # Allow nix build to also pick up the shell by default
+      defaultPackage = devShells.default.inputDerivation; # Allow nix build to also pick up the shell by default
     }
   );
 }
