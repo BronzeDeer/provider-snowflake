@@ -28,11 +28,6 @@ jobs:
             keep-env-derivations = true
             keep-outputs = true
 
-      - name: debug
-        run: |
-          ls /nix/store/cq1ad27xv42j87g6cxv6zayyhfm8glk9-acl-2.3.1 || true
-
-
       - name: Restore Nix store
         uses: nix-community/cache-nix-action/restore@v7.0.2
         with:
@@ -41,15 +36,6 @@ jobs:
           # if there's no cache hit, restore a cache by this prefix
           restore-prefixes-first-match: nix-${{ runner.os }}-
 
-      - name: debug
-        run: |
-          ls /nix/store/cq1ad27xv42j87g6cxv6zayyhfm8glk9-acl-2.3.1 || true
-          nix-store --verify-path /nix/store/cq1ad27xv42j87g6cxv6zayyhfm8glk9-acl-2.3.1 || true
-
-      - name: Setup upterm session
-        uses: owenthereal/action-upterm@v1
-        with:
-          limit-access-to-actor: true
       - name: Pre-build Nix shell
         run: |
           nixSystem=$(nix eval --raw --impure --expr 'builtins.currentSystem')
@@ -61,7 +47,6 @@ jobs:
           # restore and save a cache using this key
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
           gc-max-store-size: 8G
-
 
       -
         name: setup
@@ -89,6 +74,7 @@ jobs:
             ./setup-acc.sh ${{ github.event.number }}
 
       - name: label-pr
+        working-directory: ${{ github.workspace }}/hack/ci/acc-isolation/scripts/
         run: |
           curl -L \
             -X POST \
