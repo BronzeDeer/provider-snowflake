@@ -15,6 +15,7 @@ jobs:
       id-token: write
       # FIXME: Is there anyway to restrict this to itself?
       pull-requests: write
+      actions: read
 
     environment: int-test
     runs-on: ubuntu-24.04
@@ -55,9 +56,10 @@ jobs:
           # restore and save a cache using this key
           primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
           gc-max-store-size: 8G
-
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      - name: Setup upterm session
+        uses: owenthereal/action-upterm@v1
+        with:
+          limit-access-to-actor: true
 
       -
         name: setup
