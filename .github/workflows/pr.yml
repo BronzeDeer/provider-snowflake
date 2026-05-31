@@ -1,0 +1,87 @@
+name: PR integration tests
+
+on:
+  pull_request:
+    types:
+      - labeled
+    branches:
+      - main
+
+
+jobs:
+  create-test-account:
+    if: ${{ contains( github.event.pull_request.labels.*.name, 'ok-to-test') && !contains( github.event.pull_request.labels.*.name, 'pr-account-deployed') }}
+    permissions:
+      id-token: write
+      # FIXME: Is there anyway to restrict this to itself?
+      pull-requests: write
+      actions: read
+
+    environment: int-test
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            keep-env-derivations = true
+            keep-outputs = true
+
+      - name: Restore Nix store
+        uses: nix-community/cache-nix-action/restore@v7.0.2
+        with:
+          # restore and save a cache using this key
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
+          # if there's no cache hit, restore a cache by this prefix
+          restore-prefixes-first-match: nix-${{ runner.os }}-
+
+      - name: Pre-build Nix shell
+        run: |
+          nixSystem=$(nix eval --raw --impure --expr 'builtins.currentSystem')
+          nix build ".#devShells.${nixSystem}.default" --out-link ${{ runner.temp }}/devshell
+
+      - name: Cache Nix store
+        uses: nix-community/cache-nix-action/save@v7.0.2
+        with:
+          # restore and save a cache using this key
+          primary-key: nix-${{ runner.os }}-${{ hashFiles('**/*.nix', '**/flake.lock') }}
+          gc-max-store-size: 8G
+
+      -
+        name: setup
+        uses: workflow/nix-shell-action@v4.0.0
+        env:
+          SNOWFLAKE_USER: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_USER }}
+          SNOWFLAKE_ACCOUNT_NAME: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_ACCOUNT_NAME }}
+          SNOWFLAKE_ROLE: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_ROLE }}
+          SNOWFLAKE_HOST: ${{ vars.SNOWFLAKE_PR_ACC_MANAGER_HOST }}
+        with:
+          working-directory: ${{ github.workspace }}/hack/ci/acc-isolation/scripts/
+          flakes-from-devshell: true
+          interpreter: "bash -e"
+          script: |
+            export AUDIENCE="snowflakecomputing.com"
+            export TOKEN_JSON=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUDIENCE")
+            export ID_TOKEN=$(echo "$TOKEN_JSON" | jq -r .value)
+            export ID_TOKEN_CONTENT=$(echo "$ID_TOKEN" | awk -F. '{print $2}' | base64 -d 2>/dev/null)
+            export PR_SUBJECT=$(echo $ID_TOKEN_CONTENT | jq -r .sub)
+            echo "SUBJECT=$PR_SUBJECT" >> $GITHUB_OUTPUT
+            echo $PR_SUBJECT
+
+            export SNOWFLAKE_PRIVATE_KEY_PATH="$(mktemp)"
+            echo -n "${{ secrets.SNOWFLAKE_PR_ACC_MANAGER_PRIVATE_KEY }}" > $SNOWFLAKE_PRIVATE_KEY_PATH
+            ./setup-acc.sh ${{ github.event.number }}
+
+      - name: label-pr
+        working-directory: ${{ github.workspace }}/hack/ci/acc-isolation/scripts/
+        run: |
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{github.token}}" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            https://api.github.com/repos/${{github.repository}}/issues/${{github.event.pull_request.number}}/labels \
+            -d "$(yq ' . | to_entries | map(.key + ":" + .value) | . += "pr-account-deployed" | {"labels": .}' -o json --indent=0 pr-account.yaml)"
+
+      # contains( github.event.pull_request.labels.*.name, 'My Label')
