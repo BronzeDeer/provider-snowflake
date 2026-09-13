@@ -121,6 +121,8 @@ jobs:
         name: test-connection
         uses: workflow/nix-shell-action@v4.0.0
         with:
+          flakes-from-devshell: true
+          interpreter: "bash -e"
           script: |
             echo "${{ toJson(github.event.pull_request.labels.*.name) }}" > labels-list.json
             cat labels-list.json | yq 'map(. | split(":") | {"key" : .[0], "value": .[1]}) | from_entries' | tee labels.yaml
