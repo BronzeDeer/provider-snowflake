@@ -1,0 +1,8 @@
+[connections.default]
+account = "kkqfkrs-rj88990"
+host = "kkqfkrs-rj88990.snowflakecomputing.com"
+user = "GH_ACTIONS_PR_ACC_MANAGER"
+region = "eu-central-1"
+role = "PR_ACC_MANAGER"
+authenticator = "SNOWFLAKE_JWT"
+private_key_file = "id_rsa"
