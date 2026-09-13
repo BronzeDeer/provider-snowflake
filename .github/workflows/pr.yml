@@ -129,7 +129,7 @@ jobs:
             yq '{ "connections": { "default": {
               "role": "ACCOUNTADMIN",
               "authenticator": "WORKLOAD_IDENTITY",
-              "workloadIdentityProvider": "OIDC",
+              "workload_identity_provider": "OIDC",
               "region": "eu-central-1",
               "host": .PR_HOST,
               "user": .PR_USER_NAME,
