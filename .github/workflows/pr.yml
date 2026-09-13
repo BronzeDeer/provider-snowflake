@@ -83,6 +83,8 @@ jobs:
             -d "$(yq ' . | to_entries | map(.key + ":" + .value) | . += "pr-account-deployed" | {"labels": .}' -o json --indent=0 pr-account.yaml)"
 
   test-pr-account:
+    permissions:
+      id-token: write
     if: ${{ contains( github.event.pull_request.labels.*.name, 'ok-to-test') && contains( github.event.pull_request.labels.*.name, 'pr-account-deployed') }}
     runs-on: ubuntu-24.04
     steps:
