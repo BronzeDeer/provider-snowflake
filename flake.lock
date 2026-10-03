@@ -20,15 +20,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1791031302,
-        "narHash": "sha256-JAyjN3AxMYK+T/VBmTRWnCqSEgSStMXGV9os90u+dUQ=",
+        "lastModified": 1790769526,
+        "narHash": "sha256-5AIVFLRcx8YAwbFTVPTs7YhwJH7JyHfAQsvXmpovcXI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "777af8065726141f36a9d59a769729e212de7694",
+        "rev": "c9fe7d12cd78d1adcd12dd15e24432dde5b155a0",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -88,11 +89,27 @@
         "type": "github"
       }
     },
+    "nono-nix": {
+      "locked": {
+        "lastModified": 1789345477,
+        "narHash": "sha256-dpULqToo4R4aLGPiimfz4mvEAhRxm4K9Goys+8Y0iUA=",
+        "ref": "refs/heads/main",
+        "rev": "6037525ab7928d105fb86658410ed3464e2ac8aa",
+        "revCount": 129,
+        "type": "git",
+        "url": "https://gitlab.com/gitlab-org/nix/nono.nix.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://gitlab.com/gitlab-org/nix/nono.nix.git"
+      }
+    },
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-terraform": "nixpkgs-terraform"
+        "nixpkgs-terraform": "nixpkgs-terraform",
+        "nono-nix": "nono-nix"
       }
     },
     "systems": {
