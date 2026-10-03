@@ -3,6 +3,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs-terraform.url = "github:stackbuilders/nixpkgs-terraform"; # Allows us to fetch old pre-BSL terraform binaries
+    nixpkgs-terraform.inputs.nixpkgs.follows="nixpkgs";
   };
 
   outputs = {
@@ -18,19 +19,20 @@
       terraformVersion = "1.5.6";
       pkgs = import nixpkgs{
         inherit system;
-        overlays = [nixpkgs-terraform.overlays.default];
       };
     in rec {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
 
-          go_1_24
+          go
           gopls
           govulncheck
           gotools
           golangci-lint
 
-          pkgs."terraform-${terraformVersion}"
+          # importing the package directly rather than through the overlay, due to a bug in overlay hostPlatform detection on NixOs with stud-ld: 
+          # https://github.com/NixOS/nixpkgs/issues/325318
+          nixpkgs-terraform.packages.${system}."terraform-${terraformVersion}"
           delve
 
         ]
