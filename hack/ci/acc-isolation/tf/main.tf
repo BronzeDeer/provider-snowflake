@@ -51,15 +51,12 @@ resource "snowflake_schema" "procedure_schema" {
   database = snowflake_database.procedure_db.name
 }
 
-resource "snowflake_grant_privileges_to_account_role" "orgadm_create_procedure" {
+resource "snowflake_grant_privileges_to_account_role" "orgadm_create_procedures" {
   provider = snowflake.accadm
   account_role_name = "ORGADMIN"
-  all_privileges = true
-  on_schema_object {
-    future {
-      in_schema = snowflake_schema.procedure_schema.fully_qualified_name
-      object_type_plural = "PROCEDURES"
-    }
+  privileges = ["CREATE PROCEDURE"]
+  on_schema {
+      schema_name = snowflake_schema.procedure_schema.fully_qualified_name
   }
 }
 
@@ -108,6 +105,8 @@ RETURN TABLE(res);
 END;
 
 EOT
+
+depends_on = [ snowflake_grant_privileges_to_account_role.orgadm_create_procedures ]
 }
 
 resource "snowflake_procedure_sql" "drop_acc" {
@@ -142,6 +141,8 @@ RETURN :ACCOUNT_NAME;
 END;
 
 EOT
+
+depends_on = [ snowflake_grant_privileges_to_account_role.orgadm_create_procedures ]
 }
 
 resource "snowflake_account_role" "pr_acc_manager" {
