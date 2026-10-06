@@ -77,6 +77,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 		// Do not take metadata.name as name value, otherwise we will get loads of collisions unless sticking to a "1 DB per NS" rule
 		DisableNameInitializer: true,
 	},
+	"snowflake_tag": config.NameAsIdentifier,
 }
 
 func idWithStub() config.ExternalName { //nolint:unused
