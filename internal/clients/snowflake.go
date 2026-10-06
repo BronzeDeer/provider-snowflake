@@ -56,22 +56,22 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if v, ok := creds["accountName"]; ok {
 			ps.Configuration["account_name"] = v
 		} else {
-			return terraform.Setup{}, errors.Wrap(err, "could not find accountName property to set account_name")
+			return terraform.Setup{}, errors.New("provider config is missing required key 'account_name'")
 		}
 		if v, ok := creds["organizationName"]; ok {
 			ps.Configuration["organization_name"] = v
 		} else {
-			return terraform.Setup{}, errors.Wrap(err, "could not find organizationName property to set organization_name")
+			return terraform.Setup{}, errors.New("provider config is missing required key 'organization_name'")
 		}
 		if v, ok := creds["user"]; ok {
 			ps.Configuration["user"] = v
 		} else {
-			return terraform.Setup{}, errors.Wrap(err, "could not find user property to set user")
+			return terraform.Setup{}, errors.New("provider config is missing required key 'user'")
 		}
 		if v, ok := creds["password"]; ok {
 			ps.Configuration["password"] = v
 		} else {
-			return terraform.Setup{}, errors.Wrap(err, "could not find password property to set password")
+			return terraform.Setup{}, errors.New("provider config is missing required key 'password'")
 		}
 		if v, ok := creds["role"]; ok {
 			ps.Configuration["role"] = v
