@@ -1,0 +1,17 @@
+apiVersion: tag.snowflake.bronze-deer.de/v1alpha1
+kind: Tag
+metadata:
+  annotations:
+    meta.upbound.io/example-id: tag/v1alpha1/tag
+  labels:
+    testing.upbound.io/example-name: tag
+  name: tag
+spec:
+  forProvider:
+    name: other-name
+    databaseSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test-crossplane
+    schemaSelector:
+      matchLabels:
+        testing.upbound.io/example-name: name-from-spec

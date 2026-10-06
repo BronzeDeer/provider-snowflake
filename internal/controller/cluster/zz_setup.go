@@ -15,6 +15,7 @@ import (
 	accountrolegrant "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/accountrolegrant"
 	user "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/user"
 	schema "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/schema/schema"
+	tag "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/tag/tag"
 	warehouse "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/warehouse/warehouse"
 )
 
@@ -28,6 +29,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		accountrolegrant.Setup,
 		user.Setup,
 		schema.Setup,
+		tag.Setup,
 		warehouse.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
@@ -47,6 +49,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		accountrolegrant.SetupGated,
 		user.SetupGated,
 		schema.SetupGated,
+		tag.SetupGated,
 		warehouse.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
