@@ -10,6 +10,7 @@ import (
 	databaseCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/database"
 	accountRoleGrantCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/grant_account_role"
 	schemaCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/schema"
+	tagCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/tag"
 	userCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/user"
 	warehouseCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/warehouse"
 	accountRoleNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/account_role"
@@ -45,6 +46,7 @@ func GetProvider() *ujconfig.Provider {
 		// add custom config functions
 		databaseCluster.Configure,
 		schemaCluster.Configure,
+		tagCluster.Configure,
 		accountRoleCluster.Configure,
 		accountRoleGrantCluster.Configure,
 		userCluster.Configure,
@@ -74,6 +76,7 @@ func GetProviderNamespaced() *ujconfig.Provider {
 		// add custom config functions
 		databaseNamespaced.Configure,
 		schemaNamespaced.Configure,
+		tagCluster.Configure,
 		accountRoleNamespaced.Configure,
 		accountRoleGrantNamespaced.Configure,
 		userNamespaced.Configure,
