@@ -184,6 +184,9 @@ spec:
                         isDefault:
                           description: (Boolean)
                           type: boolean
+                        isFromOrganizationUserGroup:
+                          description: (Boolean)
+                          type: boolean
                         isInherited:
                           description: (Boolean)
                           type: boolean

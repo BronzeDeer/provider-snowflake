@@ -62,6 +62,16 @@ func (in *DatabaseInitParameters) DeepCopyInto(out *DatabaseInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DefaultNotebookComputePoolCPU != nil {
+		in, out := &in.DefaultNotebookComputePoolCPU, &out.DefaultNotebookComputePoolCPU
+		*out = new(string)
+		**out = **in
+	}
+	if in.DefaultNotebookComputePoolGpu != nil {
+		in, out := &in.DefaultNotebookComputePoolGpu, &out.DefaultNotebookComputePoolGpu
+		*out = new(string)
+		**out = **in
+	}
 	if in.DropPublicSchemaOnCreation != nil {
 		in, out := &in.DropPublicSchemaOnCreation, &out.DropPublicSchemaOnCreation
 		*out = new(bool)
@@ -80,6 +90,11 @@ func (in *DatabaseInitParameters) DeepCopyInto(out *DatabaseInitParameters) {
 	if in.IsTransient != nil {
 		in, out := &in.IsTransient, &out.IsTransient
 		*out = new(bool)
+		**out = **in
+	}
+	if in.LogEventLevel != nil {
+		in, out := &in.LogEventLevel, &out.LogEventLevel
+		*out = new(string)
 		**out = **in
 	}
 	if in.LogLevel != nil {
@@ -211,6 +226,16 @@ func (in *DatabaseObservation) DeepCopyInto(out *DatabaseObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DefaultNotebookComputePoolCPU != nil {
+		in, out := &in.DefaultNotebookComputePoolCPU, &out.DefaultNotebookComputePoolCPU
+		*out = new(string)
+		**out = **in
+	}
+	if in.DefaultNotebookComputePoolGpu != nil {
+		in, out := &in.DefaultNotebookComputePoolGpu, &out.DefaultNotebookComputePoolGpu
+		*out = new(string)
+		**out = **in
+	}
 	if in.DropPublicSchemaOnCreation != nil {
 		in, out := &in.DropPublicSchemaOnCreation, &out.DropPublicSchemaOnCreation
 		*out = new(bool)
@@ -239,6 +264,11 @@ func (in *DatabaseObservation) DeepCopyInto(out *DatabaseObservation) {
 	if in.IsTransient != nil {
 		in, out := &in.IsTransient, &out.IsTransient
 		*out = new(bool)
+		**out = **in
+	}
+	if in.LogEventLevel != nil {
+		in, out := &in.LogEventLevel, &out.LogEventLevel
+		*out = new(string)
 		**out = **in
 	}
 	if in.LogLevel != nil {
@@ -338,6 +368,16 @@ func (in *DatabaseParameters) DeepCopyInto(out *DatabaseParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DefaultNotebookComputePoolCPU != nil {
+		in, out := &in.DefaultNotebookComputePoolCPU, &out.DefaultNotebookComputePoolCPU
+		*out = new(string)
+		**out = **in
+	}
+	if in.DefaultNotebookComputePoolGpu != nil {
+		in, out := &in.DefaultNotebookComputePoolGpu, &out.DefaultNotebookComputePoolGpu
+		*out = new(string)
+		**out = **in
+	}
 	if in.DropPublicSchemaOnCreation != nil {
 		in, out := &in.DropPublicSchemaOnCreation, &out.DropPublicSchemaOnCreation
 		*out = new(bool)
@@ -356,6 +396,11 @@ func (in *DatabaseParameters) DeepCopyInto(out *DatabaseParameters) {
 	if in.IsTransient != nil {
 		in, out := &in.IsTransient, &out.IsTransient
 		*out = new(bool)
+		**out = **in
+	}
+	if in.LogEventLevel != nil {
+		in, out := &in.LogEventLevel, &out.LogEventLevel
+		*out = new(string)
 		**out = **in
 	}
 	if in.LogLevel != nil {

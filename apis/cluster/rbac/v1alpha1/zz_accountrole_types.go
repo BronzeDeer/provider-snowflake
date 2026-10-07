@@ -70,6 +70,9 @@ type ShowOutputObservation struct {
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// (Boolean)
+	IsFromOrganizationUserGroup *bool `json:"isFromOrganizationUserGroup,omitempty" tf:"is_from_organization_user_group,omitempty"`
+
+	// (Boolean)
 	IsInherited *bool `json:"isInherited,omitempty" tf:"is_inherited,omitempty"`
 
 	// (String) Identifier for the role; must be unique for your account. Due to technical limitations (read more here), avoid using the following characters: |, ., ".

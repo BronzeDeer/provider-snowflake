@@ -456,6 +456,11 @@ spec:
                       (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
                       Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
                     type: number
+                  logEventLevel:
+                    description: |-
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+                      Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
+                    type: string
                   logLevel:
                     description: |-
                       (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Messages at the specified level (and at more severe levels) are ingested. For more information about log levels, see Setting log level. For more information, check LOG_LEVEL docs.
@@ -1099,6 +1104,11 @@ spec:
                       (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
                       Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
                     type: number
+                  logEventLevel:
+                    description: |-
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+                      Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
+                    type: string
                   logLevel:
                     description: |-
                       (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Messages at the specified level (and at more severe levels) are ingested. For more information about log levels, see Setting log level. For more information, check LOG_LEVEL docs.
@@ -1621,6 +1631,11 @@ spec:
                       (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
                       Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
                     type: number
+                  logEventLevel:
+                    description: |-
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+                      Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
+                    type: string
                   logLevel:
                     description: |-
                       (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Messages at the specified level (and at more severe levels) are ingested. For more information about log levels, see Setting log level. For more information, check LOG_LEVEL docs.
@@ -2261,6 +2276,29 @@ spec:
                           description: (Number) Number of seconds to wait while trying
                             to lock a resource, before timing out and aborting the
                             statement. For more information, check LOCK_TIMEOUT docs.
+                          items:
+                            properties:
+                              default:
+                                description: (String)
+                                type: string
+                              description:
+                                description: (String)
+                                type: string
+                              key:
+                                description: (String)
+                                type: string
+                              level:
+                                description: (String)
+                                type: string
+                              value:
+                                description: (String)
+                                type: string
+                            type: object
+                          type: array
+                        logEventLevel:
+                          description: 'insensitive): TRACE | DEBUG | INFO | WARN
+                            | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL
+                            docs.'
                           items:
                             properties:
                               default:

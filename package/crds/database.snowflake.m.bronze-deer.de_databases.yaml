@@ -80,6 +80,16 @@ spec:
                       (String) Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see collation specification.
                       Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
                     type: string
+                  defaultNotebookComputePoolCpu:
+                    description: |-
+                      (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                      Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                    type: string
+                  defaultNotebookComputePoolGpu:
+                    description: |-
+                      (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                      Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                    type: string
                   dropPublicSchemaOnCreation:
                     description: |-
                       (Boolean) Specifies whether to drop public schema on creation or not. Modifying the parameter after database is already created won't have any effect.
@@ -100,6 +110,11 @@ spec:
                       safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss.
                       Specifies the database as transient. Transient databases do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss.
                     type: boolean
+                  logEventLevel:
+                    description: |-
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
+                      Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
+                    type: string
                   logLevel:
                     description: |-
                       (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Valid options are: [TRACE DEBUG INFO WARN ERROR FATAL OFF]. Messages at the specified level (and at more severe levels) are ingested. For more information, see LOG_LEVEL.
@@ -220,6 +235,16 @@ spec:
                       (String) Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see collation specification.
                       Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
                     type: string
+                  defaultNotebookComputePoolCpu:
+                    description: |-
+                      (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                      Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                    type: string
+                  defaultNotebookComputePoolGpu:
+                    description: |-
+                      (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                      Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                    type: string
                   dropPublicSchemaOnCreation:
                     description: |-
                       (Boolean) Specifies whether to drop public schema on creation or not. Modifying the parameter after database is already created won't have any effect.
@@ -240,6 +265,11 @@ spec:
                       safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss.
                       Specifies the database as transient. Transient databases do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss.
                     type: boolean
+                  logEventLevel:
+                    description: |-
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
+                      Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
+                    type: string
                   logLevel:
                     description: |-
                       (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Valid options are: [TRACE DEBUG INFO WARN ERROR FATAL OFF]. Messages at the specified level (and at more severe levels) are ingested. For more information, see LOG_LEVEL.
@@ -410,6 +440,16 @@ spec:
                       (String) Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see collation specification.
                       Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
                     type: string
+                  defaultNotebookComputePoolCpu:
+                    description: |-
+                      (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                      Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                    type: string
+                  defaultNotebookComputePoolGpu:
+                    description: |-
+                      (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                      Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                    type: string
                   dropPublicSchemaOnCreation:
                     description: |-
                       (Boolean) Specifies whether to drop public schema on creation or not. Modifying the parameter after database is already created won't have any effect.
@@ -438,6 +478,11 @@ spec:
                       safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss.
                       Specifies the database as transient. Transient databases do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss.
                     type: boolean
+                  logEventLevel:
+                    description: |-
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
+                      Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
+                    type: string
                   logLevel:
                     description: |-
                       (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Valid options are: [TRACE DEBUG INFO WARN ERROR FATAL OFF]. Messages at the specified level (and at more severe levels) are ingested. For more information, see LOG_LEVEL.

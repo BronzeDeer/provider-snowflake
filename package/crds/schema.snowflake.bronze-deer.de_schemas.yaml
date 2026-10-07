@@ -172,6 +172,16 @@ spec:
                       (String) Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see collation specification.
                       Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
                     type: string
+                  defaultNotebookComputePoolCpu:
+                    description: |-
+                      (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                      Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                    type: string
+                  defaultNotebookComputePoolGpu:
+                    description: |-
+                      (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                      Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                    type: string
                   enableConsoleOutput:
                     description: |-
                       (Boolean) If true, enables stdout/stderr fast path logging for anonymous stored procedures.
@@ -186,6 +196,11 @@ spec:
                     description: |-
                       uses special value that cannot be set in the configuration manually (default)) Specifies the schema as transient. Transient schemas do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
                       (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies the schema as transient. Transient schemas do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
+                    type: string
+                  logEventLevel:
+                    description: |-
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
+                      Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
                     type: string
                   logLevel:
                     description: |-
@@ -370,6 +385,16 @@ spec:
                       (String) Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see collation specification.
                       Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
                     type: string
+                  defaultNotebookComputePoolCpu:
+                    description: |-
+                      (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                      Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                    type: string
+                  defaultNotebookComputePoolGpu:
+                    description: |-
+                      (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                      Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                    type: string
                   enableConsoleOutput:
                     description: |-
                       (Boolean) If true, enables stdout/stderr fast path logging for anonymous stored procedures.
@@ -384,6 +409,11 @@ spec:
                     description: |-
                       uses special value that cannot be set in the configuration manually (default)) Specifies the schema as transient. Transient schemas do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
                       (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies the schema as transient. Transient schemas do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
+                    type: string
+                  logEventLevel:
+                    description: |-
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
+                      Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
                     type: string
                   logLevel:
                     description: |-
@@ -577,6 +607,16 @@ spec:
                       (String) Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see collation specification.
                       Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
                     type: string
+                  defaultNotebookComputePoolCpu:
+                    description: |-
+                      (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                      Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
+                    type: string
+                  defaultNotebookComputePoolGpu:
+                    description: |-
+                      (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                      Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
+                    type: string
                   describeOutput:
                     description: |-
                       (List of Object) Outputs the result of DESCRIBE SCHEMA for the given object. In order to handle this output, one must grant sufficient privileges, e.g. grant_ownership on all objects in the schema. (see below for nested schema)
@@ -622,6 +662,11 @@ spec:
                     description: |-
                       uses special value that cannot be set in the configuration manually (default)) Specifies the schema as transient. Transient schemas do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
                       (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies the schema as transient. Transient schemas do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
+                    type: string
+                  logEventLevel:
+                    description: |-
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
+                      Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
                     type: string
                   logLevel:
                     description: |-
@@ -742,6 +787,28 @@ spec:
                           description: (String) The database parameter that specifies
                             the default external volume to use for Iceberg tables.
                             For more information, see EXTERNAL_VOLUME.
+                          items:
+                            properties:
+                              default:
+                                description: (String)
+                                type: string
+                              description:
+                                description: (String)
+                                type: string
+                              key:
+                                description: (String)
+                                type: string
+                              level:
+                                description: (String)
+                                type: string
+                              value:
+                                description: (String)
+                                type: string
+                            type: object
+                          type: array
+                        logEventLevel:
+                          description: 'insensitive): TRACE | DEBUG | INFO | WARN
+                            | ERROR | FATAL | OFF.'
                           items:
                             properties:
                               default:
