@@ -1,0 +1,106 @@
+apiVersion: apiextensions.crossplane.io/v2
+kind: CompositeResourceDefinition
+metadata:
+  name: dataproducts.platform.bronze-deer.de
+spec:
+  scope: Namespaced
+  group: platform.bronze-deer.de
+  names:
+    kind: DataProduct
+    plural: dataproducts
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      additionalPrinterColumns:
+        - name: DATABASE
+          type: string
+          jsonPath: .status.database
+        - name: DP-NAME
+          type: string
+          jsonPath: .spec.name
+        - name: ID
+          type: integer
+          jsonPath: .spec.id
+        - name: ENV
+          type: string
+          jsonPath: .spec.env
+        - name: DIVISION
+          type: string
+          jsonPath: .spec.division
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              description: A Snowflake data product.
+              properties:
+                name:
+                  type: string
+                  description: Name of the data product.
+                  minLength: 3
+                  maxLength: 20
+                id:
+                  type: integer
+                  description: Numeric ID of the data product.
+                  minimum: 1
+                env:
+                  type: string
+                  description: Environment the data product is deployed to.
+                  enum: [INTE, ZINT, GSEC, KOMO, MIGR, TEST, DEV, PROD, ABNA]
+                division:
+                  type: string
+                  description: Division owning the data product.
+                  enum: [PNC, HEALTH]
+                warehouse:
+                  type: object
+                  description: Warehouse of the data product.
+                  default: {}
+                  properties:
+                    size:
+                      type: string
+                      description: Size of the warehouse.
+                      default: XSMALL
+                      enum: [XSMALL, SMALL, MEDIUM, LARGE, XLARGE, XXLARGE, XXXLARGE, X4LARGE, X5LARGE, X6LARGE]
+                    autoscale:
+                      type: boolean
+                      description: Whether the warehouse scales out automatically under load.
+                      default: false
+                viewers:
+                  type: array
+                  description: Snowflake users granted the viewer role of the data product.
+                  default: []
+                  items:
+                    type: string
+                    minLength: 1
+                    maxLength: 255
+                  x-kubernetes-list-type: set
+                contributors:
+                  type: array
+                  description: Snowflake users granted the developer role of the data product.
+                  default: []
+                  items:
+                    type: string
+                    minLength: 1
+                    maxLength: 255
+                  x-kubernetes-list-type: set
+                maintainers:
+                  type: array
+                  description: Snowflake users granted the maintainer role of the data product.
+                  default: []
+                  items:
+                    type: string
+                    minLength: 1
+                    maxLength: 255
+                  x-kubernetes-list-type: set
+              required: [name, id, env, division]
+            status:
+              type: object
+              properties:
+                database:
+                  type: string
+                  description: Name of the data product database.
+                warehouse:
+                  type: string
+                  description: Name of the data product warehouse.

@@ -1,0 +1,386 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: dataproducts.platform.bronze-deer.de
+spec:
+  compositeTypeRef:
+    apiVersion: platform.bronze-deer.de/v1alpha1
+    kind: DataProduct
+  mode: Pipeline
+  pipeline:
+    - step: render-snowflake-resources
+      functionRef:
+        name: function-go-templating
+      input:
+        apiVersion: gotemplating.fn.crossplane.io/v1beta1
+        kind: GoTemplate
+        source: Inline
+        inline:
+          template: |
+            {{- /*
+              Privileges per data product role. Schema object privileges are granted on future objects of the type only, grants on all existing objects are not kept in sync by terraform.
+            */}}
+            {{- define "privileges" }}
+            viewer:
+              database: [USAGE]
+              warehouse: [USAGE, OPERATE]
+              schemas:
+                SDP: [USAGE]
+                OPS: [USAGE]
+                OUT: [USAGE]
+                DPZ: [USAGE]
+              schemaObjects:
+                - schemas: [SDP, OPS, OUT, DPZ]
+                  types:
+                    TABLES: [SELECT]
+                    VIEWS: [SELECT]
+                    MATERIALIZED VIEWS: [SELECT]
+                    DYNAMIC TABLES: [SELECT]
+                    FUNCTIONS: [USAGE]
+                - schemas: [SDP]
+                  types:
+                    PROCEDURES: [USAGE]
+                - schemas: [OUT]
+                  types:
+                    STAGES: [READ]
+            x:
+              warehouse: [USAGE]
+              schemas:
+                OPS: [USAGE, CREATE DBT PROJECT]
+                SDP: [USAGE]
+            consumer:
+              database: [USAGE]
+              schemas:
+                OUT: [USAGE]
+              schemaObjects:
+                - schemas: [OUT]
+                  types:
+                    TABLES: [SELECT]
+                    DYNAMIC TABLES: [SELECT]
+                    MATERIALIZED VIEWS: [SELECT]
+                    VIEWS: [SELECT]
+                    FUNCTIONS: [USAGE]
+            maintainer:
+              account: [MANAGE USER SUPPORT CASES]
+              warehouse: [USAGE, MONITOR]
+              serviceUsers: [MODIFY PROGRAMMATIC AUTHENTICATION METHODS]
+              procedures:
+                SDP.CREATE_DEV_SCHEMA(VARCHAR): [USAGE]
+                SDP.CREATE_DBT_TASK(VARIANT): [USAGE]
+            developer:
+              account: [EXECUTE TASK]
+              warehouse: [USAGE]
+              schemas:
+                OUT:
+                  - CREATE TABLE
+                  - CREATE DYNAMIC TABLE
+                  - CREATE VIEW
+                  - CREATE MATERIALIZED VIEW
+                  - CREATE MASKING POLICY
+                  - CREATE ROW ACCESS POLICY
+                  - CREATE STAGE
+                  - CREATE FILE FORMAT
+                  - CREATE SEQUENCE
+                  - CREATE FUNCTION
+                  - CREATE PROCEDURE
+                  - CREATE TAG
+                  - CREATE DATA METRIC FUNCTION
+                  - CREATE SEMANTIC VIEW
+                DPZ:
+                  - CREATE TABLE
+                  - CREATE DYNAMIC TABLE
+                  - CREATE VIEW
+                  - CREATE MATERIALIZED VIEW
+                  - CREATE MASKING POLICY
+                  - CREATE ROW ACCESS POLICY
+                  - CREATE STAGE
+                  - CREATE FILE FORMAT
+                  - CREATE SEQUENCE
+                  - CREATE FUNCTION
+                  - CREATE PROCEDURE
+                  - CREATE TAG
+                  - CREATE DATA METRIC FUNCTION
+                  - CREATE SEMANTIC VIEW
+                OPS:
+                  - CREATE TABLE
+                  - CREATE DYNAMIC TABLE
+                  - CREATE VIEW
+                  - CREATE MATERIALIZED VIEW
+                  - CREATE MASKING POLICY
+                  - CREATE ROW ACCESS POLICY
+                  - CREATE STAGE
+                  - CREATE FILE FORMAT
+                  - CREATE SEQUENCE
+                  - CREATE FUNCTION
+                  - CREATE PROCEDURE
+                  - CREATE TAG
+                  - CREATE DATA METRIC FUNCTION
+                  - CREATE SEMANTIC VIEW
+                  - CREATE NOTEBOOK
+                  - CREATE ALERT
+                  - CREATE TASK
+            {{- end }}
+            {{- $xr := .observed.composite.resource }}
+            {{- $spec := $xr.spec }}
+            {{- $database := printf "D%d_%s" (int64 $spec.id) $spec.env }}
+            {{- $comment := printf "Data product %s (%s)" $spec.name $spec.division }}
+            {{- $rolePrefix := printf "%s_%s_%s" $database $spec.division ($spec.name | upper | replace "-" "_") }}
+            {{- $warehouse := printf "%s_WH" $database }}
+            {{- $warehouseSpec := $spec.warehouse | default dict }}
+            {{- $serviceUsers := dict "github-ci" (printf "SVC_D%d_%s_GITHUB_CI" (int64 $spec.id) $spec.env) "default" (printf "SVC_D%d_%s" (int64 $spec.id) $spec.env) }}
+            {{- $roles := dict "developer" (printf "%s_D" $rolePrefix) "viewer" (printf "%s_V" $rolePrefix) "maintainer" (printf "%s_M" $rolePrefix) "consumer" (printf "%s_C" $rolePrefix) "x" (printf "%s_X" $rolePrefix) }}
+            ---
+            apiVersion: database.snowflake.m.bronze-deer.de/v1alpha1
+            kind: Database
+            metadata:
+              name: {{ $xr.metadata.name }}-database
+              annotations:
+                {{ setResourceNameAnnotation "database" }}
+                crossplane.io/external-name: {{ $database }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                comment: {{ $comment | quote }}
+            ---
+            apiVersion: warehouse.snowflake.m.bronze-deer.de/v1alpha1
+            kind: Warehouse
+            metadata:
+              name: {{ $xr.metadata.name }}-warehouse
+              annotations:
+                {{ setResourceNameAnnotation "warehouse" }}
+                crossplane.io/external-name: {{ $warehouse }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                comment: {{ $comment | quote }}
+                warehouseSize: {{ $warehouseSpec.size | default "XSMALL" }}
+                autoSuspend: 60
+                autoResume: "true"
+                initiallySuspended: true
+                enableQueryAcceleration: "false"
+                {{- if $warehouseSpec.autoscale }}
+                # multi-cluster warehouse adding clusters under load, requires Snowflake Enterprise edition
+                minClusterCount: 1
+                maxClusterCount: 3
+                scalingPolicy: STANDARD
+                {{- else }}
+                minClusterCount: 1
+                maxClusterCount: 1
+                {{- end }}
+            {{- range $schema := list "SDP" "OPS" "OUT" "DPZ" }}
+            ---
+            apiVersion: schema.snowflake.m.bronze-deer.de/v1alpha1
+            kind: Schema
+            metadata:
+              name: {{ $xr.metadata.name }}-schema-{{ lower $schema }}
+              annotations:
+                {{ setResourceNameAnnotation (printf "schema-%s" (lower $schema)) }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                name: {{ $schema }}
+                databaseRef:
+                  name: {{ $xr.metadata.name }}-database
+                comment: {{ $comment | quote }}
+            {{- end }}
+            {{- range $role, $roleName := $roles }}
+            ---
+            apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+            kind: AccountRole
+            metadata:
+              name: {{ $xr.metadata.name }}-role-{{ $role }}
+              annotations:
+                {{ setResourceNameAnnotation (printf "role-%s" $role) }}
+                crossplane.io/external-name: {{ $roleName }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                comment: {{ printf "%s role of %s" $role $comment | quote }}
+            {{- end }}
+            {{- /* stub procedures, the actual definitions follow later */}}
+            {{- range $procedure := list (dict "name" "CREATE_DEV_SCHEMA" "argName" "SCHEMA_NAME" "argDataType" "VARCHAR") (dict "name" "CREATE_DBT_TASK" "argName" "CONFIG" "argDataType" "VARIANT") }}
+            ---
+            apiVersion: procedure.snowflake.m.bronze-deer.de/v1alpha1
+            kind: ProcedurePython
+            metadata:
+              name: {{ $xr.metadata.name }}-procedure-{{ lower $procedure.name | replace "_" "-" }}
+              annotations:
+                {{ setResourceNameAnnotation (printf "procedure-%s" (lower $procedure.name | replace "_" "-")) }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                name: {{ $procedure.name }}
+                databaseRef:
+                  name: {{ $xr.metadata.name }}-database
+                schemaRef:
+                  name: {{ $xr.metadata.name }}-schema-sdp
+                comment: {{ $comment | quote }}
+                arguments:
+                  - argName: {{ $procedure.argName }}
+                    argDataType: {{ $procedure.argDataType }}
+                returnType: VARCHAR
+                handler: run
+                runtimeVersion: "3.13"
+                snowparkPackage: 1.51.0
+                procedureDefinition: |
+                  def run(session, arg):
+                    return '{{ $procedure.name }} is not implemented yet'
+            {{- end }}
+            {{- range $key, $user := $serviceUsers }}
+            ---
+            apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+            kind: ServiceUser
+            metadata:
+              name: {{ $xr.metadata.name }}-service-user-{{ $key }}
+              annotations:
+                {{ setResourceNameAnnotation (printf "service-user-%s" $key) }}
+                crossplane.io/external-name: {{ $user }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                comment: {{ printf "Service user of %s" $comment | quote }}
+                defaultRoleRef:
+                  name: {{ $xr.metadata.name }}-role-developer
+                defaultWarehouseRef:
+                  name: {{ $xr.metadata.name }}-warehouse
+                defaultNamespace: {{ $database }}
+            ---
+            apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+            kind: AccountRoleGrant
+            metadata:
+              name: {{ $xr.metadata.name }}-grant-developer-to-service-user-{{ $key }}
+              annotations:
+                {{ setResourceNameAnnotation (printf "grant-developer-to-service-user-%s" $key) }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                roleName: {{ $roles.developer }}
+                userName: {{ $user }}
+            {{- end }}
+            ---
+            apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+            kind: AccountRoleGrant
+            metadata:
+              name: {{ $xr.metadata.name }}-grant-x-to-service-user-github-ci
+              annotations:
+                {{ setResourceNameAnnotation "grant-x-to-service-user-github-ci" }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                roleName: {{ $roles.x }}
+                userName: {{ get $serviceUsers "github-ci" }}
+            {{- /* role hierarchy: developer > maintainer > viewer, consumer and developer > x */}}
+            {{- range $hierarchy := list (list "viewer" "maintainer") (list "consumer" "maintainer") (list "maintainer" "developer") (list "x" "developer") }}
+            {{- $role := index $hierarchy 0 }}
+            {{- $parent := index $hierarchy 1 }}
+            ---
+            apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+            kind: AccountRoleGrant
+            metadata:
+              name: {{ $xr.metadata.name }}-grant-{{ $role }}-to-{{ $parent }}
+              annotations:
+                {{ setResourceNameAnnotation (printf "grant-%s-to-%s" $role $parent) }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                roleName: {{ get $roles $role }}
+                parentRoleName: {{ get $roles $parent }}
+            {{- end }}
+            {{- range $role, $input := dict "viewer" "viewers" "developer" "contributors" "maintainer" "maintainers" }}
+            {{- range $user := get $spec $input | default list }}
+            {{- /* user names may contain characters invalid in kubernetes names, the hash keeps sanitized names unique */}}
+            {{- $userKey := printf "%s-%s" (regexReplaceAll "[^a-z0-9]+" (lower $user) "-" | trunc 40 | trimAll "-") (sha256sum $user | trunc 8) }}
+            ---
+            apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+            kind: AccountRoleGrant
+            metadata:
+              name: {{ $xr.metadata.name }}-grant-{{ $role }}-{{ $userKey }}
+              annotations:
+                {{ setResourceNameAnnotation (printf "grant-%s-%s" $role $userKey) }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                roleName: {{ get $roles $role }}
+                userName: {{ $user | quote }}
+            {{- end }}
+            {{- end }}
+            {{- range $role, $p := include "privileges" . | fromYaml }}
+            {{- $grants := list }}
+            {{- with $p.account }}
+            {{- $grants = append $grants (dict "key" "account" "privileges" . "on" (dict "onAccount" true)) }}
+            {{- end }}
+            {{- with $p.database }}
+            {{- $grants = append $grants (dict "key" "database" "privileges" . "on" (dict "onAccountObject" (list (dict "objectType" "DATABASE" "objectName" $database)))) }}
+            {{- end }}
+            {{- with $p.warehouse }}
+            {{- $grants = append $grants (dict "key" "warehouse" "privileges" . "on" (dict "onAccountObject" (list (dict "objectType" "WAREHOUSE" "objectName" $warehouse)))) }}
+            {{- end }}
+            {{- with $p.serviceUsers }}
+            {{- $privileges := . }}
+            {{- range $key, $user := $serviceUsers }}
+            {{- $grants = append $grants (dict "key" (printf "service-user-%s" $key) "privileges" $privileges "on" (dict "onAccountObject" (list (dict "objectType" "USER" "objectName" $user)))) }}
+            {{- end }}
+            {{- end }}
+            {{- range $procedure, $privileges := $p.procedures }}
+            {{- $key := printf "procedure-%s" (regexReplaceAll "[^a-z0-9]+" (lower (regexReplaceAll "\\(.*" $procedure "")) "-") }}
+            {{- $grants = append $grants (dict "key" $key "privileges" $privileges "on" (dict "onSchemaObject" (list (dict "objectType" "PROCEDURE" "objectName" (printf "%s.%s" $database $procedure))))) }}
+            {{- end }}
+            {{- range $schema, $privileges := $p.schemas }}
+            {{- $grants = append $grants (dict "key" (printf "schema-%s" (lower $schema)) "privileges" $privileges "on" (dict "onSchema" (list (dict "schemaName" (printf "%s.%s" $database $schema))))) }}
+            {{- end }}
+            {{- range $objects := $p.schemaObjects }}
+            {{- range $schema := $objects.schemas }}
+            {{- range $type, $privileges := $objects.types }}
+            {{- $key := printf "%s-%s-future" (lower $schema) (lower $type | replace " " "-") }}
+            {{- $grants = append $grants (dict "key" $key "privileges" $privileges "on" (dict "onSchemaObject" (list (dict "future" (list (dict "objectTypePlural" $type "inSchema" (printf "%s.%s" $database $schema))))))) }}
+            {{- end }}
+            {{- end }}
+            {{- end }}
+            {{- range $g := $grants }}
+            ---
+            apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+            kind: AccountRolePrivilegeGrant
+            metadata:
+              name: {{ $xr.metadata.name }}-privileges-{{ $role }}-{{ $g.key }}
+              annotations:
+                {{ setResourceNameAnnotation (printf "privileges-%s-%s" $role $g.key) }}
+            spec:
+              providerConfigRef:
+                kind: ClusterProviderConfig
+                name: default
+              forProvider:
+                accountRoleNameRef:
+                  name: {{ $xr.metadata.name }}-role-{{ $role }}
+                privileges: {{ toJson $g.privileges }}
+                {{- toYaml $g.on | nindent 4 }}
+            {{- end }}
+            {{- end }}
+            ---
+            apiVersion: {{ $xr.apiVersion }}
+            kind: {{ $xr.kind }}
+            status:
+              database: {{ $database }}
+              warehouse: {{ $warehouse }}
+    - step: automatically-detect-ready-composed-resources
+      functionRef:
+        name: function-auto-ready

@@ -1,0 +1,46 @@
+# Dummy Snowflake users referenced by example.yaml, apply before the data product so its user role grants succeed
+apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+kind: User
+metadata:
+  name: jane-doe
+  namespace: default
+  annotations:
+    crossplane.io/external-name: JANE_DOE
+spec:
+  providerConfigRef:
+    kind: ClusterProviderConfig
+    name: default
+  forProvider:
+    comment: Dummy user of the DataProduct example
+
+---
+
+apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+kind: User
+metadata:
+  name: john-doe
+  namespace: default
+  annotations:
+    crossplane.io/external-name: JOHN_DOE
+spec:
+  providerConfigRef:
+    kind: ClusterProviderConfig
+    name: default
+  forProvider:
+    comment: Dummy user of the DataProduct example
+
+---
+
+apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+kind: User
+metadata:
+  name: max-mustermann
+  namespace: default
+  annotations:
+    crossplane.io/external-name: MAX_MUSTERMANN
+spec:
+  providerConfigRef:
+    kind: ClusterProviderConfig
+    name: default
+  forProvider:
+    comment: Dummy user of the DataProduct example

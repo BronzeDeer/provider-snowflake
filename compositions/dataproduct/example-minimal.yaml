@@ -1,0 +1,11 @@
+# Data product using only the required inputs, the warehouse defaults to XSMALL without autoscaling and no users are granted roles
+apiVersion: platform.bronze-deer.de/v1alpha1
+kind: DataProduct
+metadata:
+  name: claims
+  namespace: default
+spec:
+  name: claims
+  id: 1002
+  env: TEST
+  division: HEALTH

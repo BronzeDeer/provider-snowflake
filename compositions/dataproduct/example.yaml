@@ -1,0 +1,20 @@
+# Data product using all inputs. The users in viewers, contributors and maintainers must already exist in Snowflake.
+apiVersion: platform.bronze-deer.de/v1alpha1
+kind: DataProduct
+metadata:
+  name: sales-orders
+  namespace: default
+spec:
+  name: sales-orders
+  id: 1001
+  env: DEV
+  division: PNC
+  warehouse:
+    size: SMALL
+    autoscale: false
+  viewers:
+    - JANE_DOE
+  contributors:
+    - JOHN_DOE
+  maintainers:
+    - MAX_MUSTERMANN

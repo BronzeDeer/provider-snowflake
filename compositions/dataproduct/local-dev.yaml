@@ -1,0 +1,28 @@
+# Only needed when running the provider out of cluster with `make run`; a provider package installs this RBAC itself
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: crossplane:dev:provider-snowflake
+  labels:
+    rbac.crossplane.io/aggregate-to-crossplane: "true"
+rules:
+  - apiGroups:
+      - database.snowflake.m.bronze-deer.de
+      - schema.snowflake.m.bronze-deer.de
+      - warehouse.snowflake.m.bronze-deer.de
+      - rbac.snowflake.m.bronze-deer.de
+      - procedure.snowflake.m.bronze-deer.de
+    resources: ["*"]
+    verbs: ["*"]
+---
+apiVersion: snowflake.m.bronze-deer.de/v1beta1
+kind: ClusterProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: example-creds
+      namespace: crossplane-system
+      key: credentials
