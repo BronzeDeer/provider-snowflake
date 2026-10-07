@@ -1,0 +1,30 @@
+apiVersion: procedure.snowflake.bronze-deer.de/v1alpha1
+kind: ProcedurePython
+metadata:
+  annotations:
+    meta.upbound.io/example-id: procedure/v1alpha1/procedurepython
+  labels:
+    testing.upbound.io/example-name: w
+  name: w
+spec:
+  forProvider:
+    arguments:
+      - argDataType: VARCHAR(100)
+        argName: x
+    databaseSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test-crossplane
+    handler: echoVarchar
+    name: Name
+    procedureDefinition: |
+      def echoVarchar(x):
+        result = ''
+        for a in range(5):
+          result += x
+        return result
+    returnType: VARCHAR(100)
+    runtimeVersion: "3.13"
+    schemaSelector:
+      matchLabels:
+        testing.upbound.io/example-name: name-from-spec
+    snowparkPackage: 1.51.0

@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	grantaccountrole "github.com/BronzeDeer/provider-snowflake/config/cluster/grant_account_role"
+	procedure "github.com/BronzeDeer/provider-snowflake/config/cluster/procedure"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/upjet/v2/pkg/config"
 )
@@ -77,6 +78,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 		// Do not take metadata.name as name value, otherwise we will get loads of collisions unless sticking to a "1 DB per NS" rule
 		DisableNameInitializer: true,
 	},
+	"snowflake_procedure_python": procedure.ExternalName,
 }
 
 func idWithStub() config.ExternalName { //nolint:unused

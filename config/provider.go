@@ -9,6 +9,7 @@ import (
 	accountRoleCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/account_role"
 	databaseCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/database"
 	accountRoleGrantCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/grant_account_role"
+	procedureCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/procedure"
 	schemaCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/schema"
 	userCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/user"
 	warehouseCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/warehouse"
@@ -49,6 +50,7 @@ func GetProvider() *ujconfig.Provider {
 		accountRoleGrantCluster.Configure,
 		userCluster.Configure,
 		warehouseCluster.Configure,
+		procedureCluster.Configure,
 	} {
 		configure(pc)
 	}
@@ -78,6 +80,7 @@ func GetProviderNamespaced() *ujconfig.Provider {
 		accountRoleGrantNamespaced.Configure,
 		userNamespaced.Configure,
 		warehouseNamespaced.Configure,
+		procedureCluster.Configure,
 	} {
 		configure(pc)
 	}

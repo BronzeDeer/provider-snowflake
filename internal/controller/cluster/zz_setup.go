@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	database "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/database/database"
+	procedurepython "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/procedure/procedurepython"
 	providerconfig "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/providerconfig"
 	accountrole "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/accountrole"
 	accountrolegrant "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/accountrolegrant"
@@ -23,6 +24,7 @@ import (
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		database.Setup,
+		procedurepython.Setup,
 		providerconfig.Setup,
 		accountrole.Setup,
 		accountrolegrant.Setup,
@@ -42,6 +44,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		database.SetupGated,
+		procedurepython.SetupGated,
 		providerconfig.SetupGated,
 		accountrole.SetupGated,
 		accountrolegrant.SetupGated,

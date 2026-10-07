@@ -11,6 +11,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 
 	v1alpha1 "github.com/BronzeDeer/provider-snowflake/apis/cluster/database/v1alpha1"
+	v1alpha1procedure "github.com/BronzeDeer/provider-snowflake/apis/cluster/procedure/v1alpha1"
 	v1alpha1rbac "github.com/BronzeDeer/provider-snowflake/apis/cluster/rbac/v1alpha1"
 	v1alpha1schema "github.com/BronzeDeer/provider-snowflake/apis/cluster/schema/v1alpha1"
 	v1alpha1cluster "github.com/BronzeDeer/provider-snowflake/apis/cluster/v1alpha1"
@@ -22,6 +23,7 @@ func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1procedure.SchemeBuilder.AddToScheme,
 		v1alpha1rbac.SchemeBuilder.AddToScheme,
 		v1alpha1schema.SchemeBuilder.AddToScheme,
 		v1alpha1cluster.SchemeBuilder.AddToScheme,
