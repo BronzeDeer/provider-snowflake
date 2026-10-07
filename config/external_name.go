@@ -17,8 +17,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"snowflake_account_role":       config.NameAsIdentifier,
 	"snowflake_user":               config.NameAsIdentifier,
 	"snowflake_grant_account_role": grantaccountrole.ExternalName,
-	"snowflake_warehouse":          config.NameAsIdentifier,
-	"snowflake_database":           config.NameAsIdentifier,
+	// The id encodes role, privileges and grant target in a provider specific format, so we let the provider generate it
+	"snowflake_grant_privileges_to_account_role": config.IdentifierFromProvider,
+	"snowflake_warehouse":                        config.NameAsIdentifier,
+	"snowflake_database":                         config.NameAsIdentifier,
 	// since we might have multiple schemas with the same name from different databases in the same namespace or cluster we need to decouple metadata.name and forProvider.name
 	// name in spec determines externalname and database + "." + "externalName" is the id
 	"snowflake_schema": {

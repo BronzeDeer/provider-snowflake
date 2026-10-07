@@ -1,0 +1,68 @@
+apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+kind: AccountRole
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
+  labels:
+    testing.upbound.io/example-name: privileged_role
+  name: privileged-role
+  namespace: crossplane-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: database.snowflake.m.bronze-deer.de/v1alpha1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
+  labels:
+    testing.upbound.io/example-name: privileged_db
+  name: privileged-db
+  namespace: crossplane-system
+spec:
+  forProvider: {}
+
+---
+
+# Grant on the account itself
+apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+kind: AccountRolePrivilegeGrant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
+  labels:
+    testing.upbound.io/example-name: on_account
+  name: on-account
+  namespace: crossplane-system
+spec:
+  forProvider:
+    accountRoleNameRef:
+      name: privileged-role
+    onAccount: true
+    privileges:
+      - CREATE DATABASE
+
+---
+
+# Grant on an account object (database)
+apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+kind: AccountRolePrivilegeGrant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
+  labels:
+    testing.upbound.io/example-name: on_database
+  name: on-database
+  namespace: crossplane-system
+spec:
+  forProvider:
+    accountRoleNameRef:
+      name: privileged-role
+    onAccountObject:
+      - objectType: DATABASE
+        objectName: privileged-db
+    privileges:
+      - USAGE
+      - CREATE SCHEMA

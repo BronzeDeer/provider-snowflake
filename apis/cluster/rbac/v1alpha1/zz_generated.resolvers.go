@@ -14,6 +14,50 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this AccountRolePrivilegeGrant.
+func (mg *AccountRolePrivilegeGrant) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountRoleName),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.AccountRoleNameRef,
+		Selector:     mg.Spec.ForProvider.AccountRoleNameSelector,
+		To: reference.To{
+			List:    &AccountRoleList{},
+			Managed: &AccountRole{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountRoleName")
+	}
+	mg.Spec.ForProvider.AccountRoleName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountRoleNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountRoleName),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.AccountRoleNameRef,
+		Selector:     mg.Spec.InitProvider.AccountRoleNameSelector,
+		To: reference.To{
+			List:    &AccountRoleList{},
+			Managed: &AccountRole{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AccountRoleName")
+	}
+	mg.Spec.InitProvider.AccountRoleName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountRoleNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this User.
 func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

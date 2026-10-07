@@ -13,4 +13,7 @@ func (tr *AccountRole) Hub() {}
 func (tr *AccountRoleGrant) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *AccountRolePrivilegeGrant) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *User) Hub() {}

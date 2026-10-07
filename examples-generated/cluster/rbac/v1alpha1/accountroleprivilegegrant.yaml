@@ -1,0 +1,60 @@
+apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
+kind: AccountRolePrivilegeGrant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountRoleNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: db_role
+    onAccount: true
+    privileges:
+    - CREATE DATABASE
+    - CREATE USER
+
+---
+
+apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
+kind: AccountRole
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
+  labels:
+    testing.upbound.io/example-name: db_role
+  name: db-role
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: database.snowflake.bronze-deer.de/v1alpha1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
+  labels:
+    testing.upbound.io/example-name: db
+  name: db
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: schema.snowflake.bronze-deer.de/v1alpha1
+kind: Schema
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
+  labels:
+    testing.upbound.io/example-name: my_schema
+  name: my-schema
+spec:
+  forProvider:
+    databaseSelector:
+      matchLabels:
+        testing.upbound.io/example-name: db
+    name: my_schema

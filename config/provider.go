@@ -10,12 +10,14 @@ import (
 	databaseCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/database"
 	accountRoleGrantCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/grant_account_role"
 	procedureCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/procedure"
+	accountRolePrivilegeGrantCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/grant_privileges_to_account_role"
 	schemaCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/schema"
 	userCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/user"
 	warehouseCluster "github.com/BronzeDeer/provider-snowflake/config/cluster/warehouse"
 	accountRoleNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/account_role"
 	databaseNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/database"
 	accountRoleGrantNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/grant_account_role"
+	accountRolePrivilegeGrantNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/grant_privileges_to_account_role"
 	schemaNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/schema"
 	userNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/user"
 	warehouseNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/warehouse"
@@ -48,6 +50,7 @@ func GetProvider() *ujconfig.Provider {
 		schemaCluster.Configure,
 		accountRoleCluster.Configure,
 		accountRoleGrantCluster.Configure,
+		accountRolePrivilegeGrantCluster.Configure,
 		userCluster.Configure,
 		warehouseCluster.Configure,
 		procedureCluster.Configure,
@@ -78,6 +81,7 @@ func GetProviderNamespaced() *ujconfig.Provider {
 		schemaNamespaced.Configure,
 		accountRoleNamespaced.Configure,
 		accountRoleGrantNamespaced.Configure,
+		accountRolePrivilegeGrantNamespaced.Configure,
 		userNamespaced.Configure,
 		warehouseNamespaced.Configure,
 		procedureCluster.Configure,
