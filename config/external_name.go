@@ -16,6 +16,7 @@ import (
 var ExternalNameConfigs = map[string]config.ExternalName{
 	"snowflake_account_role":       config.NameAsIdentifier,
 	"snowflake_user":               config.NameAsIdentifier,
+	"snowflake_service_user":       config.NameAsIdentifier,
 	"snowflake_grant_account_role": grantaccountrole.ExternalName,
 	// The id encodes role, privileges and grant target in a provider specific format, so we let the provider generate it
 	"snowflake_grant_privileges_to_account_role": config.IdentifierFromProvider,

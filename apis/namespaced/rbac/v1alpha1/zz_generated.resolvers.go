@@ -58,6 +58,84 @@ func (mg *AccountRolePrivilegeGrant) ResolveReferences(ctx context.Context, c cl
 	return nil
 }
 
+// ResolveReferences of this ServiceUser.
+func (mg *ServiceUser) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultRole),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.DefaultRoleRef,
+		Selector:     mg.Spec.ForProvider.DefaultRoleSelector,
+		To: reference.To{
+			List:    &AccountRoleList{},
+			Managed: &AccountRole{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DefaultRole")
+	}
+	mg.Spec.ForProvider.DefaultRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DefaultRoleRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultWarehouse),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.DefaultWarehouseRef,
+		Selector:     mg.Spec.ForProvider.DefaultWarehouseSelector,
+		To: reference.To{
+			List:    &v1alpha1.WarehouseList{},
+			Managed: &v1alpha1.Warehouse{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DefaultWarehouse")
+	}
+	mg.Spec.ForProvider.DefaultWarehouse = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DefaultWarehouseRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultRole),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.DefaultRoleRef,
+		Selector:     mg.Spec.InitProvider.DefaultRoleSelector,
+		To: reference.To{
+			List:    &AccountRoleList{},
+			Managed: &AccountRole{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DefaultRole")
+	}
+	mg.Spec.InitProvider.DefaultRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DefaultRoleRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultWarehouse),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.DefaultWarehouseRef,
+		Selector:     mg.Spec.InitProvider.DefaultWarehouseSelector,
+		To: reference.To{
+			List:    &v1alpha1.WarehouseList{},
+			Managed: &v1alpha1.Warehouse{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DefaultWarehouse")
+	}
+	mg.Spec.InitProvider.DefaultWarehouse = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DefaultWarehouseRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this User.
 func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPINamespacedResolver(c, mg)

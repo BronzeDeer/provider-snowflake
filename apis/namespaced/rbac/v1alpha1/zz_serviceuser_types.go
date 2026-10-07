@@ -14,34 +14,10 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
-type ParametersAbortDetachedQueryInitParameters struct {
+type AbortDetachedQueryInitParameters struct {
 }
 
-type ParametersAbortDetachedQueryObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersAbortDetachedQueryParameters struct {
-}
-
-type ParametersAutocommitInitParameters struct {
-}
-
-type ParametersAutocommitObservation struct {
+type AbortDetachedQueryObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -59,37 +35,13 @@ type ParametersAutocommitObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersAutocommitParameters struct {
+type AbortDetachedQueryParameters struct {
 }
 
-type ParametersBinaryInputFormatInitParameters struct {
+type AutocommitInitParameters struct {
 }
 
-type ParametersBinaryInputFormatObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersBinaryInputFormatParameters struct {
-}
-
-type ParametersBinaryOutputFormatInitParameters struct {
-}
-
-type ParametersBinaryOutputFormatObservation struct {
+type AutocommitObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -107,85 +59,83 @@ type ParametersBinaryOutputFormatObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersBinaryOutputFormatParameters struct {
+type AutocommitParameters struct {
 }
 
-type ParametersClientMemoryLimitInitParameters struct {
+type AwsInitParameters struct {
+
+	// (String) The ARN of the AWS IAM role to use for workload identity federation.
+	// The ARN of the AWS IAM role to use for workload identity federation.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// based (GetWebIdentityToken) workload identity federation.
+	// The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 }
 
-type ParametersClientMemoryLimitObservation struct {
+type AwsObservation struct {
 
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+	// (String) The ARN of the AWS IAM role to use for workload identity federation.
+	// The ARN of the AWS IAM role to use for workload identity federation.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	// based (GetWebIdentityToken) workload identity federation.
+	// The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 }
 
-type ParametersClientMemoryLimitParameters struct {
+type AwsParameters struct {
+
+	// (String) The ARN of the AWS IAM role to use for workload identity federation.
+	// The ARN of the AWS IAM role to use for workload identity federation.
+	// +kubebuilder:validation:Optional
+	Arn *string `json:"arn" tf:"arn,omitempty"`
+
+	// based (GetWebIdentityToken) workload identity federation.
+	// The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 }
 
-type ParametersClientMetadataRequestUseConnectionCtxInitParameters struct {
+type AzureInitParameters struct {
+
+	// based (GetWebIdentityToken) workload identity federation.
+	// The Azure issuer URL.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// (String) The Azure subject identifier.
+	// The Azure subject identifier.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
-type ParametersClientMetadataRequestUseConnectionCtxObservation struct {
+type AzureObservation struct {
 
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+	// based (GetWebIdentityToken) workload identity federation.
+	// The Azure issuer URL.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	// (String) The Azure subject identifier.
+	// The Azure subject identifier.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
-type ParametersClientMetadataRequestUseConnectionCtxParameters struct {
+type AzureParameters struct {
+
+	// based (GetWebIdentityToken) workload identity federation.
+	// The Azure issuer URL.
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
+
+	// (String) The Azure subject identifier.
+	// The Azure subject identifier.
+	// +kubebuilder:validation:Optional
+	Subject *string `json:"subject" tf:"subject,omitempty"`
 }
 
-type ParametersClientPrefetchThreadsInitParameters struct {
+type BinaryInputFormatInitParameters struct {
 }
 
-type ParametersClientPrefetchThreadsObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersClientPrefetchThreadsParameters struct {
-}
-
-type ParametersClientResultChunkSizeInitParameters struct {
-}
-
-type ParametersClientResultChunkSizeObservation struct {
+type BinaryInputFormatObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -203,37 +153,13 @@ type ParametersClientResultChunkSizeObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersClientResultChunkSizeParameters struct {
+type BinaryInputFormatParameters struct {
 }
 
-type ParametersClientResultColumnCaseInsensitiveInitParameters struct {
+type BinaryOutputFormatInitParameters struct {
 }
 
-type ParametersClientResultColumnCaseInsensitiveObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersClientResultColumnCaseInsensitiveParameters struct {
-}
-
-type ParametersClientSessionKeepAliveHeartbeatFrequencyInitParameters struct {
-}
-
-type ParametersClientSessionKeepAliveHeartbeatFrequencyObservation struct {
+type BinaryOutputFormatObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -251,37 +177,13 @@ type ParametersClientSessionKeepAliveHeartbeatFrequencyObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersClientSessionKeepAliveHeartbeatFrequencyParameters struct {
+type BinaryOutputFormatParameters struct {
 }
 
-type ParametersClientSessionKeepAliveInitParameters struct {
+type ClientMemoryLimitInitParameters struct {
 }
 
-type ParametersClientSessionKeepAliveObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersClientSessionKeepAliveParameters struct {
-}
-
-type ParametersClientTimestampTypeMappingInitParameters struct {
-}
-
-type ParametersClientTimestampTypeMappingObservation struct {
+type ClientMemoryLimitObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -299,37 +201,13 @@ type ParametersClientTimestampTypeMappingObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersClientTimestampTypeMappingParameters struct {
+type ClientMemoryLimitParameters struct {
 }
 
-type ParametersDateInputFormatInitParameters struct {
+type ClientMetadataRequestUseConnectionCtxInitParameters struct {
 }
 
-type ParametersDateInputFormatObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersDateInputFormatParameters struct {
-}
-
-type ParametersDateOutputFormatInitParameters struct {
-}
-
-type ParametersDateOutputFormatObservation struct {
+type ClientMetadataRequestUseConnectionCtxObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -347,37 +225,13 @@ type ParametersDateOutputFormatObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersDateOutputFormatParameters struct {
+type ClientMetadataRequestUseConnectionCtxParameters struct {
 }
 
-type ParametersEnableUnloadPhysicalTypeOptimizationInitParameters struct {
+type ClientPrefetchThreadsInitParameters struct {
 }
 
-type ParametersEnableUnloadPhysicalTypeOptimizationObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersEnableUnloadPhysicalTypeOptimizationParameters struct {
-}
-
-type ParametersEnableUnredactedQuerySyntaxErrorInitParameters struct {
-}
-
-type ParametersEnableUnredactedQuerySyntaxErrorObservation struct {
+type ClientPrefetchThreadsObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -395,37 +249,13 @@ type ParametersEnableUnredactedQuerySyntaxErrorObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersEnableUnredactedQuerySyntaxErrorParameters struct {
+type ClientPrefetchThreadsParameters struct {
 }
 
-type ParametersErrorOnNondeterministicMergeInitParameters struct {
+type ClientResultChunkSizeInitParameters struct {
 }
 
-type ParametersErrorOnNondeterministicMergeObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersErrorOnNondeterministicMergeParameters struct {
-}
-
-type ParametersErrorOnNondeterministicUpdateInitParameters struct {
-}
-
-type ParametersErrorOnNondeterministicUpdateObservation struct {
+type ClientResultChunkSizeObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -443,37 +273,13 @@ type ParametersErrorOnNondeterministicUpdateObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersErrorOnNondeterministicUpdateParameters struct {
+type ClientResultChunkSizeParameters struct {
 }
 
-type ParametersGeographyOutputFormatInitParameters struct {
+type ClientResultColumnCaseInsensitiveInitParameters struct {
 }
 
-type ParametersGeographyOutputFormatObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersGeographyOutputFormatParameters struct {
-}
-
-type ParametersGeometryOutputFormatInitParameters struct {
-}
-
-type ParametersGeometryOutputFormatObservation struct {
+type ClientResultColumnCaseInsensitiveObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -491,37 +297,13 @@ type ParametersGeometryOutputFormatObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersGeometryOutputFormatParameters struct {
+type ClientResultColumnCaseInsensitiveParameters struct {
 }
 
-type ParametersJSONIndentInitParameters struct {
+type ClientSessionKeepAliveHeartbeatFrequencyInitParameters struct {
 }
 
-type ParametersJSONIndentObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersJSONIndentParameters struct {
-}
-
-type ParametersJdbcTreatDecimalAsIntInitParameters struct {
-}
-
-type ParametersJdbcTreatDecimalAsIntObservation struct {
+type ClientSessionKeepAliveHeartbeatFrequencyObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -539,37 +321,13 @@ type ParametersJdbcTreatDecimalAsIntObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersJdbcTreatDecimalAsIntParameters struct {
+type ClientSessionKeepAliveHeartbeatFrequencyParameters struct {
 }
 
-type ParametersJdbcTreatTimestampNtzAsUtcInitParameters struct {
+type ClientSessionKeepAliveInitParameters struct {
 }
 
-type ParametersJdbcTreatTimestampNtzAsUtcObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersJdbcTreatTimestampNtzAsUtcParameters struct {
-}
-
-type ParametersJdbcUseSessionTimezoneInitParameters struct {
-}
-
-type ParametersJdbcUseSessionTimezoneObservation struct {
+type ClientSessionKeepAliveObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -587,37 +345,13 @@ type ParametersJdbcUseSessionTimezoneObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersJdbcUseSessionTimezoneParameters struct {
+type ClientSessionKeepAliveParameters struct {
 }
 
-type ParametersLockTimeoutInitParameters struct {
+type ClientTimestampTypeMappingInitParameters struct {
 }
 
-type ParametersLockTimeoutObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersLockTimeoutParameters struct {
-}
-
-type ParametersLogEventLevelInitParameters struct {
-}
-
-type ParametersLogEventLevelObservation struct {
+type ClientTimestampTypeMappingObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -635,37 +369,13 @@ type ParametersLogEventLevelObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersLogEventLevelParameters struct {
+type ClientTimestampTypeMappingParameters struct {
 }
 
-type ParametersLogLevelInitParameters struct {
+type DateInputFormatInitParameters struct {
 }
 
-type ParametersLogLevelObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersLogLevelParameters struct {
-}
-
-type ParametersMultiStatementCountInitParameters struct {
-}
-
-type ParametersMultiStatementCountObservation struct {
+type DateInputFormatObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -683,37 +393,13 @@ type ParametersMultiStatementCountObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersMultiStatementCountParameters struct {
+type DateInputFormatParameters struct {
 }
 
-type ParametersNetworkPolicyInitParameters struct {
+type DateOutputFormatInitParameters struct {
 }
 
-type ParametersNetworkPolicyObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersNetworkPolicyParameters struct {
-}
-
-type ParametersNoorderSequenceAsDefaultInitParameters struct {
-}
-
-type ParametersNoorderSequenceAsDefaultObservation struct {
+type DateOutputFormatObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -731,85 +417,74 @@ type ParametersNoorderSequenceAsDefaultObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersNoorderSequenceAsDefaultParameters struct {
+type DateOutputFormatParameters struct {
 }
 
-type ParametersOdbcTreatDecimalAsIntInitParameters struct {
+type DefaultWorkloadIdentityInitParameters struct {
+
+	// (Block List, Max: 1) AWS workload identity configuration. (see below for nested schema)
+	// AWS workload identity configuration.
+	Aws []AwsInitParameters `json:"aws,omitempty" tf:"aws,omitempty"`
+
+	// (Block List, Max: 1) Azure workload identity configuration. (see below for nested schema)
+	// Azure workload identity configuration.
+	Azure []AzureInitParameters `json:"azure,omitempty" tf:"azure,omitempty"`
+
+	// (Block List, Max: 1) GCP workload identity configuration. (see below for nested schema)
+	// GCP workload identity configuration.
+	GCP []GCPInitParameters `json:"gcp,omitempty" tf:"gcp,omitempty"`
+
+	// (Block List, Max: 1) Generic OIDC workload identity configuration. (see below for nested schema)
+	// Generic OIDC workload identity configuration.
+	Oidc []OidcInitParameters `json:"oidc,omitempty" tf:"oidc,omitempty"`
 }
 
-type ParametersOdbcTreatDecimalAsIntObservation struct {
+type DefaultWorkloadIdentityObservation struct {
 
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+	// (Block List, Max: 1) AWS workload identity configuration. (see below for nested schema)
+	// AWS workload identity configuration.
+	Aws []AwsObservation `json:"aws,omitempty" tf:"aws,omitempty"`
 
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+	// (Block List, Max: 1) Azure workload identity configuration. (see below for nested schema)
+	// Azure workload identity configuration.
+	Azure []AzureObservation `json:"azure,omitempty" tf:"azure,omitempty"`
 
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	// (Block List, Max: 1) GCP workload identity configuration. (see below for nested schema)
+	// GCP workload identity configuration.
+	GCP []GCPObservation `json:"gcp,omitempty" tf:"gcp,omitempty"`
 
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	// (Block List, Max: 1) Generic OIDC workload identity configuration. (see below for nested schema)
+	// Generic OIDC workload identity configuration.
+	Oidc []OidcObservation `json:"oidc,omitempty" tf:"oidc,omitempty"`
 }
 
-type ParametersOdbcTreatDecimalAsIntParameters struct {
+type DefaultWorkloadIdentityParameters struct {
+
+	// (Block List, Max: 1) AWS workload identity configuration. (see below for nested schema)
+	// AWS workload identity configuration.
+	// +kubebuilder:validation:Optional
+	Aws []AwsParameters `json:"aws,omitempty" tf:"aws,omitempty"`
+
+	// (Block List, Max: 1) Azure workload identity configuration. (see below for nested schema)
+	// Azure workload identity configuration.
+	// +kubebuilder:validation:Optional
+	Azure []AzureParameters `json:"azure,omitempty" tf:"azure,omitempty"`
+
+	// (Block List, Max: 1) GCP workload identity configuration. (see below for nested schema)
+	// GCP workload identity configuration.
+	// +kubebuilder:validation:Optional
+	GCP []GCPParameters `json:"gcp,omitempty" tf:"gcp,omitempty"`
+
+	// (Block List, Max: 1) Generic OIDC workload identity configuration. (see below for nested schema)
+	// Generic OIDC workload identity configuration.
+	// +kubebuilder:validation:Optional
+	Oidc []OidcParameters `json:"oidc,omitempty" tf:"oidc,omitempty"`
 }
 
-type ParametersPreventUnloadToInternalStagesInitParameters struct {
+type EnableUnloadPhysicalTypeOptimizationInitParameters struct {
 }
 
-type ParametersPreventUnloadToInternalStagesObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersPreventUnloadToInternalStagesParameters struct {
-}
-
-type ParametersQueryTagInitParameters struct {
-}
-
-type ParametersQueryTagObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersQueryTagParameters struct {
-}
-
-type ParametersQuotedIdentifiersIgnoreCaseInitParameters struct {
-}
-
-type ParametersQuotedIdentifiersIgnoreCaseObservation struct {
+type EnableUnloadPhysicalTypeOptimizationObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -827,37 +502,13 @@ type ParametersQuotedIdentifiersIgnoreCaseObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersQuotedIdentifiersIgnoreCaseParameters struct {
+type EnableUnloadPhysicalTypeOptimizationParameters struct {
 }
 
-type ParametersRowsPerResultsetInitParameters struct {
+type EnableUnredactedQuerySyntaxErrorInitParameters struct {
 }
 
-type ParametersRowsPerResultsetObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersRowsPerResultsetParameters struct {
-}
-
-type ParametersS3StageVpceDNSNameInitParameters struct {
-}
-
-type ParametersS3StageVpceDNSNameObservation struct {
+type EnableUnredactedQuerySyntaxErrorObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -875,37 +526,13 @@ type ParametersS3StageVpceDNSNameObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersS3StageVpceDNSNameParameters struct {
+type EnableUnredactedQuerySyntaxErrorParameters struct {
 }
 
-type ParametersSearchPathInitParameters struct {
+type ErrorOnNondeterministicMergeInitParameters struct {
 }
 
-type ParametersSearchPathObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersSearchPathParameters struct {
-}
-
-type ParametersSimulatedDataSharingConsumerInitParameters struct {
-}
-
-type ParametersSimulatedDataSharingConsumerObservation struct {
+type ErrorOnNondeterministicMergeObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -923,37 +550,13 @@ type ParametersSimulatedDataSharingConsumerObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersSimulatedDataSharingConsumerParameters struct {
+type ErrorOnNondeterministicMergeParameters struct {
 }
 
-type ParametersStatementQueuedTimeoutInSecondsInitParameters struct {
+type ErrorOnNondeterministicUpdateInitParameters struct {
 }
 
-type ParametersStatementQueuedTimeoutInSecondsObservation struct {
-
-	// (String)
-	Default *string `json:"default,omitempty" tf:"default,omitempty"`
-
-	// (String)
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// (String)
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
-	// (String)
-	Level *string `json:"level,omitempty" tf:"level,omitempty"`
-
-	// (String)
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ParametersStatementQueuedTimeoutInSecondsParameters struct {
-}
-
-type ParametersStatementTimeoutInSecondsInitParameters struct {
-}
-
-type ParametersStatementTimeoutInSecondsObservation struct {
+type ErrorOnNondeterministicUpdateObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -971,13 +574,35 @@ type ParametersStatementTimeoutInSecondsObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersStatementTimeoutInSecondsParameters struct {
+type ErrorOnNondeterministicUpdateParameters struct {
 }
 
-type ParametersStrictJSONOutputInitParameters struct {
+type GCPInitParameters struct {
+
+	// (String) The Azure subject identifier.
+	// The GCP service account subject identifier.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
-type ParametersStrictJSONOutputObservation struct {
+type GCPObservation struct {
+
+	// (String) The Azure subject identifier.
+	// The GCP service account subject identifier.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+}
+
+type GCPParameters struct {
+
+	// (String) The Azure subject identifier.
+	// The GCP service account subject identifier.
+	// +kubebuilder:validation:Optional
+	Subject *string `json:"subject" tf:"subject,omitempty"`
+}
+
+type GeographyOutputFormatInitParameters struct {
+}
+
+type GeographyOutputFormatObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -995,13 +620,13 @@ type ParametersStrictJSONOutputObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersStrictJSONOutputParameters struct {
+type GeographyOutputFormatParameters struct {
 }
 
-type ParametersTimeInputFormatInitParameters struct {
+type GeometryOutputFormatInitParameters struct {
 }
 
-type ParametersTimeInputFormatObservation struct {
+type GeometryOutputFormatObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1019,13 +644,13 @@ type ParametersTimeInputFormatObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTimeInputFormatParameters struct {
+type GeometryOutputFormatParameters struct {
 }
 
-type ParametersTimeOutputFormatInitParameters struct {
+type JSONIndentInitParameters struct {
 }
 
-type ParametersTimeOutputFormatObservation struct {
+type JSONIndentObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1043,13 +668,13 @@ type ParametersTimeOutputFormatObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTimeOutputFormatParameters struct {
+type JSONIndentParameters struct {
 }
 
-type ParametersTimestampDayIsAlways24HInitParameters struct {
+type JdbcTreatDecimalAsIntInitParameters struct {
 }
 
-type ParametersTimestampDayIsAlways24HObservation struct {
+type JdbcTreatDecimalAsIntObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1067,13 +692,13 @@ type ParametersTimestampDayIsAlways24HObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTimestampDayIsAlways24HParameters struct {
+type JdbcTreatDecimalAsIntParameters struct {
 }
 
-type ParametersTimestampInputFormatInitParameters struct {
+type JdbcTreatTimestampNtzAsUtcInitParameters struct {
 }
 
-type ParametersTimestampInputFormatObservation struct {
+type JdbcTreatTimestampNtzAsUtcObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1091,13 +716,13 @@ type ParametersTimestampInputFormatObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTimestampInputFormatParameters struct {
+type JdbcTreatTimestampNtzAsUtcParameters struct {
 }
 
-type ParametersTimestampLtzOutputFormatInitParameters struct {
+type JdbcUseSessionTimezoneInitParameters struct {
 }
 
-type ParametersTimestampLtzOutputFormatObservation struct {
+type JdbcUseSessionTimezoneObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1115,13 +740,13 @@ type ParametersTimestampLtzOutputFormatObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTimestampLtzOutputFormatParameters struct {
+type JdbcUseSessionTimezoneParameters struct {
 }
 
-type ParametersTimestampNtzOutputFormatInitParameters struct {
+type LockTimeoutInitParameters struct {
 }
 
-type ParametersTimestampNtzOutputFormatObservation struct {
+type LockTimeoutObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1139,13 +764,13 @@ type ParametersTimestampNtzOutputFormatObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTimestampNtzOutputFormatParameters struct {
+type LockTimeoutParameters struct {
 }
 
-type ParametersTimestampOutputFormatInitParameters struct {
+type LogEventLevelInitParameters struct {
 }
 
-type ParametersTimestampOutputFormatObservation struct {
+type LogEventLevelObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1163,13 +788,13 @@ type ParametersTimestampOutputFormatObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTimestampOutputFormatParameters struct {
+type LogEventLevelParameters struct {
 }
 
-type ParametersTimestampTypeMappingInitParameters struct {
+type LogLevelInitParameters struct {
 }
 
-type ParametersTimestampTypeMappingObservation struct {
+type LogLevelObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1187,13 +812,13 @@ type ParametersTimestampTypeMappingObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTimestampTypeMappingParameters struct {
+type LogLevelParameters struct {
 }
 
-type ParametersTimestampTzOutputFormatInitParameters struct {
+type MultiStatementCountInitParameters struct {
 }
 
-type ParametersTimestampTzOutputFormatObservation struct {
+type MultiStatementCountObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1211,13 +836,13 @@ type ParametersTimestampTzOutputFormatObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTimestampTzOutputFormatParameters struct {
+type MultiStatementCountParameters struct {
 }
 
-type ParametersTimezoneInitParameters struct {
+type NetworkPolicyInitParameters struct {
 }
 
-type ParametersTimezoneObservation struct {
+type NetworkPolicyObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1235,13 +860,13 @@ type ParametersTimezoneObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTimezoneParameters struct {
+type NetworkPolicyParameters struct {
 }
 
-type ParametersTraceLevelInitParameters struct {
+type NoorderSequenceAsDefaultInitParameters struct {
 }
 
-type ParametersTraceLevelObservation struct {
+type NoorderSequenceAsDefaultObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1259,13 +884,13 @@ type ParametersTraceLevelObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTraceLevelParameters struct {
+type NoorderSequenceAsDefaultParameters struct {
 }
 
-type ParametersTransactionAbortOnErrorInitParameters struct {
+type OdbcTreatDecimalAsIntInitParameters struct {
 }
 
-type ParametersTransactionAbortOnErrorObservation struct {
+type OdbcTreatDecimalAsIntObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1283,13 +908,247 @@ type ParametersTransactionAbortOnErrorObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTransactionAbortOnErrorParameters struct {
+type OdbcTreatDecimalAsIntParameters struct {
 }
 
-type ParametersTransactionDefaultIsolationLevelInitParameters struct {
+type OidcInitParameters struct {
+
+	// based (GetWebIdentityToken) workload identity federation.
+	// The OIDC issuer URL.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// (List of String) List of allowed OIDC audiences.
+	// List of allowed OIDC audiences.
+	OidcAudienceList []*string `json:"oidcAudienceList,omitempty" tf:"oidc_audience_list,omitempty"`
+
+	// (String) The Azure subject identifier.
+	// The OIDC subject identifier.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
-type ParametersTransactionDefaultIsolationLevelObservation struct {
+type OidcObservation struct {
+
+	// based (GetWebIdentityToken) workload identity federation.
+	// The OIDC issuer URL.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// (List of String) List of allowed OIDC audiences.
+	// List of allowed OIDC audiences.
+	OidcAudienceList []*string `json:"oidcAudienceList,omitempty" tf:"oidc_audience_list,omitempty"`
+
+	// (String) The Azure subject identifier.
+	// The OIDC subject identifier.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+}
+
+type OidcParameters struct {
+
+	// based (GetWebIdentityToken) workload identity federation.
+	// The OIDC issuer URL.
+	// +kubebuilder:validation:Optional
+	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
+
+	// (List of String) List of allowed OIDC audiences.
+	// List of allowed OIDC audiences.
+	// +kubebuilder:validation:Optional
+	OidcAudienceList []*string `json:"oidcAudienceList,omitempty" tf:"oidc_audience_list,omitempty"`
+
+	// (String) The Azure subject identifier.
+	// The OIDC subject identifier.
+	// +kubebuilder:validation:Optional
+	Subject *string `json:"subject" tf:"subject,omitempty"`
+}
+
+type ParametersInitParameters struct {
+}
+
+type ParametersObservation struct {
+
+	// progress queries if connectivity is lost due to abrupt termination of a session (e.g. network outage, browser termination, service interruption). For more information, check ABORT_DETACHED_QUERY docs.
+	AbortDetachedQuery []AbortDetachedQueryObservation `json:"abortDetachedQuery,omitempty" tf:"abort_detached_query,omitempty"`
+
+	// (Boolean) Specifies whether autocommit is enabled for the session. Autocommit determines whether a DML statement, when executed without an active transaction, is automatically committed after the statement successfully completes. For more information, see Transactions. For more information, check AUTOCOMMIT docs.
+	Autocommit []AutocommitObservation `json:"autocommit,omitempty" tf:"autocommit,omitempty"`
+
+	// to-BINARY conversion functions. For more information, see Binary input and output. For more information, check BINARY_INPUT_FORMAT docs.
+	BinaryInputFormat []BinaryInputFormatObservation `json:"binaryInputFormat,omitempty" tf:"binary_input_format,omitempty"`
+
+	// to-VARCHAR conversion functions. For more information, see Binary input and output. For more information, check BINARY_OUTPUT_FORMAT docs.
+	BinaryOutputFormat []BinaryOutputFormatObservation `json:"binaryOutputFormat,omitempty" tf:"binary_output_format,omitempty"`
+
+	// (Number) Parameter that specifies the maximum amount of memory the JDBC driver or ODBC driver should use for the result set from queries (in MB). For more information, check CLIENT_MEMORY_LIMIT docs.
+	ClientMemoryLimit []ClientMemoryLimitObservation `json:"clientMemoryLimit,omitempty" tf:"client_memory_limit,omitempty"`
+
+	// (Boolean) For specific ODBC functions and JDBC methods, this parameter can change the default search scope from all databases/schemas to the current database/schema. The narrower search typically returns fewer rows and executes more quickly. For more information, check CLIENT_METADATA_REQUEST_USE_CONNECTION_CTX docs.
+	ClientMetadataRequestUseConnectionCtx []ClientMetadataRequestUseConnectionCtxObservation `json:"clientMetadataRequestUseConnectionCtx,omitempty" tf:"client_metadata_request_use_connection_ctx,omitempty"`
+
+	// fetch large result sets. The driver will attempt to honor the parameter value, but defines the minimum and maximum values (depending on your system’s resources) to improve performance. For more information, check CLIENT_PREFETCH_THREADS docs.
+	ClientPrefetchThreads []ClientPrefetchThreadsObservation `json:"clientPrefetchThreads,omitempty" tf:"client_prefetch_threads,omitempty"`
+
+	// (Number) Parameter that specifies the maximum size of each set (or chunk) of query results to download (in MB). The JDBC driver downloads query results in chunks. For more information, check CLIENT_RESULT_CHUNK_SIZE docs.
+	ClientResultChunkSize []ClientResultChunkSizeObservation `json:"clientResultChunkSize,omitempty" tf:"client_result_chunk_size,omitempty"`
+
+	// insensitively in ResultSet.get* methods in JDBC. For more information, check CLIENT_RESULT_COLUMN_CASE_INSENSITIVE docs.
+	ClientResultColumnCaseInsensitive []ClientResultColumnCaseInsensitiveObservation `json:"clientResultColumnCaseInsensitive,omitempty" tf:"client_result_column_case_insensitive,omitempty"`
+
+	// (Boolean) Parameter that indicates whether to force a user to log in again after a period of inactivity in the session. For more information, check CLIENT_SESSION_KEEP_ALIVE docs.
+	ClientSessionKeepAlive []ClientSessionKeepAliveObservation `json:"clientSessionKeepAlive,omitempty" tf:"client_session_keep_alive,omitempty"`
+
+	// between client attempts to update the token for the session. For more information, check CLIENT_SESSION_KEEP_ALIVE_HEARTBEAT_FREQUENCY docs.
+	ClientSessionKeepAliveHeartbeatFrequency []ClientSessionKeepAliveHeartbeatFrequencyObservation `json:"clientSessionKeepAliveHeartbeatFrequency,omitempty" tf:"client_session_keep_alive_heartbeat_frequency,omitempty"`
+
+	// (String) Specifies the TIMESTAMP_* variation to use when binding timestamp variables for JDBC or ODBC applications that use the bind API to load data. For more information, check CLIENT_TIMESTAMP_TYPE_MAPPING docs.
+	ClientTimestampTypeMapping []ClientTimestampTypeMappingObservation `json:"clientTimestampTypeMapping,omitempty" tf:"client_timestamp_type_mapping,omitempty"`
+
+	// (String) Specifies the input format for the DATE data type. For more information, see Date and time input and output formats. For more information, check DATE_INPUT_FORMAT docs.
+	DateInputFormat []DateInputFormatObservation `json:"dateInputFormat,omitempty" tf:"date_input_format,omitempty"`
+
+	// (String) Specifies the display format for the DATE data type. For more information, see Date and time input and output formats. For more information, check DATE_OUTPUT_FORMAT docs.
+	DateOutputFormat []DateOutputFormatObservation `json:"dateOutputFormat,omitempty" tf:"date_output_format,omitempty"`
+
+	// (Boolean) Specifies whether to set the schema for unloaded Parquet files based on the logical column data types (i.e. the types in the unload SQL query or source table) or on the unloaded column values (i.e. the smallest data types and precision that support the values in the output columns of the unload SQL statement or source table). For more information, check ENABLE_UNLOAD_PHYSICAL_TYPE_OPTIMIZATION docs.
+	EnableUnloadPhysicalTypeOptimization []EnableUnloadPhysicalTypeOptimizationObservation `json:"enableUnloadPhysicalTypeOptimization,omitempty" tf:"enable_unload_physical_type_optimization,omitempty"`
+
+	// (Boolean) Controls whether query text is redacted if a SQL query fails due to a syntax or parsing error. If FALSE, the content of a failed query is redacted in the views, pages, and functions that provide a query history. Only users with a role that is granted or inherits the AUDIT privilege can set the ENABLE_UNREDACTED_QUERY_SYNTAX_ERROR parameter. When using the ALTER USER command to set the parameter to TRUE for a particular user, modify the user that you want to see the query text, not the user who executed the query (if those are different users). For more information, check ENABLE_UNREDACTED_QUERY_SYNTAX_ERROR docs.
+	EnableUnredactedQuerySyntaxError []EnableUnredactedQuerySyntaxErrorObservation `json:"enableUnredactedQuerySyntaxError,omitempty" tf:"enable_unredacted_query_syntax_error,omitempty"`
+
+	// (Boolean) Specifies whether to return an error when the MERGE command is used to update or delete a target row that joins multiple source rows and the system cannot determine the action to perform on the target row. For more information, check ERROR_ON_NONDETERMINISTIC_MERGE docs.
+	ErrorOnNondeterministicMerge []ErrorOnNondeterministicMergeObservation `json:"errorOnNondeterministicMerge,omitempty" tf:"error_on_nondeterministic_merge,omitempty"`
+
+	// (Boolean) Specifies whether to return an error when the UPDATE command is used to update a target row that joins multiple source rows and the system cannot determine the action to perform on the target row. For more information, check ERROR_ON_NONDETERMINISTIC_UPDATE docs.
+	ErrorOnNondeterministicUpdate []ErrorOnNondeterministicUpdateObservation `json:"errorOnNondeterministicUpdate,omitempty" tf:"error_on_nondeterministic_update,omitempty"`
+
+	// (String) Display format for GEOGRAPHY values. For more information, check GEOGRAPHY_OUTPUT_FORMAT docs.
+	GeographyOutputFormat []GeographyOutputFormatObservation `json:"geographyOutputFormat,omitempty" tf:"geography_output_format,omitempty"`
+
+	// (String) Display format for GEOMETRY values. For more information, check GEOMETRY_OUTPUT_FORMAT docs.
+	GeometryOutputFormat []GeometryOutputFormatObservation `json:"geometryOutputFormat,omitempty" tf:"geometry_output_format,omitempty"`
+
+	// (Number) Specifies the number of blank spaces to indent each new element in JSON output in the session. Also specifies whether to insert newline characters after each element. For more information, check JSON_INDENT docs.
+	JSONIndent []JSONIndentObservation `json:"jsonIndent,omitempty" tf:"json_indent,omitempty"`
+
+	// (Boolean) Specifies how JDBC processes columns that have a scale of zero (0). For more information, check JDBC_TREAT_DECIMAL_AS_INT docs.
+	JdbcTreatDecimalAsInt []JdbcTreatDecimalAsIntObservation `json:"jdbcTreatDecimalAsInt,omitempty" tf:"jdbc_treat_decimal_as_int,omitempty"`
+
+	// (Boolean) Specifies how JDBC processes TIMESTAMP_NTZ values. For more information, check JDBC_TREAT_TIMESTAMP_NTZ_AS_UTC docs.
+	JdbcTreatTimestampNtzAsUtc []JdbcTreatTimestampNtzAsUtcObservation `json:"jdbcTreatTimestampNtzAsUtc,omitempty" tf:"jdbc_treat_timestamp_ntz_as_utc,omitempty"`
+
+	// (Boolean) Specifies whether the JDBC Driver uses the time zone of the JVM or the time zone of the session (specified by the TIMEZONE parameter) for the getDate(), getTime(), and getTimestamp() methods of the ResultSet class. For more information, check JDBC_USE_SESSION_TIMEZONE docs.
+	JdbcUseSessionTimezone []JdbcUseSessionTimezoneObservation `json:"jdbcUseSessionTimezone,omitempty" tf:"jdbc_use_session_timezone,omitempty"`
+
+	// (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
+	LockTimeout []LockTimeoutObservation `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
+
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	LogEventLevel []LogEventLevelObservation `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
+
+	// (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Messages at the specified level (and at more severe levels) are ingested. For more information about log levels, see Setting log level. For more information, check LOG_LEVEL docs.
+	LogLevel []LogLevelObservation `json:"logLevel,omitempty" tf:"log_level,omitempty"`
+
+	// statement capability. For more information, check MULTI_STATEMENT_COUNT docs.
+	MultiStatementCount []MultiStatementCountObservation `json:"multiStatementCount,omitempty" tf:"multi_statement_count,omitempty"`
+
+	// (String) Specifies the network policy to enforce for your account. Network policies enable restricting access to your account based on users’ IP address. For more details, see Controlling network traffic with network policies. Any existing network policy (created using CREATE NETWORK POLICY). For more information, check NETWORK_POLICY docs.
+	NetworkPolicy []NetworkPolicyObservation `json:"networkPolicy,omitempty" tf:"network_policy,omitempty"`
+
+	// incremented column in increasing or decreasing order. For more information, check NOORDER_SEQUENCE_AS_DEFAULT docs.
+	NoorderSequenceAsDefault []NoorderSequenceAsDefaultObservation `json:"noorderSequenceAsDefault,omitempty" tf:"noorder_sequence_as_default,omitempty"`
+
+	// (Boolean) Specifies how ODBC processes columns that have a scale of zero (0). For more information, check ODBC_TREAT_DECIMAL_AS_INT docs.
+	OdbcTreatDecimalAsInt []OdbcTreatDecimalAsIntObservation `json:"odbcTreatDecimalAsInt,omitempty" tf:"odbc_treat_decimal_as_int,omitempty"`
+
+	// (Boolean) Specifies whether to prevent data unload operations to internal (Snowflake) stages using COPY INTO  statements. For more information, check PREVENT_UNLOAD_TO_INTERNAL_STAGES docs.
+	PreventUnloadToInternalStages []PreventUnloadToInternalStagesObservation `json:"preventUnloadToInternalStages,omitempty" tf:"prevent_unload_to_internal_stages,omitempty"`
+
+	// (String) Optional string that can be used to tag queries and other SQL statements executed within a session. The tags are displayed in the output of the QUERY_HISTORY, QUERY_HISTORY_BY_* functions. For more information, check QUERY_TAG docs.
+	QueryTag []QueryTagObservation `json:"queryTag,omitempty" tf:"query_tag,omitempty"`
+
+	// quoted object identifiers are stored and resolved as uppercase letters. By default, Snowflake preserves the case of alphabetic characters when storing and resolving double-quoted identifiers (see Identifier resolution). You can use this parameter in situations in which third-party applications always use double quotes around identifiers. For more information, check QUOTED_IDENTIFIERS_IGNORE_CASE docs.
+	QuotedIdentifiersIgnoreCase []QuotedIdentifiersIgnoreCaseObservation `json:"quotedIdentifiersIgnoreCase,omitempty" tf:"quoted_identifiers_ignore_case,omitempty"`
+
+	// (Number) Specifies the maximum number of rows returned in a result set. A value of 0 specifies no maximum. For more information, check ROWS_PER_RESULTSET docs.
+	RowsPerResultset []RowsPerResultsetObservation `json:"rowsPerResultset,omitempty" tf:"rows_per_resultset,omitempty"`
+
+	// (String) Specifies the DNS name of an Amazon S3 interface endpoint. Requests sent to the internal stage of an account via AWS PrivateLink for Amazon S3 use this endpoint to connect. For more information, see Accessing Internal stages with dedicated interface endpoints. For more information, check S3_STAGE_VPCE_DNS_NAME docs.
+	S3StageVpceDNSName []S3StageVpceDNSNameObservation `json:"s3StageVpceDnsName,omitempty" tf:"s3_stage_vpce_dns_name,omitempty"`
+
+	// separated list of identifiers. An identifier can be a fully or partially qualified schema name. For more information, check SEARCH_PATH docs.
+	SearchPath []SearchPathObservation `json:"searchPath,omitempty" tf:"search_path,omitempty"`
+
+	// (String) Specifies the name of a consumer account to simulate for testing/validating shared data, particularly shared secure views. When this parameter is set in a session, shared views return rows as if executed in the specified consumer account rather than the provider account. For more information, see Introduction to Secure Data Sharing and Working with shares. For more information, check SIMULATED_DATA_SHARING_CONSUMER docs.
+	SimulatedDataSharingConsumer []SimulatedDataSharingConsumerObservation `json:"simulatedDataSharingConsumer,omitempty" tf:"simulated_data_sharing_consumer,omitempty"`
+
+	// (Number) Amount of time, in seconds, a SQL statement (query, DDL, DML, etc.) remains queued for a warehouse before it is canceled by the system. This parameter can be used in conjunction with the MAX_CONCURRENCY_LEVEL parameter to ensure a warehouse is never backlogged. For more information, check STATEMENT_QUEUED_TIMEOUT_IN_SECONDS docs.
+	StatementQueuedTimeoutInSeconds []StatementQueuedTimeoutInSecondsObservation `json:"statementQueuedTimeoutInSeconds,omitempty" tf:"statement_queued_timeout_in_seconds,omitempty"`
+
+	// (Number) Amount of time, in seconds, after which a running SQL statement (query, DDL, DML, etc.) is canceled by the system. For more information, check STATEMENT_TIMEOUT_IN_SECONDS docs.
+	StatementTimeoutInSeconds []StatementTimeoutInSecondsObservation `json:"statementTimeoutInSeconds,omitempty" tf:"statement_timeout_in_seconds,omitempty"`
+
+	// standard values; however, these non-standard values might result in Snowflake outputting JSON that is incompatible with other platforms and languages. This parameter, when enabled, ensures that Snowflake outputs valid/compatible JSON. For more information, check STRICT_JSON_OUTPUT docs.
+	StrictJSONOutput []StrictJSONOutputObservation `json:"strictJsonOutput,omitempty" tf:"strict_json_output,omitempty"`
+
+	// (String) Specifies the input format for the TIME data type. For more information, see Date and time input and output formats. Any valid, supported time format or AUTO (AUTO specifies that Snowflake attempts to automatically detect the format of times stored in the system during the session). For more information, check TIME_INPUT_FORMAT docs.
+	TimeInputFormat []TimeInputFormatObservation `json:"timeInputFormat,omitempty" tf:"time_input_format,omitempty"`
+
+	// (String) Specifies the display format for the TIME data type. For more information, see Date and time input and output formats. For more information, check TIME_OUTPUT_FORMAT docs.
+	TimeOutputFormat []TimeOutputFormatObservation `json:"timeOutputFormat,omitempty" tf:"time_output_format,omitempty"`
+
+	// (Boolean) Specifies whether the DATEADD function (and its aliases) always consider a day to be exactly 24 hours for expressions that span multiple days. For more information, check TIMESTAMP_DAY_IS_ALWAYS_24H docs.
+	TimestampDayIsAlways24H []TimestampDayIsAlways24HObservation `json:"timestampDayIsAlways24H,omitempty" tf:"timestamp_day_is_always_24h,omitempty"`
+
+	// (String) Specifies the input format for the TIMESTAMP data type alias. For more information, see Date and time input and output formats. Any valid, supported timestamp format or AUTO (AUTO specifies that Snowflake attempts to automatically detect the format of timestamps stored in the system during the session). For more information, check TIMESTAMP_INPUT_FORMAT docs.
+	TimestampInputFormat []TimestampInputFormatObservation `json:"timestampInputFormat,omitempty" tf:"timestamp_input_format,omitempty"`
+
+	// (String) Specifies the display format for the TIMESTAMP_LTZ data type. If no format is specified, defaults to TIMESTAMP_OUTPUT_FORMAT. For more information, see Date and time input and output formats. For more information, check TIMESTAMP_LTZ_OUTPUT_FORMAT docs.
+	TimestampLtzOutputFormat []TimestampLtzOutputFormatObservation `json:"timestampLtzOutputFormat,omitempty" tf:"timestamp_ltz_output_format,omitempty"`
+
+	// (String) Specifies the display format for the TIMESTAMP_NTZ data type. For more information, check TIMESTAMP_NTZ_OUTPUT_FORMAT docs.
+	TimestampNtzOutputFormat []TimestampNtzOutputFormatObservation `json:"timestampNtzOutputFormat,omitempty" tf:"timestamp_ntz_output_format,omitempty"`
+
+	// (String) Specifies the display format for the TIMESTAMP data type alias. For more information, see Date and time input and output formats. For more information, check TIMESTAMP_OUTPUT_FORMAT docs.
+	TimestampOutputFormat []TimestampOutputFormatObservation `json:"timestampOutputFormat,omitempty" tf:"timestamp_output_format,omitempty"`
+
+	// (String) Specifies the TIMESTAMP_* variation that the TIMESTAMP data type alias maps to. For more information, check TIMESTAMP_TYPE_MAPPING docs.
+	TimestampTypeMapping []TimestampTypeMappingObservation `json:"timestampTypeMapping,omitempty" tf:"timestamp_type_mapping,omitempty"`
+
+	// (String) Specifies the display format for the TIMESTAMP_TZ data type. If no format is specified, defaults to TIMESTAMP_OUTPUT_FORMAT. For more information, see Date and time input and output formats. For more information, check TIMESTAMP_TZ_OUTPUT_FORMAT docs.
+	TimestampTzOutputFormat []TimestampTzOutputFormatObservation `json:"timestampTzOutputFormat,omitempty" tf:"timestamp_tz_output_format,omitempty"`
+
+	// (String) Specifies the time zone for the session. You can specify a time zone name or a link name from release 2021a of the IANA Time Zone Database (e.g. America/Los_Angeles, Europe/London, UTC, Etc/GMT, etc.). For more information, check TIMEZONE docs.
+	Timezone []TimezoneObservation `json:"timezone,omitempty" tf:"timezone,omitempty"`
+
+	// (String) Controls how trace events are ingested into the event table. For more information about trace levels, see Setting trace level. For more information, check TRACE_LEVEL docs.
+	TraceLevel []TraceLevelObservation `json:"traceLevel,omitempty" tf:"trace_level,omitempty"`
+
+	// autocommit transaction returns with an error. For more information, check TRANSACTION_ABORT_ON_ERROR docs.
+	TransactionAbortOnError []TransactionAbortOnErrorObservation `json:"transactionAbortOnError,omitempty" tf:"transaction_abort_on_error,omitempty"`
+
+	// (String) Specifies the isolation level for transactions in the user session. For more information, check TRANSACTION_DEFAULT_ISOLATION_LEVEL docs.
+	TransactionDefaultIsolationLevel []TransactionDefaultIsolationLevelObservation `json:"transactionDefaultIsolationLevel,omitempty" tf:"transaction_default_isolation_level,omitempty"`
+
+	// digit years (i.e. the earliest year such dates can represent). This parameter prevents ambiguous dates when importing or converting data with the YY date format component (i.e. years represented as 2 digits). For more information, check TWO_DIGIT_CENTURY_START docs.
+	TwoDigitCenturyStart []TwoDigitCenturyStartObservation `json:"twoDigitCenturyStart,omitempty" tf:"two_digit_century_start,omitempty"`
+
+	// default) value specified for a constraint property returns an error. For more information, check UNSUPPORTED_DDL_ACTION docs.
+	UnsupportedDdlAction []UnsupportedDdlActionObservation `json:"unsupportedDdlAction,omitempty" tf:"unsupported_ddl_action,omitempty"`
+
+	// (Boolean) Specifies whether to reuse persisted query results, if available, when a matching query is submitted. For more information, check USE_CACHED_RESULT docs.
+	UseCachedResult []UseCachedResultObservation `json:"useCachedResult,omitempty" tf:"use_cached_result,omitempty"`
+
+	// (Number) Specifies how the weeks in a given year are computed. 0: The semantics used are equivalent to the ISO semantics, in which a week belongs to a given year if at least 4 days of that week are in that year. 1: January 1 is included in the first week of the year and December 31 is included in the last week of the year. For more information, check WEEK_OF_YEAR_POLICY docs.
+	WeekOfYearPolicy []WeekOfYearPolicyObservation `json:"weekOfYearPolicy,omitempty" tf:"week_of_year_policy,omitempty"`
+
+	// related date functions). 0: Legacy Snowflake behavior is used (i.e. ISO-like semantics). 1 (Monday) to 7 (Sunday): All the week-related functions use weeks that start on the specified day of the week. For more information, check WEEK_START docs.
+	WeekStart []WeekStartObservation `json:"weekStart,omitempty" tf:"week_start,omitempty"`
+}
+
+type ParametersParameters struct {
+}
+
+type PreventUnloadToInternalStagesInitParameters struct {
+}
+
+type PreventUnloadToInternalStagesObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1307,13 +1166,13 @@ type ParametersTransactionDefaultIsolationLevelObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTransactionDefaultIsolationLevelParameters struct {
+type PreventUnloadToInternalStagesParameters struct {
 }
 
-type ParametersTwoDigitCenturyStartInitParameters struct {
+type QueryTagInitParameters struct {
 }
 
-type ParametersTwoDigitCenturyStartObservation struct {
+type QueryTagObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1331,13 +1190,13 @@ type ParametersTwoDigitCenturyStartObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersTwoDigitCenturyStartParameters struct {
+type QueryTagParameters struct {
 }
 
-type ParametersUnsupportedDdlActionInitParameters struct {
+type QuotedIdentifiersIgnoreCaseInitParameters struct {
 }
 
-type ParametersUnsupportedDdlActionObservation struct {
+type QuotedIdentifiersIgnoreCaseObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1355,13 +1214,13 @@ type ParametersUnsupportedDdlActionObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersUnsupportedDdlActionParameters struct {
+type QuotedIdentifiersIgnoreCaseParameters struct {
 }
 
-type ParametersUseCachedResultInitParameters struct {
+type RowsPerResultsetInitParameters struct {
 }
 
-type ParametersUseCachedResultObservation struct {
+type RowsPerResultsetObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1379,13 +1238,13 @@ type ParametersUseCachedResultObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersUseCachedResultParameters struct {
+type RowsPerResultsetParameters struct {
 }
 
-type ParametersWeekOfYearPolicyInitParameters struct {
+type S3StageVpceDNSNameInitParameters struct {
 }
 
-type ParametersWeekOfYearPolicyObservation struct {
+type S3StageVpceDNSNameObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1403,13 +1262,13 @@ type ParametersWeekOfYearPolicyObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersWeekOfYearPolicyParameters struct {
+type S3StageVpceDNSNameParameters struct {
 }
 
-type ParametersWeekStartInitParameters struct {
+type SearchPathInitParameters struct {
 }
 
-type ParametersWeekStartObservation struct {
+type SearchPathObservation struct {
 
 	// (String)
 	Default *string `json:"default,omitempty" tf:"default,omitempty"`
@@ -1427,10 +1286,10 @@ type ParametersWeekStartObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type ParametersWeekStartParameters struct {
+type SearchPathParameters struct {
 }
 
-type UserInitParameters struct {
+type ServiceUserInitParameters struct {
 
 	// progress queries if connectivity is lost due to abrupt termination of a session (e.g. network outage, browser termination, service interruption). For more information, check ABORT_DETACHED_QUERY docs.
 	// Specifies the action that Snowflake performs for in-progress queries if connectivity is lost due to abrupt termination of a session (e.g. network outage, browser termination, service interruption). For more information, check [ABORT_DETACHED_QUERY docs](https://docs.snowflake.com/en/sql-reference/parameters#abort-detached-query).
@@ -1529,9 +1388,9 @@ type UserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultWarehouseSelector *v1.NamespacedSelector `json:"defaultWarehouseSelector,omitempty" tf:"-"`
 
-	// uses special value that cannot be set in the configuration manually (default)) Allows enabling or disabling multi-factor authentication. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value. External changes for this field won't be detected.
-	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Allows enabling or disabling [multi-factor authentication](https://docs.snowflake.com/en/user-guide/security-mfa). Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value. External changes for this field won't be detected.
-	DisableMfa *string `json:"disableMfa,omitempty" tf:"disable_mfa,omitempty"`
+	// party services to authenticate as this user. Only applicable for service users and legacy service users. This field can be only used when USER_ENABLE_DEFAULT_WORKLOAD_IDENTITY option is specified in provider block in the experimental_features_enabled field. If this feature is not enabled, attempting to set this field will result in an error. The provider will not get WIF information from Snowflake. (see below for nested schema)
+	// Configures the default workload identity for the user. This is used for workload identity federation to allow third-party services to authenticate as this user. Only applicable for service users and legacy service users. This field can be only used when `USER_ENABLE_DEFAULT_WORKLOAD_IDENTITY` option is specified in provider block in the [`experimental_features_enabled`](../#experimental_features_enabled-1) field. If this feature is not enabled, attempting to set this field will result in an error. The provider will not get WIF information from Snowflake.
+	DefaultWorkloadIdentity []DefaultWorkloadIdentityInitParameters `json:"defaultWorkloadIdentity,omitempty" tf:"default_workload_identity,omitempty"`
 
 	// uses special value that cannot be set in the configuration manually (default)) Specifies whether the user is disabled, which prevents logging in and aborts all the currently-running queries for the user. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies whether the user is disabled, which prevents logging in and aborts all the currently-running queries for the user. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
@@ -1561,10 +1420,6 @@ type UserInitParameters struct {
 	// Specifies whether to return an error when the [UPDATE](https://docs.snowflake.com/en/sql-reference/sql/update) command is used to update a target row that joins multiple source rows and the system cannot determine the action to perform on the target row. For more information, check [ERROR_ON_NONDETERMINISTIC_UPDATE docs](https://docs.snowflake.com/en/sql-reference/parameters#error-on-nondeterministic-update).
 	ErrorOnNondeterministicUpdate *bool `json:"errorOnNondeterministicUpdate,omitempty" tf:"error_on_nondeterministic_update,omitempty"`
 
-	// (String, Sensitive) First name of the user.
-	// First name of the user.
-	FirstNameSecretRef *v1.LocalSecretKeySelector `json:"firstNameSecretRef,omitempty" tf:"-"`
-
 	// (String) Display format for GEOGRAPHY values. For more information, check GEOGRAPHY_OUTPUT_FORMAT docs.
 	// Display format for [GEOGRAPHY values](https://docs.snowflake.com/en/sql-reference/data-types-geospatial.html#label-data-types-geography). For more information, check [GEOGRAPHY_OUTPUT_FORMAT docs](https://docs.snowflake.com/en/sql-reference/parameters#geography-output-format).
 	GeographyOutputFormat *string `json:"geographyOutputFormat,omitempty" tf:"geography_output_format,omitempty"`
@@ -1589,10 +1444,6 @@ type UserInitParameters struct {
 	// Specifies whether the JDBC Driver uses the time zone of the JVM or the time zone of the session (specified by the [TIMEZONE](https://docs.snowflake.com/en/sql-reference/parameters#label-timezone) parameter) for the getDate(), getTime(), and getTimestamp() methods of the ResultSet class. For more information, check [JDBC_USE_SESSION_TIMEZONE docs](https://docs.snowflake.com/en/sql-reference/parameters#jdbc-use-session-timezone).
 	JdbcUseSessionTimezone *bool `json:"jdbcUseSessionTimezone,omitempty" tf:"jdbc_use_session_timezone,omitempty"`
 
-	// (String, Sensitive) Last name of the user.
-	// Last name of the user.
-	LastNameSecretRef *v1.LocalSecretKeySelector `json:"lastNameSecretRef,omitempty" tf:"-"`
-
 	// (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
@@ -1609,14 +1460,6 @@ type UserInitParameters struct {
 	// The name users use to log in. If not supplied, snowflake will use name instead. Login names are always case-insensitive.
 	LoginNameSecretRef *v1.LocalSecretKeySelector `json:"loginNameSecretRef,omitempty" tf:"-"`
 
-	// (String, Sensitive) Middle name of the user.
-	// Middle name of the user.
-	MiddleNameSecretRef *v1.LocalSecretKeySelector `json:"middleNameSecretRef,omitempty" tf:"-"`
-
-	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
-	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`-1`)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
-	MinsToBypassMfa *float64 `json:"minsToBypassMfa,omitempty" tf:"mins_to_bypass_mfa,omitempty"`
-
 	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. Note because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`-1`)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. **Note** because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
 	MinsToUnlock *float64 `json:"minsToUnlock,omitempty" tf:"mins_to_unlock,omitempty"`
@@ -1624,10 +1467,6 @@ type UserInitParameters struct {
 	// statement capability. For more information, check MULTI_STATEMENT_COUNT docs.
 	// Number of statements to execute when using the multi-statement capability. For more information, check [MULTI_STATEMENT_COUNT docs](https://docs.snowflake.com/en/sql-reference/parameters#multi-statement-count).
 	MultiStatementCount *float64 `json:"multiStatementCount,omitempty" tf:"multi_statement_count,omitempty"`
-
-	// uses special value that cannot be set in the configuration manually (default)) Specifies whether the user is forced to change their password on next login (including their first/initial login) into the system. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
-	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies whether the user is forced to change their password on next login (including their first/initial login) into the system. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
-	MustChangePassword *string `json:"mustChangePassword,omitempty" tf:"must_change_password,omitempty"`
 
 	// (String) Specifies the network policy to enforce for your account. Network policies enable restricting access to your account based on users’ IP address. For more details, see Controlling network traffic with network policies. Any existing network policy (created using CREATE NETWORK POLICY). For more information, check NETWORK_POLICY docs.
 	// Specifies the network policy to enforce for your account. Network policies enable restricting access to your account based on users’ IP address. For more details, see [Controlling network traffic with network policies](https://docs.snowflake.com/en/user-guide/network-policies). Any existing network policy (created using [CREATE NETWORK POLICY](https://docs.snowflake.com/en/sql-reference/sql/create-network-policy)). For more information, check [NETWORK_POLICY docs](https://docs.snowflake.com/en/sql-reference/parameters#network-policy).
@@ -1640,9 +1479,6 @@ type UserInitParameters struct {
 	// (Boolean) Specifies how ODBC processes columns that have a scale of zero (0). For more information, check ODBC_TREAT_DECIMAL_AS_INT docs.
 	// Specifies how ODBC processes columns that have a scale of zero (0). For more information, check [ODBC_TREAT_DECIMAL_AS_INT docs](https://docs.snowflake.com/en/sql-reference/parameters#odbc-treat-decimal-as-int).
 	OdbcTreatDecimalAsInt *bool `json:"odbcTreatDecimalAsInt,omitempty" tf:"odbc_treat_decimal_as_int,omitempty"`
-
-	// Password for the user. Use carefully. External changes for this field won't be detected.
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// (Boolean) Specifies whether to prevent data unload operations to internal (Snowflake) stages using COPY INTO  statements. For more information, check PREVENT_UNLOAD_TO_INTERNAL_STAGES docs.
 	// Specifies whether to prevent data unload operations to internal (Snowflake) stages using [COPY INTO <location>](https://docs.snowflake.com/en/sql-reference/sql/copy-into-location) statements. For more information, check [PREVENT_UNLOAD_TO_INTERNAL_STAGES docs](https://docs.snowflake.com/en/sql-reference/parameters#prevent-unload-to-internal-stages).
@@ -1765,7 +1601,7 @@ type UserInitParameters struct {
 	WeekStart *float64 `json:"weekStart,omitempty" tf:"week_start,omitempty"`
 }
 
-type UserObservation struct {
+type ServiceUserObservation struct {
 
 	// progress queries if connectivity is lost due to abrupt termination of a session (e.g. network outage, browser termination, service interruption). For more information, check ABORT_DETACHED_QUERY docs.
 	// Specifies the action that Snowflake performs for in-progress queries if connectivity is lost due to abrupt termination of a session (e.g. network outage, browser termination, service interruption). For more information, check [ABORT_DETACHED_QUERY docs](https://docs.snowflake.com/en/sql-reference/parameters#abort-detached-query).
@@ -1846,9 +1682,9 @@ type UserObservation struct {
 	// Specifies the virtual warehouse that is active by default for the user’s session upon login. Note that the CREATE USER operation does not verify that the warehouse exists. For more information about this resource, see [docs](./warehouse).
 	DefaultWarehouse *string `json:"defaultWarehouse,omitempty" tf:"default_warehouse,omitempty"`
 
-	// uses special value that cannot be set in the configuration manually (default)) Allows enabling or disabling multi-factor authentication. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value. External changes for this field won't be detected.
-	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Allows enabling or disabling [multi-factor authentication](https://docs.snowflake.com/en/user-guide/security-mfa). Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value. External changes for this field won't be detected.
-	DisableMfa *string `json:"disableMfa,omitempty" tf:"disable_mfa,omitempty"`
+	// party services to authenticate as this user. Only applicable for service users and legacy service users. This field can be only used when USER_ENABLE_DEFAULT_WORKLOAD_IDENTITY option is specified in provider block in the experimental_features_enabled field. If this feature is not enabled, attempting to set this field will result in an error. The provider will not get WIF information from Snowflake. (see below for nested schema)
+	// Configures the default workload identity for the user. This is used for workload identity federation to allow third-party services to authenticate as this user. Only applicable for service users and legacy service users. This field can be only used when `USER_ENABLE_DEFAULT_WORKLOAD_IDENTITY` option is specified in provider block in the [`experimental_features_enabled`](../#experimental_features_enabled-1) field. If this feature is not enabled, attempting to set this field will result in an error. The provider will not get WIF information from Snowflake.
+	DefaultWorkloadIdentity []DefaultWorkloadIdentityObservation `json:"defaultWorkloadIdentity,omitempty" tf:"default_workload_identity,omitempty"`
 
 	// uses special value that cannot be set in the configuration manually (default)) Specifies whether the user is disabled, which prevents logging in and aborts all the currently-running queries for the user. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies whether the user is disabled, which prevents logging in and aborts all the currently-running queries for the user. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
@@ -1917,10 +1753,6 @@ type UserObservation struct {
 	// Specifies the severity level of messages that should be ingested and made available in the active event table. Messages at the specified level (and at more severe levels) are ingested. For more information about log levels, see [Setting log level](https://docs.snowflake.com/en/developer-guide/logging-tracing/logging-log-level). For more information, check [LOG_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-level).
 	LogLevel *string `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 
-	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
-	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`-1`)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
-	MinsToBypassMfa *float64 `json:"minsToBypassMfa,omitempty" tf:"mins_to_bypass_mfa,omitempty"`
-
 	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. Note because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`-1`)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. **Note** because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
 	MinsToUnlock *float64 `json:"minsToUnlock,omitempty" tf:"mins_to_unlock,omitempty"`
@@ -1928,10 +1760,6 @@ type UserObservation struct {
 	// statement capability. For more information, check MULTI_STATEMENT_COUNT docs.
 	// Number of statements to execute when using the multi-statement capability. For more information, check [MULTI_STATEMENT_COUNT docs](https://docs.snowflake.com/en/sql-reference/parameters#multi-statement-count).
 	MultiStatementCount *float64 `json:"multiStatementCount,omitempty" tf:"multi_statement_count,omitempty"`
-
-	// uses special value that cannot be set in the configuration manually (default)) Specifies whether the user is forced to change their password on next login (including their first/initial login) into the system. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
-	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies whether the user is forced to change their password on next login (including their first/initial login) into the system. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
-	MustChangePassword *string `json:"mustChangePassword,omitempty" tf:"must_change_password,omitempty"`
 
 	// (String) Specifies the network policy to enforce for your account. Network policies enable restricting access to your account based on users’ IP address. For more details, see Controlling network traffic with network policies. Any existing network policy (created using CREATE NETWORK POLICY). For more information, check NETWORK_POLICY docs.
 	// Specifies the network policy to enforce for your account. Network policies enable restricting access to your account based on users’ IP address. For more details, see [Controlling network traffic with network policies](https://docs.snowflake.com/en/user-guide/network-policies). Any existing network policy (created using [CREATE NETWORK POLICY](https://docs.snowflake.com/en/sql-reference/sql/create-network-policy)). For more information, check [NETWORK_POLICY docs](https://docs.snowflake.com/en/sql-reference/parameters#network-policy).
@@ -1947,7 +1775,7 @@ type UserObservation struct {
 
 	// (List of Object) Outputs the result of SHOW PARAMETERS IN USER for the given user. (see below for nested schema)
 	// Outputs the result of `SHOW PARAMETERS IN USER` for the given user.
-	Parameters []UserParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
+	Parameters []ParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// (Boolean) Specifies whether to prevent data unload operations to internal (Snowflake) stages using COPY INTO  statements. For more information, check PREVENT_UNLOAD_TO_INTERNAL_STAGES docs.
 	// Specifies whether to prevent data unload operations to internal (Snowflake) stages using [COPY INTO <location>](https://docs.snowflake.com/en/sql-reference/sql/copy-into-location) statements. For more information, check [PREVENT_UNLOAD_TO_INTERNAL_STAGES docs](https://docs.snowflake.com/en/sql-reference/parameters#prevent-unload-to-internal-stages).
@@ -1983,7 +1811,7 @@ type UserObservation struct {
 
 	// (List of Object) Outputs the result of SHOW USER for the given user. (see below for nested schema)
 	// Outputs the result of `SHOW USER` for the given user.
-	ShowOutput []UserShowOutputObservation `json:"showOutput,omitempty" tf:"show_output,omitempty"`
+	ShowOutput []ServiceUserShowOutputObservation `json:"showOutput,omitempty" tf:"show_output,omitempty"`
 
 	// (String) Specifies the name of a consumer account to simulate for testing/validating shared data, particularly shared secure views. When this parameter is set in a session, shared views return rows as if executed in the specified consumer account rather than the provider account. For more information, see Introduction to Secure Data Sharing and Working with shares. For more information, check SIMULATED_DATA_SHARING_CONSUMER docs.
 	// Specifies the name of a consumer account to simulate for testing/validating shared data, particularly shared secure views. When this parameter is set in a session, shared views return rows as if executed in the specified consumer account rather than the provider account. For more information, see [Introduction to Secure Data Sharing](https://docs.snowflake.com/en/user-guide/data-sharing-intro) and [Working with shares](https://docs.snowflake.com/en/user-guide/data-sharing-provider). For more information, check [SIMULATED_DATA_SHARING_CONSUMER docs](https://docs.snowflake.com/en/sql-reference/parameters#simulated-data-sharing-consumer).
@@ -2078,7 +1906,7 @@ type UserObservation struct {
 	WeekStart *float64 `json:"weekStart,omitempty" tf:"week_start,omitempty"`
 }
 
-type UserParameters struct {
+type ServiceUserParameters struct {
 
 	// progress queries if connectivity is lost due to abrupt termination of a session (e.g. network outage, browser termination, service interruption). For more information, check ABORT_DETACHED_QUERY docs.
 	// Specifies the action that Snowflake performs for in-progress queries if connectivity is lost due to abrupt termination of a session (e.g. network outage, browser termination, service interruption). For more information, check [ABORT_DETACHED_QUERY docs](https://docs.snowflake.com/en/sql-reference/parameters#abort-detached-query).
@@ -2197,10 +2025,10 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultWarehouseSelector *v1.NamespacedSelector `json:"defaultWarehouseSelector,omitempty" tf:"-"`
 
-	// uses special value that cannot be set in the configuration manually (default)) Allows enabling or disabling multi-factor authentication. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value. External changes for this field won't be detected.
-	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Allows enabling or disabling [multi-factor authentication](https://docs.snowflake.com/en/user-guide/security-mfa). Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value. External changes for this field won't be detected.
+	// party services to authenticate as this user. Only applicable for service users and legacy service users. This field can be only used when USER_ENABLE_DEFAULT_WORKLOAD_IDENTITY option is specified in provider block in the experimental_features_enabled field. If this feature is not enabled, attempting to set this field will result in an error. The provider will not get WIF information from Snowflake. (see below for nested schema)
+	// Configures the default workload identity for the user. This is used for workload identity federation to allow third-party services to authenticate as this user. Only applicable for service users and legacy service users. This field can be only used when `USER_ENABLE_DEFAULT_WORKLOAD_IDENTITY` option is specified in provider block in the [`experimental_features_enabled`](../#experimental_features_enabled-1) field. If this feature is not enabled, attempting to set this field will result in an error. The provider will not get WIF information from Snowflake.
 	// +kubebuilder:validation:Optional
-	DisableMfa *string `json:"disableMfa,omitempty" tf:"disable_mfa,omitempty"`
+	DefaultWorkloadIdentity []DefaultWorkloadIdentityParameters `json:"defaultWorkloadIdentity,omitempty" tf:"default_workload_identity,omitempty"`
 
 	// uses special value that cannot be set in the configuration manually (default)) Specifies whether the user is disabled, which prevents logging in and aborts all the currently-running queries for the user. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies whether the user is disabled, which prevents logging in and aborts all the currently-running queries for the user. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
@@ -2237,11 +2065,6 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	ErrorOnNondeterministicUpdate *bool `json:"errorOnNondeterministicUpdate,omitempty" tf:"error_on_nondeterministic_update,omitempty"`
 
-	// (String, Sensitive) First name of the user.
-	// First name of the user.
-	// +kubebuilder:validation:Optional
-	FirstNameSecretRef *v1.LocalSecretKeySelector `json:"firstNameSecretRef,omitempty" tf:"-"`
-
 	// (String) Display format for GEOGRAPHY values. For more information, check GEOGRAPHY_OUTPUT_FORMAT docs.
 	// Display format for [GEOGRAPHY values](https://docs.snowflake.com/en/sql-reference/data-types-geospatial.html#label-data-types-geography). For more information, check [GEOGRAPHY_OUTPUT_FORMAT docs](https://docs.snowflake.com/en/sql-reference/parameters#geography-output-format).
 	// +kubebuilder:validation:Optional
@@ -2272,11 +2095,6 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	JdbcUseSessionTimezone *bool `json:"jdbcUseSessionTimezone,omitempty" tf:"jdbc_use_session_timezone,omitempty"`
 
-	// (String, Sensitive) Last name of the user.
-	// Last name of the user.
-	// +kubebuilder:validation:Optional
-	LastNameSecretRef *v1.LocalSecretKeySelector `json:"lastNameSecretRef,omitempty" tf:"-"`
-
 	// (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	// +kubebuilder:validation:Optional
@@ -2297,16 +2115,6 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	LoginNameSecretRef *v1.LocalSecretKeySelector `json:"loginNameSecretRef,omitempty" tf:"-"`
 
-	// (String, Sensitive) Middle name of the user.
-	// Middle name of the user.
-	// +kubebuilder:validation:Optional
-	MiddleNameSecretRef *v1.LocalSecretKeySelector `json:"middleNameSecretRef,omitempty" tf:"-"`
-
-	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
-	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`-1`)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
-	// +kubebuilder:validation:Optional
-	MinsToBypassMfa *float64 `json:"minsToBypassMfa,omitempty" tf:"mins_to_bypass_mfa,omitempty"`
-
 	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. Note because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`-1`)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. **Note** because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
 	// +kubebuilder:validation:Optional
@@ -2316,11 +2124,6 @@ type UserParameters struct {
 	// Number of statements to execute when using the multi-statement capability. For more information, check [MULTI_STATEMENT_COUNT docs](https://docs.snowflake.com/en/sql-reference/parameters#multi-statement-count).
 	// +kubebuilder:validation:Optional
 	MultiStatementCount *float64 `json:"multiStatementCount,omitempty" tf:"multi_statement_count,omitempty"`
-
-	// uses special value that cannot be set in the configuration manually (default)) Specifies whether the user is forced to change their password on next login (including their first/initial login) into the system. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
-	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies whether the user is forced to change their password on next login (including their first/initial login) into the system. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
-	// +kubebuilder:validation:Optional
-	MustChangePassword *string `json:"mustChangePassword,omitempty" tf:"must_change_password,omitempty"`
 
 	// (String) Specifies the network policy to enforce for your account. Network policies enable restricting access to your account based on users’ IP address. For more details, see Controlling network traffic with network policies. Any existing network policy (created using CREATE NETWORK POLICY). For more information, check NETWORK_POLICY docs.
 	// Specifies the network policy to enforce for your account. Network policies enable restricting access to your account based on users’ IP address. For more details, see [Controlling network traffic with network policies](https://docs.snowflake.com/en/user-guide/network-policies). Any existing network policy (created using [CREATE NETWORK POLICY](https://docs.snowflake.com/en/sql-reference/sql/create-network-policy)). For more information, check [NETWORK_POLICY docs](https://docs.snowflake.com/en/sql-reference/parameters#network-policy).
@@ -2336,10 +2139,6 @@ type UserParameters struct {
 	// Specifies how ODBC processes columns that have a scale of zero (0). For more information, check [ODBC_TREAT_DECIMAL_AS_INT docs](https://docs.snowflake.com/en/sql-reference/parameters#odbc-treat-decimal-as-int).
 	// +kubebuilder:validation:Optional
 	OdbcTreatDecimalAsInt *bool `json:"odbcTreatDecimalAsInt,omitempty" tf:"odbc_treat_decimal_as_int,omitempty"`
-
-	// Password for the user. Use carefully. External changes for this field won't be detected.
-	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.LocalSecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// (Boolean) Specifies whether to prevent data unload operations to internal (Snowflake) stages using COPY INTO  statements. For more information, check PREVENT_UNLOAD_TO_INTERNAL_STAGES docs.
 	// Specifies whether to prevent data unload operations to internal (Snowflake) stages using [COPY INTO <location>](https://docs.snowflake.com/en/sql-reference/sql/copy-into-location) statements. For more information, check [PREVENT_UNLOAD_TO_INTERNAL_STAGES docs](https://docs.snowflake.com/en/sql-reference/parameters#prevent-unload-to-internal-stages).
@@ -2492,196 +2291,10 @@ type UserParameters struct {
 	WeekStart *float64 `json:"weekStart,omitempty" tf:"week_start,omitempty"`
 }
 
-type UserParametersInitParameters struct {
+type ServiceUserShowOutputInitParameters struct {
 }
 
-type UserParametersObservation struct {
-
-	// progress queries if connectivity is lost due to abrupt termination of a session (e.g. network outage, browser termination, service interruption). For more information, check ABORT_DETACHED_QUERY docs.
-	AbortDetachedQuery []ParametersAbortDetachedQueryObservation `json:"abortDetachedQuery,omitempty" tf:"abort_detached_query,omitempty"`
-
-	// (Boolean) Specifies whether autocommit is enabled for the session. Autocommit determines whether a DML statement, when executed without an active transaction, is automatically committed after the statement successfully completes. For more information, see Transactions. For more information, check AUTOCOMMIT docs.
-	Autocommit []ParametersAutocommitObservation `json:"autocommit,omitempty" tf:"autocommit,omitempty"`
-
-	// to-BINARY conversion functions. For more information, see Binary input and output. For more information, check BINARY_INPUT_FORMAT docs.
-	BinaryInputFormat []ParametersBinaryInputFormatObservation `json:"binaryInputFormat,omitempty" tf:"binary_input_format,omitempty"`
-
-	// to-VARCHAR conversion functions. For more information, see Binary input and output. For more information, check BINARY_OUTPUT_FORMAT docs.
-	BinaryOutputFormat []ParametersBinaryOutputFormatObservation `json:"binaryOutputFormat,omitempty" tf:"binary_output_format,omitempty"`
-
-	// (Number) Parameter that specifies the maximum amount of memory the JDBC driver or ODBC driver should use for the result set from queries (in MB). For more information, check CLIENT_MEMORY_LIMIT docs.
-	ClientMemoryLimit []ParametersClientMemoryLimitObservation `json:"clientMemoryLimit,omitempty" tf:"client_memory_limit,omitempty"`
-
-	// (Boolean) For specific ODBC functions and JDBC methods, this parameter can change the default search scope from all databases/schemas to the current database/schema. The narrower search typically returns fewer rows and executes more quickly. For more information, check CLIENT_METADATA_REQUEST_USE_CONNECTION_CTX docs.
-	ClientMetadataRequestUseConnectionCtx []ParametersClientMetadataRequestUseConnectionCtxObservation `json:"clientMetadataRequestUseConnectionCtx,omitempty" tf:"client_metadata_request_use_connection_ctx,omitempty"`
-
-	// fetch large result sets. The driver will attempt to honor the parameter value, but defines the minimum and maximum values (depending on your system’s resources) to improve performance. For more information, check CLIENT_PREFETCH_THREADS docs.
-	ClientPrefetchThreads []ParametersClientPrefetchThreadsObservation `json:"clientPrefetchThreads,omitempty" tf:"client_prefetch_threads,omitempty"`
-
-	// (Number) Parameter that specifies the maximum size of each set (or chunk) of query results to download (in MB). The JDBC driver downloads query results in chunks. For more information, check CLIENT_RESULT_CHUNK_SIZE docs.
-	ClientResultChunkSize []ParametersClientResultChunkSizeObservation `json:"clientResultChunkSize,omitempty" tf:"client_result_chunk_size,omitempty"`
-
-	// insensitively in ResultSet.get* methods in JDBC. For more information, check CLIENT_RESULT_COLUMN_CASE_INSENSITIVE docs.
-	ClientResultColumnCaseInsensitive []ParametersClientResultColumnCaseInsensitiveObservation `json:"clientResultColumnCaseInsensitive,omitempty" tf:"client_result_column_case_insensitive,omitempty"`
-
-	// (Boolean) Parameter that indicates whether to force a user to log in again after a period of inactivity in the session. For more information, check CLIENT_SESSION_KEEP_ALIVE docs.
-	ClientSessionKeepAlive []ParametersClientSessionKeepAliveObservation `json:"clientSessionKeepAlive,omitempty" tf:"client_session_keep_alive,omitempty"`
-
-	// between client attempts to update the token for the session. For more information, check CLIENT_SESSION_KEEP_ALIVE_HEARTBEAT_FREQUENCY docs.
-	ClientSessionKeepAliveHeartbeatFrequency []ParametersClientSessionKeepAliveHeartbeatFrequencyObservation `json:"clientSessionKeepAliveHeartbeatFrequency,omitempty" tf:"client_session_keep_alive_heartbeat_frequency,omitempty"`
-
-	// (String) Specifies the TIMESTAMP_* variation to use when binding timestamp variables for JDBC or ODBC applications that use the bind API to load data. For more information, check CLIENT_TIMESTAMP_TYPE_MAPPING docs.
-	ClientTimestampTypeMapping []ParametersClientTimestampTypeMappingObservation `json:"clientTimestampTypeMapping,omitempty" tf:"client_timestamp_type_mapping,omitempty"`
-
-	// (String) Specifies the input format for the DATE data type. For more information, see Date and time input and output formats. For more information, check DATE_INPUT_FORMAT docs.
-	DateInputFormat []ParametersDateInputFormatObservation `json:"dateInputFormat,omitempty" tf:"date_input_format,omitempty"`
-
-	// (String) Specifies the display format for the DATE data type. For more information, see Date and time input and output formats. For more information, check DATE_OUTPUT_FORMAT docs.
-	DateOutputFormat []ParametersDateOutputFormatObservation `json:"dateOutputFormat,omitempty" tf:"date_output_format,omitempty"`
-
-	// (Boolean) Specifies whether to set the schema for unloaded Parquet files based on the logical column data types (i.e. the types in the unload SQL query or source table) or on the unloaded column values (i.e. the smallest data types and precision that support the values in the output columns of the unload SQL statement or source table). For more information, check ENABLE_UNLOAD_PHYSICAL_TYPE_OPTIMIZATION docs.
-	EnableUnloadPhysicalTypeOptimization []ParametersEnableUnloadPhysicalTypeOptimizationObservation `json:"enableUnloadPhysicalTypeOptimization,omitempty" tf:"enable_unload_physical_type_optimization,omitempty"`
-
-	// (Boolean) Controls whether query text is redacted if a SQL query fails due to a syntax or parsing error. If FALSE, the content of a failed query is redacted in the views, pages, and functions that provide a query history. Only users with a role that is granted or inherits the AUDIT privilege can set the ENABLE_UNREDACTED_QUERY_SYNTAX_ERROR parameter. When using the ALTER USER command to set the parameter to TRUE for a particular user, modify the user that you want to see the query text, not the user who executed the query (if those are different users). For more information, check ENABLE_UNREDACTED_QUERY_SYNTAX_ERROR docs.
-	EnableUnredactedQuerySyntaxError []ParametersEnableUnredactedQuerySyntaxErrorObservation `json:"enableUnredactedQuerySyntaxError,omitempty" tf:"enable_unredacted_query_syntax_error,omitempty"`
-
-	// (Boolean) Specifies whether to return an error when the MERGE command is used to update or delete a target row that joins multiple source rows and the system cannot determine the action to perform on the target row. For more information, check ERROR_ON_NONDETERMINISTIC_MERGE docs.
-	ErrorOnNondeterministicMerge []ParametersErrorOnNondeterministicMergeObservation `json:"errorOnNondeterministicMerge,omitempty" tf:"error_on_nondeterministic_merge,omitempty"`
-
-	// (Boolean) Specifies whether to return an error when the UPDATE command is used to update a target row that joins multiple source rows and the system cannot determine the action to perform on the target row. For more information, check ERROR_ON_NONDETERMINISTIC_UPDATE docs.
-	ErrorOnNondeterministicUpdate []ParametersErrorOnNondeterministicUpdateObservation `json:"errorOnNondeterministicUpdate,omitempty" tf:"error_on_nondeterministic_update,omitempty"`
-
-	// (String) Display format for GEOGRAPHY values. For more information, check GEOGRAPHY_OUTPUT_FORMAT docs.
-	GeographyOutputFormat []ParametersGeographyOutputFormatObservation `json:"geographyOutputFormat,omitempty" tf:"geography_output_format,omitempty"`
-
-	// (String) Display format for GEOMETRY values. For more information, check GEOMETRY_OUTPUT_FORMAT docs.
-	GeometryOutputFormat []ParametersGeometryOutputFormatObservation `json:"geometryOutputFormat,omitempty" tf:"geometry_output_format,omitempty"`
-
-	// (Number) Specifies the number of blank spaces to indent each new element in JSON output in the session. Also specifies whether to insert newline characters after each element. For more information, check JSON_INDENT docs.
-	JSONIndent []ParametersJSONIndentObservation `json:"jsonIndent,omitempty" tf:"json_indent,omitempty"`
-
-	// (Boolean) Specifies how JDBC processes columns that have a scale of zero (0). For more information, check JDBC_TREAT_DECIMAL_AS_INT docs.
-	JdbcTreatDecimalAsInt []ParametersJdbcTreatDecimalAsIntObservation `json:"jdbcTreatDecimalAsInt,omitempty" tf:"jdbc_treat_decimal_as_int,omitempty"`
-
-	// (Boolean) Specifies how JDBC processes TIMESTAMP_NTZ values. For more information, check JDBC_TREAT_TIMESTAMP_NTZ_AS_UTC docs.
-	JdbcTreatTimestampNtzAsUtc []ParametersJdbcTreatTimestampNtzAsUtcObservation `json:"jdbcTreatTimestampNtzAsUtc,omitempty" tf:"jdbc_treat_timestamp_ntz_as_utc,omitempty"`
-
-	// (Boolean) Specifies whether the JDBC Driver uses the time zone of the JVM or the time zone of the session (specified by the TIMEZONE parameter) for the getDate(), getTime(), and getTimestamp() methods of the ResultSet class. For more information, check JDBC_USE_SESSION_TIMEZONE docs.
-	JdbcUseSessionTimezone []ParametersJdbcUseSessionTimezoneObservation `json:"jdbcUseSessionTimezone,omitempty" tf:"jdbc_use_session_timezone,omitempty"`
-
-	// (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
-	LockTimeout []ParametersLockTimeoutObservation `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
-
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
-	LogEventLevel []ParametersLogEventLevelObservation `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
-
-	// (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Messages at the specified level (and at more severe levels) are ingested. For more information about log levels, see Setting log level. For more information, check LOG_LEVEL docs.
-	LogLevel []ParametersLogLevelObservation `json:"logLevel,omitempty" tf:"log_level,omitempty"`
-
-	// statement capability. For more information, check MULTI_STATEMENT_COUNT docs.
-	MultiStatementCount []ParametersMultiStatementCountObservation `json:"multiStatementCount,omitempty" tf:"multi_statement_count,omitempty"`
-
-	// (String) Specifies the network policy to enforce for your account. Network policies enable restricting access to your account based on users’ IP address. For more details, see Controlling network traffic with network policies. Any existing network policy (created using CREATE NETWORK POLICY). For more information, check NETWORK_POLICY docs.
-	NetworkPolicy []ParametersNetworkPolicyObservation `json:"networkPolicy,omitempty" tf:"network_policy,omitempty"`
-
-	// incremented column in increasing or decreasing order. For more information, check NOORDER_SEQUENCE_AS_DEFAULT docs.
-	NoorderSequenceAsDefault []ParametersNoorderSequenceAsDefaultObservation `json:"noorderSequenceAsDefault,omitempty" tf:"noorder_sequence_as_default,omitempty"`
-
-	// (Boolean) Specifies how ODBC processes columns that have a scale of zero (0). For more information, check ODBC_TREAT_DECIMAL_AS_INT docs.
-	OdbcTreatDecimalAsInt []ParametersOdbcTreatDecimalAsIntObservation `json:"odbcTreatDecimalAsInt,omitempty" tf:"odbc_treat_decimal_as_int,omitempty"`
-
-	// (Boolean) Specifies whether to prevent data unload operations to internal (Snowflake) stages using COPY INTO  statements. For more information, check PREVENT_UNLOAD_TO_INTERNAL_STAGES docs.
-	PreventUnloadToInternalStages []ParametersPreventUnloadToInternalStagesObservation `json:"preventUnloadToInternalStages,omitempty" tf:"prevent_unload_to_internal_stages,omitempty"`
-
-	// (String) Optional string that can be used to tag queries and other SQL statements executed within a session. The tags are displayed in the output of the QUERY_HISTORY, QUERY_HISTORY_BY_* functions. For more information, check QUERY_TAG docs.
-	QueryTag []ParametersQueryTagObservation `json:"queryTag,omitempty" tf:"query_tag,omitempty"`
-
-	// quoted object identifiers are stored and resolved as uppercase letters. By default, Snowflake preserves the case of alphabetic characters when storing and resolving double-quoted identifiers (see Identifier resolution). You can use this parameter in situations in which third-party applications always use double quotes around identifiers. For more information, check QUOTED_IDENTIFIERS_IGNORE_CASE docs.
-	QuotedIdentifiersIgnoreCase []ParametersQuotedIdentifiersIgnoreCaseObservation `json:"quotedIdentifiersIgnoreCase,omitempty" tf:"quoted_identifiers_ignore_case,omitempty"`
-
-	// (Number) Specifies the maximum number of rows returned in a result set. A value of 0 specifies no maximum. For more information, check ROWS_PER_RESULTSET docs.
-	RowsPerResultset []ParametersRowsPerResultsetObservation `json:"rowsPerResultset,omitempty" tf:"rows_per_resultset,omitempty"`
-
-	// (String) Specifies the DNS name of an Amazon S3 interface endpoint. Requests sent to the internal stage of an account via AWS PrivateLink for Amazon S3 use this endpoint to connect. For more information, see Accessing Internal stages with dedicated interface endpoints. For more information, check S3_STAGE_VPCE_DNS_NAME docs.
-	S3StageVpceDNSName []ParametersS3StageVpceDNSNameObservation `json:"s3StageVpceDnsName,omitempty" tf:"s3_stage_vpce_dns_name,omitempty"`
-
-	// separated list of identifiers. An identifier can be a fully or partially qualified schema name. For more information, check SEARCH_PATH docs.
-	SearchPath []ParametersSearchPathObservation `json:"searchPath,omitempty" tf:"search_path,omitempty"`
-
-	// (String) Specifies the name of a consumer account to simulate for testing/validating shared data, particularly shared secure views. When this parameter is set in a session, shared views return rows as if executed in the specified consumer account rather than the provider account. For more information, see Introduction to Secure Data Sharing and Working with shares. For more information, check SIMULATED_DATA_SHARING_CONSUMER docs.
-	SimulatedDataSharingConsumer []ParametersSimulatedDataSharingConsumerObservation `json:"simulatedDataSharingConsumer,omitempty" tf:"simulated_data_sharing_consumer,omitempty"`
-
-	// (Number) Amount of time, in seconds, a SQL statement (query, DDL, DML, etc.) remains queued for a warehouse before it is canceled by the system. This parameter can be used in conjunction with the MAX_CONCURRENCY_LEVEL parameter to ensure a warehouse is never backlogged. For more information, check STATEMENT_QUEUED_TIMEOUT_IN_SECONDS docs.
-	StatementQueuedTimeoutInSeconds []ParametersStatementQueuedTimeoutInSecondsObservation `json:"statementQueuedTimeoutInSeconds,omitempty" tf:"statement_queued_timeout_in_seconds,omitempty"`
-
-	// (Number) Amount of time, in seconds, after which a running SQL statement (query, DDL, DML, etc.) is canceled by the system. For more information, check STATEMENT_TIMEOUT_IN_SECONDS docs.
-	StatementTimeoutInSeconds []ParametersStatementTimeoutInSecondsObservation `json:"statementTimeoutInSeconds,omitempty" tf:"statement_timeout_in_seconds,omitempty"`
-
-	// standard values; however, these non-standard values might result in Snowflake outputting JSON that is incompatible with other platforms and languages. This parameter, when enabled, ensures that Snowflake outputs valid/compatible JSON. For more information, check STRICT_JSON_OUTPUT docs.
-	StrictJSONOutput []ParametersStrictJSONOutputObservation `json:"strictJsonOutput,omitempty" tf:"strict_json_output,omitempty"`
-
-	// (String) Specifies the input format for the TIME data type. For more information, see Date and time input and output formats. Any valid, supported time format or AUTO (AUTO specifies that Snowflake attempts to automatically detect the format of times stored in the system during the session). For more information, check TIME_INPUT_FORMAT docs.
-	TimeInputFormat []ParametersTimeInputFormatObservation `json:"timeInputFormat,omitempty" tf:"time_input_format,omitempty"`
-
-	// (String) Specifies the display format for the TIME data type. For more information, see Date and time input and output formats. For more information, check TIME_OUTPUT_FORMAT docs.
-	TimeOutputFormat []ParametersTimeOutputFormatObservation `json:"timeOutputFormat,omitempty" tf:"time_output_format,omitempty"`
-
-	// (Boolean) Specifies whether the DATEADD function (and its aliases) always consider a day to be exactly 24 hours for expressions that span multiple days. For more information, check TIMESTAMP_DAY_IS_ALWAYS_24H docs.
-	TimestampDayIsAlways24H []ParametersTimestampDayIsAlways24HObservation `json:"timestampDayIsAlways24H,omitempty" tf:"timestamp_day_is_always_24h,omitempty"`
-
-	// (String) Specifies the input format for the TIMESTAMP data type alias. For more information, see Date and time input and output formats. Any valid, supported timestamp format or AUTO (AUTO specifies that Snowflake attempts to automatically detect the format of timestamps stored in the system during the session). For more information, check TIMESTAMP_INPUT_FORMAT docs.
-	TimestampInputFormat []ParametersTimestampInputFormatObservation `json:"timestampInputFormat,omitempty" tf:"timestamp_input_format,omitempty"`
-
-	// (String) Specifies the display format for the TIMESTAMP_LTZ data type. If no format is specified, defaults to TIMESTAMP_OUTPUT_FORMAT. For more information, see Date and time input and output formats. For more information, check TIMESTAMP_LTZ_OUTPUT_FORMAT docs.
-	TimestampLtzOutputFormat []ParametersTimestampLtzOutputFormatObservation `json:"timestampLtzOutputFormat,omitempty" tf:"timestamp_ltz_output_format,omitempty"`
-
-	// (String) Specifies the display format for the TIMESTAMP_NTZ data type. For more information, check TIMESTAMP_NTZ_OUTPUT_FORMAT docs.
-	TimestampNtzOutputFormat []ParametersTimestampNtzOutputFormatObservation `json:"timestampNtzOutputFormat,omitempty" tf:"timestamp_ntz_output_format,omitempty"`
-
-	// (String) Specifies the display format for the TIMESTAMP data type alias. For more information, see Date and time input and output formats. For more information, check TIMESTAMP_OUTPUT_FORMAT docs.
-	TimestampOutputFormat []ParametersTimestampOutputFormatObservation `json:"timestampOutputFormat,omitempty" tf:"timestamp_output_format,omitempty"`
-
-	// (String) Specifies the TIMESTAMP_* variation that the TIMESTAMP data type alias maps to. For more information, check TIMESTAMP_TYPE_MAPPING docs.
-	TimestampTypeMapping []ParametersTimestampTypeMappingObservation `json:"timestampTypeMapping,omitempty" tf:"timestamp_type_mapping,omitempty"`
-
-	// (String) Specifies the display format for the TIMESTAMP_TZ data type. If no format is specified, defaults to TIMESTAMP_OUTPUT_FORMAT. For more information, see Date and time input and output formats. For more information, check TIMESTAMP_TZ_OUTPUT_FORMAT docs.
-	TimestampTzOutputFormat []ParametersTimestampTzOutputFormatObservation `json:"timestampTzOutputFormat,omitempty" tf:"timestamp_tz_output_format,omitempty"`
-
-	// (String) Specifies the time zone for the session. You can specify a time zone name or a link name from release 2021a of the IANA Time Zone Database (e.g. America/Los_Angeles, Europe/London, UTC, Etc/GMT, etc.). For more information, check TIMEZONE docs.
-	Timezone []ParametersTimezoneObservation `json:"timezone,omitempty" tf:"timezone,omitempty"`
-
-	// (String) Controls how trace events are ingested into the event table. For more information about trace levels, see Setting trace level. For more information, check TRACE_LEVEL docs.
-	TraceLevel []ParametersTraceLevelObservation `json:"traceLevel,omitempty" tf:"trace_level,omitempty"`
-
-	// autocommit transaction returns with an error. For more information, check TRANSACTION_ABORT_ON_ERROR docs.
-	TransactionAbortOnError []ParametersTransactionAbortOnErrorObservation `json:"transactionAbortOnError,omitempty" tf:"transaction_abort_on_error,omitempty"`
-
-	// (String) Specifies the isolation level for transactions in the user session. For more information, check TRANSACTION_DEFAULT_ISOLATION_LEVEL docs.
-	TransactionDefaultIsolationLevel []ParametersTransactionDefaultIsolationLevelObservation `json:"transactionDefaultIsolationLevel,omitempty" tf:"transaction_default_isolation_level,omitempty"`
-
-	// digit years (i.e. the earliest year such dates can represent). This parameter prevents ambiguous dates when importing or converting data with the YY date format component (i.e. years represented as 2 digits). For more information, check TWO_DIGIT_CENTURY_START docs.
-	TwoDigitCenturyStart []ParametersTwoDigitCenturyStartObservation `json:"twoDigitCenturyStart,omitempty" tf:"two_digit_century_start,omitempty"`
-
-	// default) value specified for a constraint property returns an error. For more information, check UNSUPPORTED_DDL_ACTION docs.
-	UnsupportedDdlAction []ParametersUnsupportedDdlActionObservation `json:"unsupportedDdlAction,omitempty" tf:"unsupported_ddl_action,omitempty"`
-
-	// (Boolean) Specifies whether to reuse persisted query results, if available, when a matching query is submitted. For more information, check USE_CACHED_RESULT docs.
-	UseCachedResult []ParametersUseCachedResultObservation `json:"useCachedResult,omitempty" tf:"use_cached_result,omitempty"`
-
-	// (Number) Specifies how the weeks in a given year are computed. 0: The semantics used are equivalent to the ISO semantics, in which a week belongs to a given year if at least 4 days of that week are in that year. 1: January 1 is included in the first week of the year and December 31 is included in the last week of the year. For more information, check WEEK_OF_YEAR_POLICY docs.
-	WeekOfYearPolicy []ParametersWeekOfYearPolicyObservation `json:"weekOfYearPolicy,omitempty" tf:"week_of_year_policy,omitempty"`
-
-	// related date functions). 0: Legacy Snowflake behavior is used (i.e. ISO-like semantics). 1 (Monday) to 7 (Sunday): All the week-related functions use weeks that start on the specified day of the week. For more information, check WEEK_START docs.
-	WeekStart []ParametersWeekStartObservation `json:"weekStart,omitempty" tf:"week_start,omitempty"`
-}
-
-type UserParametersParameters struct {
-}
-
-type UserShowOutputInitParameters struct {
-}
-
-type UserShowOutputObservation struct {
+type ServiceUserShowOutputObservation struct {
 
 	// (String) Specifies a comment for the user.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
@@ -2721,7 +2334,7 @@ type UserShowOutputObservation struct {
 	// (String)
 	ExtAuthnUID *string `json:"extAuthnUid,omitempty" tf:"ext_authn_uid,omitempty"`
 
-	// (String, Sensitive) First name of the user.
+	// (String)
 	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
 	// (Boolean)
@@ -2736,7 +2349,7 @@ type UserShowOutputObservation struct {
 	// (Boolean)
 	HasWorkloadIdentity *bool `json:"hasWorkloadIdentity,omitempty" tf:"has_workload_identity,omitempty"`
 
-	// (String, Sensitive) Last name of the user.
+	// (String)
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
 	// (String)
@@ -2748,13 +2361,13 @@ type UserShowOutputObservation struct {
 	// insensitive.
 	LoginName *string `json:"loginName,omitempty" tf:"login_name,omitempty"`
 
-	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
+	// (String)
 	MinsToBypassMfa *string `json:"minsToBypassMfa,omitempty" tf:"mins_to_bypass_mfa,omitempty"`
 
 	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. Note because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
 	MinsToUnlock *string `json:"minsToUnlock,omitempty" tf:"mins_to_unlock,omitempty"`
 
-	// uses special value that cannot be set in the configuration manually (default)) Specifies whether the user is forced to change their password on next login (including their first/initial login) into the system. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
+	// (Boolean)
 	MustChangePassword *bool `json:"mustChangePassword,omitempty" tf:"must_change_password,omitempty"`
 
 	// (String) Name of the user. Note that if you do not supply login_name this will be used as login_name. Check the docs. Due to technical limitations (read more here), avoid using the following characters: |, ., ".
@@ -2770,13 +2383,541 @@ type UserShowOutputObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type UserShowOutputParameters struct {
+type ServiceUserShowOutputParameters struct {
 }
 
-// UserSpec defines the desired state of User
-type UserSpec struct {
+type SimulatedDataSharingConsumerInitParameters struct {
+}
+
+type SimulatedDataSharingConsumerObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SimulatedDataSharingConsumerParameters struct {
+}
+
+type StatementQueuedTimeoutInSecondsInitParameters struct {
+}
+
+type StatementQueuedTimeoutInSecondsObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type StatementQueuedTimeoutInSecondsParameters struct {
+}
+
+type StatementTimeoutInSecondsInitParameters struct {
+}
+
+type StatementTimeoutInSecondsObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type StatementTimeoutInSecondsParameters struct {
+}
+
+type StrictJSONOutputInitParameters struct {
+}
+
+type StrictJSONOutputObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type StrictJSONOutputParameters struct {
+}
+
+type TimeInputFormatInitParameters struct {
+}
+
+type TimeInputFormatObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TimeInputFormatParameters struct {
+}
+
+type TimeOutputFormatInitParameters struct {
+}
+
+type TimeOutputFormatObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TimeOutputFormatParameters struct {
+}
+
+type TimestampDayIsAlways24HInitParameters struct {
+}
+
+type TimestampDayIsAlways24HObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TimestampDayIsAlways24HParameters struct {
+}
+
+type TimestampInputFormatInitParameters struct {
+}
+
+type TimestampInputFormatObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TimestampInputFormatParameters struct {
+}
+
+type TimestampLtzOutputFormatInitParameters struct {
+}
+
+type TimestampLtzOutputFormatObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TimestampLtzOutputFormatParameters struct {
+}
+
+type TimestampNtzOutputFormatInitParameters struct {
+}
+
+type TimestampNtzOutputFormatObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TimestampNtzOutputFormatParameters struct {
+}
+
+type TimestampOutputFormatInitParameters struct {
+}
+
+type TimestampOutputFormatObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TimestampOutputFormatParameters struct {
+}
+
+type TimestampTypeMappingInitParameters struct {
+}
+
+type TimestampTypeMappingObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TimestampTypeMappingParameters struct {
+}
+
+type TimestampTzOutputFormatInitParameters struct {
+}
+
+type TimestampTzOutputFormatObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TimestampTzOutputFormatParameters struct {
+}
+
+type TimezoneInitParameters struct {
+}
+
+type TimezoneObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TimezoneParameters struct {
+}
+
+type TraceLevelInitParameters struct {
+}
+
+type TraceLevelObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TraceLevelParameters struct {
+}
+
+type TransactionAbortOnErrorInitParameters struct {
+}
+
+type TransactionAbortOnErrorObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TransactionAbortOnErrorParameters struct {
+}
+
+type TransactionDefaultIsolationLevelInitParameters struct {
+}
+
+type TransactionDefaultIsolationLevelObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TransactionDefaultIsolationLevelParameters struct {
+}
+
+type TwoDigitCenturyStartInitParameters struct {
+}
+
+type TwoDigitCenturyStartObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TwoDigitCenturyStartParameters struct {
+}
+
+type UnsupportedDdlActionInitParameters struct {
+}
+
+type UnsupportedDdlActionObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type UnsupportedDdlActionParameters struct {
+}
+
+type UseCachedResultInitParameters struct {
+}
+
+type UseCachedResultObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type UseCachedResultParameters struct {
+}
+
+type WeekOfYearPolicyInitParameters struct {
+}
+
+type WeekOfYearPolicyObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type WeekOfYearPolicyParameters struct {
+}
+
+type WeekStartInitParameters struct {
+}
+
+type WeekStartObservation struct {
+
+	// (String)
+	Default *string `json:"default,omitempty" tf:"default,omitempty"`
+
+	// (String)
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (String)
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// (String)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type WeekStartParameters struct {
+}
+
+// ServiceUserSpec defines the desired state of ServiceUser
+type ServiceUserSpec struct {
 	v2.ManagedResourceSpec `json:",inline"`
-	ForProvider            UserParameters `json:"forProvider"`
+	ForProvider            ServiceUserParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2787,49 +2928,49 @@ type UserSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider UserInitParameters `json:"initProvider,omitempty"`
+	InitProvider ServiceUserInitParameters `json:"initProvider,omitempty"`
 }
 
-// UserStatus defines the observed state of User.
-type UserStatus struct {
+// ServiceUserStatus defines the observed state of ServiceUser.
+type ServiceUserStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        UserObservation `json:"atProvider,omitempty"`
+	AtProvider        ServiceUserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// User is the Schema for the Users API. Resource used to manage user objects. For more information, check user documentation https://docs.snowflake.com/en/sql-reference/commands-user-role#user-management.
+// ServiceUser is the Schema for the ServiceUsers API. Resource used to manage service user objects. For more information, check user documentation https://docs.snowflake.com/en/sql-reference/commands-user-role#user-management.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Namespaced,categories={crossplane,managed,snowflake}
-type User struct {
+type ServiceUser struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              UserSpec   `json:"spec"`
-	Status            UserStatus `json:"status,omitempty"`
+	Spec              ServiceUserSpec   `json:"spec"`
+	Status            ServiceUserStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// UserList contains a list of Users
-type UserList struct {
+// ServiceUserList contains a list of ServiceUsers
+type ServiceUserList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []User `json:"items"`
+	Items           []ServiceUser `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	User_Kind             = "User"
-	User_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: User_Kind}.String()
-	User_KindAPIVersion   = User_Kind + "." + CRDGroupVersion.String()
-	User_GroupVersionKind = CRDGroupVersion.WithKind(User_Kind)
+	ServiceUser_Kind             = "ServiceUser"
+	ServiceUser_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: ServiceUser_Kind}.String()
+	ServiceUser_KindAPIVersion   = ServiceUser_Kind + "." + CRDGroupVersion.String()
+	ServiceUser_GroupVersionKind = CRDGroupVersion.WithKind(ServiceUser_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&User{}, &UserList{})
+	SchemeBuilder.Register(&ServiceUser{}, &ServiceUserList{})
 }

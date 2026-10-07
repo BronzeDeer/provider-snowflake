@@ -15,6 +15,7 @@ import (
 	accountrole "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/accountrole"
 	accountrolegrant "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/accountrolegrant"
 	accountroleprivilegegrant "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/accountroleprivilegegrant"
+	serviceuser "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/serviceuser"
 	user "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/user"
 	schema "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/schema/schema"
 	warehouse "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/warehouse/warehouse"
@@ -30,6 +31,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		accountrole.Setup,
 		accountrolegrant.Setup,
 		accountroleprivilegegrant.Setup,
+		serviceuser.Setup,
 		user.Setup,
 		schema.Setup,
 		warehouse.Setup,
@@ -51,6 +53,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		accountrole.SetupGated,
 		accountrolegrant.SetupGated,
 		accountroleprivilegegrant.SetupGated,
+		serviceuser.SetupGated,
 		user.SetupGated,
 		schema.SetupGated,
 		warehouse.SetupGated,
