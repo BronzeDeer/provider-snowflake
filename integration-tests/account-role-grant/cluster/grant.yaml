@@ -1,0 +1,10 @@
+apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
+kind: AccountRoleGrant
+metadata:
+  name: ($testName)
+  labels:
+    chainsaw.snowflake.bronze-deer.de/test-name: ($testName)
+spec:
+  forProvider:
+    roleName: (join('-', [$testName, 'child']))
+    parentRoleName: (join('-', [$testName, 'parent']))

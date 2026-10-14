@@ -1,0 +1,42 @@
+apiVersion: chainsaw.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: cluster-service-user
+spec:
+  description: |
+    Verify the cluster-scoped ServiceUser managed resource is created, reported
+    as Synced and Ready by the provider, and removed again.
+
+    Assumes a running control plane with the provider deployed and the default
+    cluster ProviderConfig (snowflake.bronze-deer.de/v1beta1, name "default")
+    pointing at valid Snowflake credentials.
+  concurrent: true
+  timeouts:
+    apply: 2m
+    assert: 5m
+    delete: 5m
+    error: 2m
+  bindings:
+  - name: testName
+    value: (join('-', ['chainsaw-svcuser', random('[a-z0-9]{8}')]))
+  steps:
+  - name: create
+    try:
+    - apply:
+        file: service-user.yaml
+    - assert:
+        file: service-user-assert.yaml
+    catch:
+    - describe:
+        apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
+        kind: ServiceUser
+        name: ($testName)
+  - name: delete
+    try:
+    - delete:
+        ref:
+          apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
+          kind: ServiceUser
+          name: ($testName)
+    - error:
+        file: service-user-assert.yaml

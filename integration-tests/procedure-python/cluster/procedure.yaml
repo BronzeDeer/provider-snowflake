@@ -1,0 +1,27 @@
+apiVersion: procedure.snowflake.bronze-deer.de/v1alpha1
+kind: ProcedurePython
+metadata:
+  name: ($testName)
+  labels:
+    chainsaw.snowflake.bronze-deer.de/test-name: ($testName)
+spec:
+  forProvider:
+    name: ($testName)
+    comment: Managed by the provider-snowflake chainsaw integration tests.
+    handler: echoVarchar
+    runtimeVersion: "3.13"
+    snowparkPackage: 1.51.0
+    returnType: VARCHAR(100)
+    arguments:
+    - argName: x
+      argDataType: VARCHAR(100)
+    procedureDefinition: |
+      def echoVarchar(x):
+          result = ''
+          for a in range(5):
+              result += x
+          return result
+    databaseRef:
+      name: ($testName)
+    schemaRef:
+      name: ($testName)

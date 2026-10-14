@@ -1,0 +1,119 @@
+apiVersion: chainsaw.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: namespaced-account-role-grant
+spec:
+  description: |
+    Verify the namespaced AccountRoleGrant managed resource can grant a role to
+    another role and to a user. Two prerequisite AccountRoles (child, parent)
+    and a prerequisite User are created; one grant grants the child role to the
+    parent role, a second grant grants the same child role to the user. All
+    resources are reported as Synced and Ready by the provider and removed
+    again. All resources are applied before any assertion runs; each grant
+    refers to its targets by name, which the provider resolves once the
+    prerequisites exist.
+
+    Assumes a running control plane with the provider deployed and the default
+    cluster ProviderConfig (snowflake.m.bronze-deer.de/v1beta1, kind
+    ClusterProviderConfig, name "default") pointing at valid Snowflake
+    credentials.
+  concurrent: true
+  timeouts:
+    apply: 2m
+    assert: 5m
+    delete: 5m
+    error: 2m
+  bindings:
+  - name: testName
+    value: (join('-', ['chainsaw-grant-ns', random('[a-z0-9]{8}')]))
+  steps:
+  - name: create
+    try:
+    - apply:
+        file: parent-role.yaml
+    - apply:
+        file: child-role.yaml
+    - apply:
+        file: user.yaml
+    - apply:
+        file: grant.yaml
+    - apply:
+        file: user-grant.yaml
+    - assert:
+        file: parent-role-assert.yaml
+    - assert:
+        file: child-role-assert.yaml
+    - assert:
+        file: user-assert.yaml
+    - assert:
+        file: grant-assert.yaml
+    - assert:
+        file: user-grant-assert.yaml
+    catch:
+    - describe:
+        apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+        kind: AccountRole
+        namespace: ($namespace)
+        name: (join('-', [$testName, 'parent']))
+    - describe:
+        apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+        kind: AccountRole
+        namespace: ($namespace)
+        name: (join('-', [$testName, 'child']))
+    - describe:
+        apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+        kind: User
+        namespace: ($namespace)
+        name: (join('-', [$testName, 'user']))
+    - describe:
+        apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+        kind: AccountRoleGrant
+        namespace: ($namespace)
+        name: ($testName)
+    - describe:
+        apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+        kind: AccountRoleGrant
+        namespace: ($namespace)
+        name: (join('-', [$testName, 'user-grant']))
+  - name: delete
+    try:
+    - delete:
+        ref:
+          apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+          kind: AccountRoleGrant
+          namespace: ($namespace)
+          name: (join('-', [$testName, 'user-grant']))
+    - delete:
+        ref:
+          apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+          kind: AccountRoleGrant
+          namespace: ($namespace)
+          name: ($testName)
+    - delete:
+        ref:
+          apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+          kind: AccountRole
+          namespace: ($namespace)
+          name: (join('-', [$testName, 'child']))
+    - delete:
+        ref:
+          apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+          kind: AccountRole
+          namespace: ($namespace)
+          name: (join('-', [$testName, 'parent']))
+    - delete:
+        ref:
+          apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+          kind: User
+          namespace: ($namespace)
+          name: (join('-', [$testName, 'user']))
+    - error:
+        file: user-grant-assert.yaml
+    - error:
+        file: grant-assert.yaml
+    - error:
+        file: child-role-assert.yaml
+    - error:
+        file: parent-role-assert.yaml
+    - error:
+        file: user-assert.yaml

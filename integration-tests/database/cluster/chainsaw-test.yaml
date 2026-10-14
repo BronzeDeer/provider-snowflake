@@ -1,0 +1,42 @@
+apiVersion: chainsaw.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: cluster-database
+spec:
+  description: |
+    Verify the cluster-scoped Database managed resource is created, reported as
+    Synced and Ready by the provider, and removed again.
+
+    Assumes a running control plane with the provider deployed and the default
+    cluster ProviderConfig (snowflake.bronze-deer.de/v1beta1, name "default")
+    pointing at valid Snowflake credentials.
+  concurrent: true
+  timeouts:
+    apply: 2m
+    assert: 5m
+    delete: 5m
+    error: 2m
+  bindings:
+  - name: testName
+    value: (join('-', ['chainsaw-db', random('[a-z0-9]{8}')]))
+  steps:
+  - name: create
+    try:
+    - apply:
+        file: database.yaml
+    - assert:
+        file: database-assert.yaml
+    catch:
+    - describe:
+        apiVersion: database.snowflake.bronze-deer.de/v1alpha1
+        kind: Database
+        name: ($testName)
+  - name: delete
+    try:
+    - delete:
+        ref:
+          apiVersion: database.snowflake.bronze-deer.de/v1alpha1
+          kind: Database
+          name: ($testName)
+    - error:
+        file: database-assert.yaml

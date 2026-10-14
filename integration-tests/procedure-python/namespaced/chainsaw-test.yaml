@@ -1,0 +1,82 @@
+apiVersion: chainsaw.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: namespaced-procedure-python
+spec:
+  description: |
+    Verify the namespaced ProcedurePython managed resource is created inside a
+    prerequisite Database and Schema managed by the same provider, reported as
+    Synced and Ready, and removed again. All resources are applied before any
+    assertion runs; the procedure resolves its databaseRef and schemaRef once
+    the Database and Schema become ready.
+
+    Assumes a running control plane with the provider deployed and the default
+    cluster ProviderConfig (snowflake.m.bronze-deer.de/v1beta1, kind
+    ClusterProviderConfig, name "default") pointing at valid Snowflake
+    credentials.
+  concurrent: true
+  timeouts:
+    apply: 2m
+    assert: 5m
+    delete: 5m
+    error: 2m
+  bindings:
+  - name: testName
+    value: (join('-', ['chainsaw-proc-ns', random('[a-z0-9]{8}')]))
+  steps:
+  - name: create
+    try:
+    - apply:
+        file: database.yaml
+    - apply:
+        file: schema.yaml
+    - apply:
+        file: procedure.yaml
+    - assert:
+        file: database-assert.yaml
+    - assert:
+        file: schema-assert.yaml
+    - assert:
+        file: procedure-assert.yaml
+    catch:
+    - describe:
+        apiVersion: database.snowflake.m.bronze-deer.de/v1alpha1
+        kind: Database
+        namespace: ($namespace)
+        name: ($testName)
+    - describe:
+        apiVersion: schema.snowflake.m.bronze-deer.de/v1alpha1
+        kind: Schema
+        namespace: ($namespace)
+        name: ($testName)
+    - describe:
+        apiVersion: procedure.snowflake.m.bronze-deer.de/v1alpha1
+        kind: ProcedurePython
+        namespace: ($namespace)
+        name: ($testName)
+  - name: delete
+    try:
+    - delete:
+        ref:
+          apiVersion: procedure.snowflake.m.bronze-deer.de/v1alpha1
+          kind: ProcedurePython
+          namespace: ($namespace)
+          name: ($testName)
+    - delete:
+        ref:
+          apiVersion: schema.snowflake.m.bronze-deer.de/v1alpha1
+          kind: Schema
+          namespace: ($namespace)
+          name: ($testName)
+    - delete:
+        ref:
+          apiVersion: database.snowflake.m.bronze-deer.de/v1alpha1
+          kind: Database
+          namespace: ($namespace)
+          name: ($testName)
+    - error:
+        file: procedure-assert.yaml
+    - error:
+        file: schema-assert.yaml
+    - error:
+        file: database-assert.yaml

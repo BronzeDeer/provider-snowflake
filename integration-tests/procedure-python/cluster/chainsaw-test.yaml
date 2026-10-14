@@ -1,0 +1,75 @@
+apiVersion: chainsaw.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: cluster-procedure-python
+spec:
+  description: |
+    Verify the cluster-scoped ProcedurePython managed resource is created inside
+    a prerequisite Database and Schema managed by the same provider, reported as
+    Synced and Ready, and removed again. All resources are applied before any
+    assertion runs; the procedure resolves its databaseRef and schemaRef once
+    the Database and Schema become ready.
+
+    Assumes a running control plane with the provider deployed and the default
+    cluster ProviderConfig (snowflake.bronze-deer.de/v1beta1, name "default")
+    pointing at valid Snowflake credentials.
+  concurrent: true
+  timeouts:
+    apply: 2m
+    assert: 5m
+    delete: 5m
+    error: 2m
+  bindings:
+  - name: testName
+    value: (join('-', ['chainsaw-proc', random('[a-z0-9]{8}')]))
+  steps:
+  - name: create
+    try:
+    - apply:
+        file: database.yaml
+    - apply:
+        file: schema.yaml
+    - apply:
+        file: procedure.yaml
+    - assert:
+        file: database-assert.yaml
+    - assert:
+        file: schema-assert.yaml
+    - assert:
+        file: procedure-assert.yaml
+    catch:
+    - describe:
+        apiVersion: database.snowflake.bronze-deer.de/v1alpha1
+        kind: Database
+        name: ($testName)
+    - describe:
+        apiVersion: schema.snowflake.bronze-deer.de/v1alpha1
+        kind: Schema
+        name: ($testName)
+    - describe:
+        apiVersion: procedure.snowflake.bronze-deer.de/v1alpha1
+        kind: ProcedurePython
+        name: ($testName)
+  - name: delete
+    try:
+    - delete:
+        ref:
+          apiVersion: procedure.snowflake.bronze-deer.de/v1alpha1
+          kind: ProcedurePython
+          name: ($testName)
+    - delete:
+        ref:
+          apiVersion: schema.snowflake.bronze-deer.de/v1alpha1
+          kind: Schema
+          name: ($testName)
+    - delete:
+        ref:
+          apiVersion: database.snowflake.bronze-deer.de/v1alpha1
+          kind: Database
+          name: ($testName)
+    - error:
+        file: procedure-assert.yaml
+    - error:
+        file: schema-assert.yaml
+    - error:
+        file: database-assert.yaml

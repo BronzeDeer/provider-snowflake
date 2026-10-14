@@ -1,0 +1,64 @@
+apiVersion: chainsaw.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: namespaced-account-role-privilege-grant
+spec:
+  description: |
+    Verify the namespaced AccountRolePrivilegeGrant managed resource grants a
+    set of account-level privileges to a prerequisite AccountRole, is reported
+    as Synced and Ready by the provider, and removed again. The AccountRole and
+    the grant are both applied before any assertion runs.
+
+    Assumes a running control plane with the provider deployed and the default
+    cluster ProviderConfig (snowflake.m.bronze-deer.de/v1beta1, kind
+    ClusterProviderConfig, name "default") pointing at valid Snowflake
+    credentials.
+  concurrent: true
+  timeouts:
+    apply: 2m
+    assert: 5m
+    delete: 5m
+    error: 2m
+  bindings:
+  - name: testName
+    value: (join('-', ['chainsaw-privgrant-ns', random('[a-z0-9]{8}')]))
+  steps:
+  - name: create
+    try:
+    - apply:
+        file: account-role.yaml
+    - apply:
+        file: privilege-grant.yaml
+    - assert:
+        file: account-role-assert.yaml
+    - assert:
+        file: privilege-grant-assert.yaml
+    catch:
+    - describe:
+        apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+        kind: AccountRole
+        namespace: ($namespace)
+        name: ($testName)
+    - describe:
+        apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+        kind: AccountRolePrivilegeGrant
+        namespace: ($namespace)
+        name: ($testName)
+  - name: delete
+    try:
+    - delete:
+        ref:
+          apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+          kind: AccountRolePrivilegeGrant
+          namespace: ($namespace)
+          name: ($testName)
+    - delete:
+        ref:
+          apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+          kind: AccountRole
+          namespace: ($namespace)
+          name: ($testName)
+    - error:
+        file: privilege-grant-assert.yaml
+    - error:
+        file: account-role-assert.yaml

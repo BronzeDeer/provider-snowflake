@@ -1,0 +1,10 @@
+apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+kind: AccountRole
+metadata:
+  name: ($testName)
+  namespace: ($namespace)
+  labels:
+    chainsaw.snowflake.bronze-deer.de/test-name: ($testName)
+spec:
+  forProvider:
+    comment: Managed by the provider-snowflake chainsaw integration tests.

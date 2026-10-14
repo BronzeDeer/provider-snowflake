@@ -1,0 +1,9 @@
+apiVersion: schema.snowflake.bronze-deer.de/v1alpha1
+kind: Schema
+metadata:
+  name: ($testName)
+status:
+  (conditions[?type == 'Ready']):
+  - status: 'True'
+  (conditions[?type == 'Synced']):
+  - status: 'True'

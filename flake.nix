@@ -81,6 +81,13 @@
               delve
 
               packages.sandboxed-llm
+
+              kyverno-chainsaw
+
+              kind
+
+              yq-go
+
             ]
             # Allow timetravel debugging on linux on all modern intel and many amd ryzen cpus
             # Note that `sysctl kernel.perf_event_paranoid` needs to be <= 1 in order to record a trace

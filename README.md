@@ -36,6 +36,26 @@ Build binary:
 make build
 ```
 
+## Integration tests
+
+`integration-tests/` contains [kyverno-chainsaw](https://kyverno.github.io/chainsaw/)
+test suites for every managed resource, each in a cluster-scoped and a
+namespaced variant:
+
+```console
+integration-tests/<resource>/{cluster,namespaced}/
+```
+
+The suites only need the provider installed and a default `ProviderConfig`
+(cluster-scoped) or `ClusterProviderConfig` (namespaced) named `default`
+(`cluster/test/setup.sh` creates both). They do not depend on `uptest`, so they
+can be run directly:
+
+```console
+chainsaw test integration-tests/warehouse/cluster
+chainsaw test integration-tests/warehouse/namespaced
+```
+
 ## Report a Bug
 
 For filing bugs, suggesting improvements, or requesting new features, please

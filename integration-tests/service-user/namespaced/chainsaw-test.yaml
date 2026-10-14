@@ -1,0 +1,46 @@
+apiVersion: chainsaw.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: namespaced-service-user
+spec:
+  description: |
+    Verify the namespaced ServiceUser managed resource is created in an
+    ephemeral namespace, reported as Synced and Ready by the provider, and
+    removed again.
+
+    Assumes a running control plane with the provider deployed and the default
+    cluster ProviderConfig (snowflake.m.bronze-deer.de/v1beta1, kind
+    ClusterProviderConfig, name "default") pointing at valid Snowflake
+    credentials.
+  concurrent: true
+  timeouts:
+    apply: 2m
+    assert: 5m
+    delete: 5m
+    error: 2m
+  bindings:
+  - name: testName
+    value: (join('-', ['chainsaw-svcuser-ns', random('[a-z0-9]{8}')]))
+  steps:
+  - name: create
+    try:
+    - apply:
+        file: service-user.yaml
+    - assert:
+        file: service-user-assert.yaml
+    catch:
+    - describe:
+        apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+        kind: ServiceUser
+        namespace: ($namespace)
+        name: ($testName)
+  - name: delete
+    try:
+    - delete:
+        ref:
+          apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+          kind: ServiceUser
+          namespace: ($namespace)
+          name: ($testName)
+    - error:
+        file: service-user-assert.yaml

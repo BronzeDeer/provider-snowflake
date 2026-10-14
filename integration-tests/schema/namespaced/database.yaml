@@ -1,0 +1,10 @@
+apiVersion: database.snowflake.m.bronze-deer.de/v1alpha1
+kind: Database
+metadata:
+  name: ($testName)
+  namespace: ($namespace)
+  labels:
+    chainsaw.snowflake.bronze-deer.de/test-name: ($testName)
+spec:
+  forProvider:
+    comment: Prerequisite database for the provider-snowflake chainsaw schema integration tests.

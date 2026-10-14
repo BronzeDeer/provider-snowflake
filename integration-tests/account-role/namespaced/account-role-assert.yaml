@@ -1,0 +1,10 @@
+apiVersion: rbac.snowflake.m.bronze-deer.de/v1alpha1
+kind: AccountRole
+metadata:
+  name: ($testName)
+  namespace: ($namespace)
+status:
+  (conditions[?type == 'Ready']):
+  - status: 'True'
+  (conditions[?type == 'Synced']):
+  - status: 'True'
