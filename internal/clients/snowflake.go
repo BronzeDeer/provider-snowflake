@@ -76,6 +76,10 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if v, ok := creds["role"]; ok {
 			ps.Configuration["role"] = v
 		}
+
+		if v, ok := creds["host"]; ok {
+			ps.Configuration["host"] = v
+		}
 		ps.Configuration["preview_features_enabled"] = []string{"snowflake_procedure_python_resource"}
 
 		return ps, nil
