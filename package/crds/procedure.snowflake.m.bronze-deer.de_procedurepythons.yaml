@@ -221,7 +221,7 @@ spec:
                     type: string
                   logEventLevel:
                     description: |-
-                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+                      (String)
                       Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
                     type: string
                   logLevel:
@@ -555,7 +555,7 @@ spec:
                     type: string
                   logEventLevel:
                     description: |-
-                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+                      (String)
                       Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
                     type: string
                   logLevel:
@@ -888,7 +888,7 @@ spec:
                     type: string
                   logEventLevel:
                     description: |-
-                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+                      (String)
                       Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
                     type: string
                   logLevel:
@@ -950,9 +950,7 @@ spec:
                             type: object
                           type: array
                         logEventLevel:
-                          description: 'insensitive): TRACE | DEBUG | INFO | WARN
-                            | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL
-                            docs.'
+                          description: (String)
                           items:
                             properties:
                               default:

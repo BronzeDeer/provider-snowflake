@@ -1,5 +1,5 @@
 apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-kind: AccountRoleGrant
+kind: ClusterAccountRoleGrant
 metadata:
   annotations:
     meta.upbound.io/example-id: rbac/v1alpha1/accountrolegrant
@@ -14,7 +14,7 @@ spec:
 ---
 
 apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-kind: AccountRole
+kind: ClusterAccountRole
 metadata:
   annotations:
     meta.upbound.io/example-id: rbac/v1alpha1/accountrolegrant
@@ -27,7 +27,7 @@ spec:
 ---
 
 apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-kind: AccountRole
+kind: ClusterAccountRole
 metadata:
   annotations:
     meta.upbound.io/example-id: rbac/v1alpha1/accountrolegrant
@@ -40,7 +40,7 @@ spec:
 ---
 
 apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-kind: User
+kind: ClusterUser
 metadata:
   annotations:
     meta.upbound.io/example-id: rbac/v1alpha1/accountrolegrant
@@ -53,7 +53,7 @@ spec:
 ---
 
 apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-kind: AccountRoleGrant
+kind: ClusterAccountRoleGrant
 metadata:
   annotations:
     meta.upbound.io/example-id: rbac/v1alpha1/accountrolegrant

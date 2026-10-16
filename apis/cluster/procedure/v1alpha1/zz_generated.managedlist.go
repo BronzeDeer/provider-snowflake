@@ -8,8 +8,8 @@ package v1alpha1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-// GetItems of this ProcedurePythonList.
-func (l *ProcedurePythonList) GetItems() []resource.Managed {
+// GetItems of this ClusterProcedurePythonList.
+func (l *ClusterProcedurePythonList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

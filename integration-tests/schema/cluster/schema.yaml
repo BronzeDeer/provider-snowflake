@@ -1,5 +1,5 @@
 apiVersion: schema.snowflake.bronze-deer.de/v1alpha1
-kind: Schema
+kind: ClusterSchema
 metadata:
   name: ($testName)
   labels:

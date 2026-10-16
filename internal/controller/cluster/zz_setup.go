@@ -9,32 +9,32 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
-	database "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/database/database"
-	procedurepython "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/procedure/procedurepython"
+	clusterdatabase "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/database/clusterdatabase"
+	clusterprocedurepython "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/procedure/clusterprocedurepython"
 	providerconfig "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/providerconfig"
-	accountrole "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/accountrole"
-	accountrolegrant "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/accountrolegrant"
-	accountroleprivilegegrant "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/accountroleprivilegegrant"
-	serviceuser "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/serviceuser"
-	user "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/user"
-	schema "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/schema/schema"
-	warehouse "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/warehouse/warehouse"
+	clusteraccountrole "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/clusteraccountrole"
+	clusteraccountrolegrant "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/clusteraccountrolegrant"
+	clusteraccountroleprivilegegrant "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/clusteraccountroleprivilegegrant"
+	clusterserviceuser "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/clusterserviceuser"
+	clusteruser "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/rbac/clusteruser"
+	clusterschema "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/schema/clusterschema"
+	clusterwarehouse "github.com/BronzeDeer/provider-snowflake/internal/controller/cluster/warehouse/clusterwarehouse"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		database.Setup,
-		procedurepython.Setup,
+		clusterdatabase.Setup,
+		clusterprocedurepython.Setup,
 		providerconfig.Setup,
-		accountrole.Setup,
-		accountrolegrant.Setup,
-		accountroleprivilegegrant.Setup,
-		serviceuser.Setup,
-		user.Setup,
-		schema.Setup,
-		warehouse.Setup,
+		clusteraccountrole.Setup,
+		clusteraccountrolegrant.Setup,
+		clusteraccountroleprivilegegrant.Setup,
+		clusterserviceuser.Setup,
+		clusteruser.Setup,
+		clusterschema.Setup,
+		clusterwarehouse.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
@@ -47,16 +47,16 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 // the supplied manager gated.
 func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		database.SetupGated,
-		procedurepython.SetupGated,
+		clusterdatabase.SetupGated,
+		clusterprocedurepython.SetupGated,
 		providerconfig.SetupGated,
-		accountrole.SetupGated,
-		accountrolegrant.SetupGated,
-		accountroleprivilegegrant.SetupGated,
-		serviceuser.SetupGated,
-		user.SetupGated,
-		schema.SetupGated,
-		warehouse.SetupGated,
+		clusteraccountrole.SetupGated,
+		clusteraccountrolegrant.SetupGated,
+		clusteraccountroleprivilegegrant.SetupGated,
+		clusterserviceuser.SetupGated,
+		clusteruser.SetupGated,
+		clusterschema.SetupGated,
+		clusterwarehouse.SetupGated,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

@@ -29,14 +29,14 @@ spec:
     catch:
     - describe:
         apiVersion: database.snowflake.bronze-deer.de/v1alpha1
-        kind: Database
+        kind: ClusterDatabase
         name: ($testName)
   - name: delete
     try:
     - delete:
         ref:
           apiVersion: database.snowflake.bronze-deer.de/v1alpha1
-          kind: Database
+          kind: ClusterDatabase
           name: ($testName)
     - error:
         file: database-assert.yaml

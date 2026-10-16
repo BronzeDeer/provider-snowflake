@@ -19,6 +19,7 @@ import (
 	databaseNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/database"
 	accountRoleGrantNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/grant_account_role"
 	accountRolePrivilegeGrantNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/grant_privileges_to_account_role"
+	procedureNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/procedure"
 	schemaNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/schema"
 	serviceUserNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/service_user"
 	userNamespaced "github.com/BronzeDeer/provider-snowflake/config/namespaced/user"
@@ -88,7 +89,7 @@ func GetProviderNamespaced() *ujconfig.Provider {
 		userNamespaced.Configure,
 		serviceUserNamespaced.Configure,
 		warehouseNamespaced.Configure,
-		procedureCluster.Configure,
+		procedureNamespaced.Configure,
 	} {
 		configure(pc)
 	}

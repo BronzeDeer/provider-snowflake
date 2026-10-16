@@ -1,5 +1,5 @@
 apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-kind: AccountRole
+kind: ClusterAccountRole
 metadata:
   annotations:
     meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
@@ -12,7 +12,7 @@ spec:
 ---
 
 apiVersion: database.snowflake.bronze-deer.de/v1alpha1
-kind: Database
+kind: ClusterDatabase
 metadata:
   annotations:
     meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
@@ -26,7 +26,7 @@ spec:
 
 # Grant on the account itself
 apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-kind: AccountRolePrivilegeGrant
+kind: ClusterAccountRolePrivilegeGrant
 metadata:
   annotations:
     meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant
@@ -45,7 +45,7 @@ spec:
 
 # Grant on an account object (database)
 apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-kind: AccountRolePrivilegeGrant
+kind: ClusterAccountRolePrivilegeGrant
 metadata:
   annotations:
     meta.upbound.io/example-id: rbac/v1alpha1/accountroleprivilegegrant

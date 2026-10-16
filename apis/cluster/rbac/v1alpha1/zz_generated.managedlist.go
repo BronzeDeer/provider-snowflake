@@ -8,8 +8,8 @@ package v1alpha1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-// GetItems of this AccountRoleGrantList.
-func (l *AccountRoleGrantList) GetItems() []resource.Managed {
+// GetItems of this ClusterAccountRoleGrantList.
+func (l *ClusterAccountRoleGrantList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -17,8 +17,8 @@ func (l *AccountRoleGrantList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this AccountRoleList.
-func (l *AccountRoleList) GetItems() []resource.Managed {
+// GetItems of this ClusterAccountRoleList.
+func (l *ClusterAccountRoleList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -26,8 +26,8 @@ func (l *AccountRoleList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this AccountRolePrivilegeGrantList.
-func (l *AccountRolePrivilegeGrantList) GetItems() []resource.Managed {
+// GetItems of this ClusterAccountRolePrivilegeGrantList.
+func (l *ClusterAccountRolePrivilegeGrantList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -35,8 +35,8 @@ func (l *AccountRolePrivilegeGrantList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ServiceUserList.
-func (l *ServiceUserList) GetItems() []resource.Managed {
+// GetItems of this ClusterServiceUserList.
+func (l *ClusterServiceUserList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -44,8 +44,8 @@ func (l *ServiceUserList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this UserList.
-func (l *UserList) GetItems() []resource.Managed {
+// GetItems of this ClusterUserList.
+func (l *ClusterUserList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

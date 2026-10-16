@@ -198,7 +198,7 @@ type ParametersObservation struct {
 	// (Boolean) Enable stdout/stderr fast path logging for anonyous stored procs. This is a public parameter (similar to LOG_LEVEL). For more information, check ENABLE_CONSOLE_OUTPUT docs.
 	EnableConsoleOutput []EnableConsoleOutputObservation `json:"enableConsoleOutput,omitempty" tf:"enable_console_output,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	LogEventLevel []LogEventLevelObservation `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
 	// (String) LOG_LEVEL to use when filtering events For more information, check LOG_LEVEL docs.
@@ -262,7 +262,7 @@ type ProcedurePythonInitParameters struct {
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies that the procedure is secure. For more information about secure procedures, see [Protecting Sensitive Information with Secure UDFs and Stored Procedures](https://docs.snowflake.com/en/developer-guide/secure-udf-procedure). Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	IsSecure *string `json:"isSecure,omitempty" tf:"is_secure,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -371,7 +371,7 @@ type ProcedurePythonObservation struct {
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies that the procedure is secure. For more information about secure procedures, see [Protecting Sensitive Information with Secure UDFs and Stored Procedures](https://docs.snowflake.com/en/developer-guide/secure-udf-procedure). Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	IsSecure *string `json:"isSecure,omitempty" tf:"is_secure,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -494,7 +494,7 @@ type ProcedurePythonParameters struct {
 	// +kubebuilder:validation:Optional
 	IsSecure *string `json:"isSecure,omitempty" tf:"is_secure,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	// +kubebuilder:validation:Optional
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`

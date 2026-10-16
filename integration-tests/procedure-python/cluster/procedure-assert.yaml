@@ -1,5 +1,5 @@
 apiVersion: procedure.snowflake.bronze-deer.de/v1alpha1
-kind: ProcedurePython
+kind: ClusterProcedurePython
 metadata:
   name: ($testName)
 status:

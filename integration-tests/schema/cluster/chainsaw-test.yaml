@@ -37,23 +37,23 @@ spec:
     catch:
     - describe:
         apiVersion: database.snowflake.bronze-deer.de/v1alpha1
-        kind: Database
+        kind: ClusterDatabase
         name: ($testName)
     - describe:
         apiVersion: schema.snowflake.bronze-deer.de/v1alpha1
-        kind: Schema
+        kind: ClusterSchema
         name: ($testName)
   - name: delete
     try:
     - delete:
         ref:
           apiVersion: schema.snowflake.bronze-deer.de/v1alpha1
-          kind: Schema
+          kind: ClusterSchema
           name: ($testName)
     - delete:
         ref:
           apiVersion: database.snowflake.bronze-deer.de/v1alpha1
-          kind: Database
+          kind: ClusterDatabase
           name: ($testName)
     - error:
         file: schema-assert.yaml

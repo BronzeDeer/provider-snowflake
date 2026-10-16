@@ -14,8 +14,8 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-// ResolveReferences of this Schema.
-func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error {
+// ResolveReferences of this ClusterSchema.
+func (mg *ClusterSchema) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
@@ -28,8 +28,8 @@ func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error 
 		Reference:    mg.Spec.ForProvider.DatabaseRef,
 		Selector:     mg.Spec.ForProvider.DatabaseSelector,
 		To: reference.To{
-			List:    &v1alpha1.DatabaseList{},
-			Managed: &v1alpha1.Database{},
+			List:    &v1alpha1.ClusterDatabaseList{},
+			Managed: &v1alpha1.ClusterDatabase{},
 		},
 	})
 	if err != nil {
@@ -45,8 +45,8 @@ func (mg *Schema) ResolveReferences(ctx context.Context, c client.Reader) error 
 		Reference:    mg.Spec.InitProvider.DatabaseRef,
 		Selector:     mg.Spec.InitProvider.DatabaseSelector,
 		To: reference.To{
-			List:    &v1alpha1.DatabaseList{},
-			Managed: &v1alpha1.Database{},
+			List:    &v1alpha1.ClusterDatabaseList{},
+			Managed: &v1alpha1.ClusterDatabase{},
 		},
 	})
 	if err != nil {

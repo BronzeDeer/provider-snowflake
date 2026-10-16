@@ -6,6 +6,7 @@ import "github.com/crossplane/upjet/v2/pkg/config"
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("snowflake_database", func(r *config.Resource) {
 		r.ShortGroup = "database"
+		r.Kind = "Database"
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
 				// Even though these are object level parameters, modifying them requires the executing user to have been given the rights to manipulate them at the account level , which most least-privilege users won't have

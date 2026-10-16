@@ -29,14 +29,14 @@ spec:
     catch:
     - describe:
         apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-        kind: ServiceUser
+        kind: ClusterServiceUser
         name: ($testName)
   - name: delete
     try:
     - delete:
         ref:
           apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-          kind: ServiceUser
+          kind: ClusterServiceUser
           name: ($testName)
     - error:
         file: service-user-assert.yaml

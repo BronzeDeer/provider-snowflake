@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	grantaccountrole "github.com/BronzeDeer/provider-snowflake/config/cluster/grant_account_role"
-	procedure "github.com/BronzeDeer/provider-snowflake/config/cluster/procedure"
+	grantaccountrole "github.com/BronzeDeer/provider-snowflake/config/namespaced/grant_account_role"
+	procedure "github.com/BronzeDeer/provider-snowflake/config/namespaced/procedure"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/errors"
 	"github.com/crossplane/upjet/v2/pkg/config"
 )

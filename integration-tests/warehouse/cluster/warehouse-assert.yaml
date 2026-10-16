@@ -1,5 +1,5 @@
 apiVersion: warehouse.snowflake.bronze-deer.de/v1alpha1
-kind: Warehouse
+kind: ClusterWarehouse
 metadata:
   name: ($testName)
 status:

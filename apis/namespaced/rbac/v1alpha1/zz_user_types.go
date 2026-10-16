@@ -1597,7 +1597,7 @@ type UserInitParameters struct {
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -1909,7 +1909,7 @@ type UserObservation struct {
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -2282,7 +2282,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	// +kubebuilder:validation:Optional
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
@@ -2572,7 +2572,7 @@ type UserParametersObservation struct {
 	// (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
 	LockTimeout []ParametersLockTimeoutObservation `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	LogEventLevel []ParametersLogEventLevelObservation `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
 	// (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Messages at the specified level (and at more severe levels) are ingested. For more information about log levels, see Setting log level. For more information, check LOG_LEVEL docs.

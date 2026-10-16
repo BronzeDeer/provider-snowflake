@@ -14,8 +14,8 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-// ResolveReferences of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) ResolveReferences(ctx context.Context, c client.Reader) error {
+// ResolveReferences of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
@@ -28,8 +28,8 @@ func (mg *AccountRolePrivilegeGrant) ResolveReferences(ctx context.Context, c cl
 		Reference:    mg.Spec.ForProvider.AccountRoleNameRef,
 		Selector:     mg.Spec.ForProvider.AccountRoleNameSelector,
 		To: reference.To{
-			List:    &AccountRoleList{},
-			Managed: &AccountRole{},
+			List:    &ClusterAccountRoleList{},
+			Managed: &ClusterAccountRole{},
 		},
 	})
 	if err != nil {
@@ -45,8 +45,8 @@ func (mg *AccountRolePrivilegeGrant) ResolveReferences(ctx context.Context, c cl
 		Reference:    mg.Spec.InitProvider.AccountRoleNameRef,
 		Selector:     mg.Spec.InitProvider.AccountRoleNameSelector,
 		To: reference.To{
-			List:    &AccountRoleList{},
-			Managed: &AccountRole{},
+			List:    &ClusterAccountRoleList{},
+			Managed: &ClusterAccountRole{},
 		},
 	})
 	if err != nil {
@@ -58,8 +58,8 @@ func (mg *AccountRolePrivilegeGrant) ResolveReferences(ctx context.Context, c cl
 	return nil
 }
 
-// ResolveReferences of this ServiceUser.
-func (mg *ServiceUser) ResolveReferences(ctx context.Context, c client.Reader) error {
+// ResolveReferences of this ClusterServiceUser.
+func (mg *ClusterServiceUser) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
@@ -72,8 +72,8 @@ func (mg *ServiceUser) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.DefaultRoleRef,
 		Selector:     mg.Spec.ForProvider.DefaultRoleSelector,
 		To: reference.To{
-			List:    &AccountRoleList{},
-			Managed: &AccountRole{},
+			List:    &ClusterAccountRoleList{},
+			Managed: &ClusterAccountRole{},
 		},
 	})
 	if err != nil {
@@ -89,8 +89,8 @@ func (mg *ServiceUser) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.ForProvider.DefaultWarehouseRef,
 		Selector:     mg.Spec.ForProvider.DefaultWarehouseSelector,
 		To: reference.To{
-			List:    &v1alpha1.WarehouseList{},
-			Managed: &v1alpha1.Warehouse{},
+			List:    &v1alpha1.ClusterWarehouseList{},
+			Managed: &v1alpha1.ClusterWarehouse{},
 		},
 	})
 	if err != nil {
@@ -106,8 +106,8 @@ func (mg *ServiceUser) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.InitProvider.DefaultRoleRef,
 		Selector:     mg.Spec.InitProvider.DefaultRoleSelector,
 		To: reference.To{
-			List:    &AccountRoleList{},
-			Managed: &AccountRole{},
+			List:    &ClusterAccountRoleList{},
+			Managed: &ClusterAccountRole{},
 		},
 	})
 	if err != nil {
@@ -123,8 +123,8 @@ func (mg *ServiceUser) ResolveReferences(ctx context.Context, c client.Reader) e
 		Reference:    mg.Spec.InitProvider.DefaultWarehouseRef,
 		Selector:     mg.Spec.InitProvider.DefaultWarehouseSelector,
 		To: reference.To{
-			List:    &v1alpha1.WarehouseList{},
-			Managed: &v1alpha1.Warehouse{},
+			List:    &v1alpha1.ClusterWarehouseList{},
+			Managed: &v1alpha1.ClusterWarehouse{},
 		},
 	})
 	if err != nil {
@@ -136,8 +136,8 @@ func (mg *ServiceUser) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
-// ResolveReferences of this User.
-func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
+// ResolveReferences of this ClusterUser.
+func (mg *ClusterUser) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
@@ -150,8 +150,8 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.DefaultRoleRef,
 		Selector:     mg.Spec.ForProvider.DefaultRoleSelector,
 		To: reference.To{
-			List:    &AccountRoleList{},
-			Managed: &AccountRole{},
+			List:    &ClusterAccountRoleList{},
+			Managed: &ClusterAccountRole{},
 		},
 	})
 	if err != nil {
@@ -167,8 +167,8 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.ForProvider.DefaultWarehouseRef,
 		Selector:     mg.Spec.ForProvider.DefaultWarehouseSelector,
 		To: reference.To{
-			List:    &v1alpha1.WarehouseList{},
-			Managed: &v1alpha1.Warehouse{},
+			List:    &v1alpha1.ClusterWarehouseList{},
+			Managed: &v1alpha1.ClusterWarehouse{},
 		},
 	})
 	if err != nil {
@@ -184,8 +184,8 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.InitProvider.DefaultRoleRef,
 		Selector:     mg.Spec.InitProvider.DefaultRoleSelector,
 		To: reference.To{
-			List:    &AccountRoleList{},
-			Managed: &AccountRole{},
+			List:    &ClusterAccountRoleList{},
+			Managed: &ClusterAccountRole{},
 		},
 	})
 	if err != nil {
@@ -201,8 +201,8 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 		Reference:    mg.Spec.InitProvider.DefaultWarehouseRef,
 		Selector:     mg.Spec.InitProvider.DefaultWarehouseSelector,
 		To: reference.To{
-			List:    &v1alpha1.WarehouseList{},
-			Managed: &v1alpha1.Warehouse{},
+			List:    &v1alpha1.ClusterWarehouseList{},
+			Managed: &v1alpha1.ClusterWarehouse{},
 		},
 	})
 	if err != nil {

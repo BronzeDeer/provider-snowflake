@@ -8,52 +8,52 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
-// GetCondition of this ProcedurePython.
-func (mg *ProcedurePython) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this ClusterProcedurePython.
+func (mg *ClusterProcedurePython) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this ProcedurePython.
-func (mg *ProcedurePython) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this ClusterProcedurePython.
+func (mg *ClusterProcedurePython) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this ProcedurePython.
-func (mg *ProcedurePython) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this ClusterProcedurePython.
+func (mg *ClusterProcedurePython) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this ProcedurePython.
-func (mg *ProcedurePython) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this ClusterProcedurePython.
+func (mg *ClusterProcedurePython) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetWriteConnectionSecretToReference of this ProcedurePython.
-func (mg *ProcedurePython) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this ClusterProcedurePython.
+func (mg *ClusterProcedurePython) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this ProcedurePython.
-func (mg *ProcedurePython) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this ClusterProcedurePython.
+func (mg *ClusterProcedurePython) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this ProcedurePython.
-func (mg *ProcedurePython) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this ClusterProcedurePython.
+func (mg *ClusterProcedurePython) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this ProcedurePython.
-func (mg *ProcedurePython) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this ClusterProcedurePython.
+func (mg *ClusterProcedurePython) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this ProcedurePython.
-func (mg *ProcedurePython) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this ClusterProcedurePython.
+func (mg *ClusterProcedurePython) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetWriteConnectionSecretToReference of this ProcedurePython.
-func (mg *ProcedurePython) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this ClusterProcedurePython.
+func (mg *ClusterProcedurePython) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

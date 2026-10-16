@@ -8,52 +8,52 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
-// GetCondition of this Schema.
-func (mg *Schema) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this ClusterSchema.
+func (mg *ClusterSchema) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this Schema.
-func (mg *Schema) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this ClusterSchema.
+func (mg *ClusterSchema) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this Schema.
-func (mg *Schema) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this ClusterSchema.
+func (mg *ClusterSchema) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this Schema.
-func (mg *Schema) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this ClusterSchema.
+func (mg *ClusterSchema) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetWriteConnectionSecretToReference of this Schema.
-func (mg *Schema) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this ClusterSchema.
+func (mg *ClusterSchema) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this Schema.
-func (mg *Schema) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this ClusterSchema.
+func (mg *ClusterSchema) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this Schema.
-func (mg *Schema) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this ClusterSchema.
+func (mg *ClusterSchema) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this Schema.
-func (mg *Schema) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this ClusterSchema.
+func (mg *ClusterSchema) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this Schema.
-func (mg *Schema) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this ClusterSchema.
+func (mg *ClusterSchema) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetWriteConnectionSecretToReference of this Schema.
-func (mg *Schema) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this ClusterSchema.
+func (mg *ClusterSchema) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

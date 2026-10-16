@@ -244,7 +244,7 @@ type ParametersObservation struct {
 	// (String) The database parameter that specifies the default external volume to use for Iceberg tables. For more information, see EXTERNAL_VOLUME.
 	ExternalVolume []ExternalVolumeObservation `json:"externalVolume,omitempty" tf:"external_volume,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
+	// (String)
 	LogEventLevel []LogEventLevelObservation `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
 	// (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Valid options are: [TRACE DEBUG INFO WARN ERROR FATAL OFF]. Messages at the specified level (and at more severe levels) are ingested. For more information, see LOG_LEVEL.
@@ -390,11 +390,9 @@ type SchemaInitParameters struct {
 	// Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
 	DefaultDdlCollation *string `json:"defaultDdlCollation,omitempty" tf:"default_ddl_collation,omitempty"`
 
-	// (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	DefaultNotebookComputePoolCPU *string `json:"defaultNotebookComputePoolCpu,omitempty" tf:"default_notebook_compute_pool_cpu,omitempty"`
 
-	// (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	DefaultNotebookComputePoolGpu *string `json:"defaultNotebookComputePoolGpu,omitempty" tf:"default_notebook_compute_pool_gpu,omitempty"`
 
@@ -410,7 +408,7 @@ type SchemaInitParameters struct {
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies the schema as transient. Transient schemas do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	IsTransient *string `json:"isTransient,omitempty" tf:"is_transient,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -493,11 +491,9 @@ type SchemaObservation struct {
 	// Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
 	DefaultDdlCollation *string `json:"defaultDdlCollation,omitempty" tf:"default_ddl_collation,omitempty"`
 
-	// (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	DefaultNotebookComputePoolCPU *string `json:"defaultNotebookComputePoolCpu,omitempty" tf:"default_notebook_compute_pool_cpu,omitempty"`
 
-	// (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	DefaultNotebookComputePoolGpu *string `json:"defaultNotebookComputePoolGpu,omitempty" tf:"default_notebook_compute_pool_gpu,omitempty"`
 
@@ -524,7 +520,7 @@ type SchemaObservation struct {
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies the schema as transient. Transient schemas do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	IsTransient *string `json:"isTransient,omitempty" tf:"is_transient,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -629,12 +625,10 @@ type SchemaParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultDdlCollation *string `json:"defaultDdlCollation,omitempty" tf:"default_ddl_collation,omitempty"`
 
-	// (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// +kubebuilder:validation:Optional
 	DefaultNotebookComputePoolCPU *string `json:"defaultNotebookComputePoolCpu,omitempty" tf:"default_notebook_compute_pool_cpu,omitempty"`
 
-	// (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// +kubebuilder:validation:Optional
 	DefaultNotebookComputePoolGpu *string `json:"defaultNotebookComputePoolGpu,omitempty" tf:"default_notebook_compute_pool_gpu,omitempty"`
@@ -654,7 +648,7 @@ type SchemaParameters struct {
 	// +kubebuilder:validation:Optional
 	IsTransient *string `json:"isTransient,omitempty" tf:"is_transient,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
 	// +kubebuilder:validation:Optional
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`

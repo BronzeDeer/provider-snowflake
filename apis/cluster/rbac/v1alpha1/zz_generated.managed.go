@@ -8,252 +8,252 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
-// GetCondition of this AccountRole.
-func (mg *AccountRole) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this ClusterAccountRole.
+func (mg *ClusterAccountRole) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this AccountRole.
-func (mg *AccountRole) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this ClusterAccountRole.
+func (mg *ClusterAccountRole) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this AccountRole.
-func (mg *AccountRole) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this ClusterAccountRole.
+func (mg *ClusterAccountRole) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this AccountRole.
-func (mg *AccountRole) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this ClusterAccountRole.
+func (mg *ClusterAccountRole) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetWriteConnectionSecretToReference of this AccountRole.
-func (mg *AccountRole) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this ClusterAccountRole.
+func (mg *ClusterAccountRole) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this AccountRole.
-func (mg *AccountRole) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this ClusterAccountRole.
+func (mg *ClusterAccountRole) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this AccountRole.
-func (mg *AccountRole) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this ClusterAccountRole.
+func (mg *ClusterAccountRole) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this AccountRole.
-func (mg *AccountRole) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this ClusterAccountRole.
+func (mg *ClusterAccountRole) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this AccountRole.
-func (mg *AccountRole) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this ClusterAccountRole.
+func (mg *ClusterAccountRole) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetWriteConnectionSecretToReference of this AccountRole.
-func (mg *AccountRole) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this ClusterAccountRole.
+func (mg *ClusterAccountRole) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this AccountRoleGrant.
-func (mg *AccountRoleGrant) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this ClusterAccountRoleGrant.
+func (mg *ClusterAccountRoleGrant) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this AccountRoleGrant.
-func (mg *AccountRoleGrant) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this ClusterAccountRoleGrant.
+func (mg *ClusterAccountRoleGrant) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this AccountRoleGrant.
-func (mg *AccountRoleGrant) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this ClusterAccountRoleGrant.
+func (mg *ClusterAccountRoleGrant) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this AccountRoleGrant.
-func (mg *AccountRoleGrant) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this ClusterAccountRoleGrant.
+func (mg *ClusterAccountRoleGrant) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetWriteConnectionSecretToReference of this AccountRoleGrant.
-func (mg *AccountRoleGrant) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this ClusterAccountRoleGrant.
+func (mg *ClusterAccountRoleGrant) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this AccountRoleGrant.
-func (mg *AccountRoleGrant) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this ClusterAccountRoleGrant.
+func (mg *ClusterAccountRoleGrant) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this AccountRoleGrant.
-func (mg *AccountRoleGrant) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this ClusterAccountRoleGrant.
+func (mg *ClusterAccountRoleGrant) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this AccountRoleGrant.
-func (mg *AccountRoleGrant) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this ClusterAccountRoleGrant.
+func (mg *ClusterAccountRoleGrant) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this AccountRoleGrant.
-func (mg *AccountRoleGrant) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this ClusterAccountRoleGrant.
+func (mg *ClusterAccountRoleGrant) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetWriteConnectionSecretToReference of this AccountRoleGrant.
-func (mg *AccountRoleGrant) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this ClusterAccountRoleGrant.
+func (mg *ClusterAccountRoleGrant) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetWriteConnectionSecretToReference of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetWriteConnectionSecretToReference of this AccountRolePrivilegeGrant.
-func (mg *AccountRolePrivilegeGrant) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this ClusterAccountRolePrivilegeGrant.
+func (mg *ClusterAccountRolePrivilegeGrant) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this ServiceUser.
-func (mg *ServiceUser) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this ClusterServiceUser.
+func (mg *ClusterServiceUser) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this ServiceUser.
-func (mg *ServiceUser) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this ClusterServiceUser.
+func (mg *ClusterServiceUser) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this ServiceUser.
-func (mg *ServiceUser) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this ClusterServiceUser.
+func (mg *ClusterServiceUser) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this ServiceUser.
-func (mg *ServiceUser) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this ClusterServiceUser.
+func (mg *ClusterServiceUser) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetWriteConnectionSecretToReference of this ServiceUser.
-func (mg *ServiceUser) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this ClusterServiceUser.
+func (mg *ClusterServiceUser) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this ServiceUser.
-func (mg *ServiceUser) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this ClusterServiceUser.
+func (mg *ClusterServiceUser) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this ServiceUser.
-func (mg *ServiceUser) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this ClusterServiceUser.
+func (mg *ClusterServiceUser) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this ServiceUser.
-func (mg *ServiceUser) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this ClusterServiceUser.
+func (mg *ClusterServiceUser) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this ServiceUser.
-func (mg *ServiceUser) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this ClusterServiceUser.
+func (mg *ClusterServiceUser) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetWriteConnectionSecretToReference of this ServiceUser.
-func (mg *ServiceUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this ClusterServiceUser.
+func (mg *ClusterServiceUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this User.
-func (mg *User) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this ClusterUser.
+func (mg *ClusterUser) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this User.
-func (mg *User) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this ClusterUser.
+func (mg *ClusterUser) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this User.
-func (mg *User) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this ClusterUser.
+func (mg *ClusterUser) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this User.
-func (mg *User) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this ClusterUser.
+func (mg *ClusterUser) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetWriteConnectionSecretToReference of this User.
-func (mg *User) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this ClusterUser.
+func (mg *ClusterUser) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this User.
-func (mg *User) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this ClusterUser.
+func (mg *ClusterUser) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this User.
-func (mg *User) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this ClusterUser.
+func (mg *ClusterUser) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this User.
-func (mg *User) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this ClusterUser.
+func (mg *ClusterUser) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this User.
-func (mg *User) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this ClusterUser.
+func (mg *ClusterUser) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetWriteConnectionSecretToReference of this User.
-func (mg *User) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this ClusterUser.
+func (mg *ClusterUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

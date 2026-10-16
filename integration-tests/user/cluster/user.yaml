@@ -1,5 +1,5 @@
 apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-kind: User
+kind: ClusterUser
 metadata:
   name: ($testName)
   labels:

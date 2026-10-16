@@ -51,50 +51,50 @@ spec:
     catch:
     - describe:
         apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-        kind: AccountRole
+        kind: ClusterAccountRole
         name: (join('-', [$testName, 'parent']))
     - describe:
         apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-        kind: AccountRole
+        kind: ClusterAccountRole
         name: (join('-', [$testName, 'child']))
     - describe:
         apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-        kind: User
+        kind: ClusterUser
         name: (join('-', [$testName, 'user']))
     - describe:
         apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-        kind: AccountRoleGrant
+        kind: ClusterAccountRoleGrant
         name: ($testName)
     - describe:
         apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-        kind: AccountRoleGrant
+        kind: ClusterAccountRoleGrant
         name: (join('-', [$testName, 'user-grant']))
   - name: delete
     try:
     - delete:
         ref:
           apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-          kind: AccountRoleGrant
+          kind: ClusterAccountRoleGrant
           name: (join('-', [$testName, 'user-grant']))
     - delete:
         ref:
           apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-          kind: AccountRoleGrant
+          kind: ClusterAccountRoleGrant
           name: ($testName)
     - delete:
         ref:
           apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-          kind: AccountRole
+          kind: ClusterAccountRole
           name: (join('-', [$testName, 'child']))
     - delete:
         ref:
           apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-          kind: AccountRole
+          kind: ClusterAccountRole
           name: (join('-', [$testName, 'parent']))
     - delete:
         ref:
           apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-          kind: User
+          kind: ClusterUser
           name: (join('-', [$testName, 'user']))
     - error:
         file: user-grant-assert.yaml

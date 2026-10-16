@@ -8,8 +8,8 @@ package v1alpha1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
-// GetItems of this WarehouseList.
-func (l *WarehouseList) GetItems() []resource.Managed {
+// GetItems of this ClusterWarehouseList.
+func (l *ClusterWarehouseList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

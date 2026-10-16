@@ -1,5 +1,5 @@
 apiVersion: procedure.snowflake.bronze-deer.de/v1alpha1
-kind: ProcedurePython
+kind: ClusterProcedurePython
 metadata:
   annotations:
     meta.upbound.io/example-id: procedure/v1alpha1/procedurepython

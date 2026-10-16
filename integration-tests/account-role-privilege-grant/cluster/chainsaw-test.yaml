@@ -35,23 +35,23 @@ spec:
     catch:
     - describe:
         apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-        kind: AccountRole
+        kind: ClusterAccountRole
         name: ($testName)
     - describe:
         apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-        kind: AccountRolePrivilegeGrant
+        kind: ClusterAccountRolePrivilegeGrant
         name: ($testName)
   - name: delete
     try:
     - delete:
         ref:
           apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-          kind: AccountRolePrivilegeGrant
+          kind: ClusterAccountRolePrivilegeGrant
           name: ($testName)
     - delete:
         ref:
           apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-          kind: AccountRole
+          kind: ClusterAccountRole
           name: ($testName)
     - error:
         file: privilege-grant-assert.yaml

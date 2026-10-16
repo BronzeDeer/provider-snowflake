@@ -68,7 +68,7 @@ type AwsInitParameters struct {
 	// The ARN of the AWS IAM role to use for workload identity federation.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// based (GetWebIdentityToken) workload identity federation.
+	// (String) The Azure issuer URL.
 	// The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 }
@@ -79,7 +79,7 @@ type AwsObservation struct {
 	// The ARN of the AWS IAM role to use for workload identity federation.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// based (GetWebIdentityToken) workload identity federation.
+	// (String) The Azure issuer URL.
 	// The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 }
@@ -91,7 +91,7 @@ type AwsParameters struct {
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn" tf:"arn,omitempty"`
 
-	// based (GetWebIdentityToken) workload identity federation.
+	// (String) The Azure issuer URL.
 	// The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -99,7 +99,7 @@ type AwsParameters struct {
 
 type AzureInitParameters struct {
 
-	// based (GetWebIdentityToken) workload identity federation.
+	// (String) The Azure issuer URL.
 	// The Azure issuer URL.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -110,7 +110,7 @@ type AzureInitParameters struct {
 
 type AzureObservation struct {
 
-	// based (GetWebIdentityToken) workload identity federation.
+	// (String) The Azure issuer URL.
 	// The Azure issuer URL.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -121,7 +121,7 @@ type AzureObservation struct {
 
 type AzureParameters struct {
 
-	// based (GetWebIdentityToken) workload identity federation.
+	// (String) The Azure issuer URL.
 	// The Azure issuer URL.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
@@ -913,7 +913,7 @@ type OdbcTreatDecimalAsIntParameters struct {
 
 type OidcInitParameters struct {
 
-	// based (GetWebIdentityToken) workload identity federation.
+	// (String) The Azure issuer URL.
 	// The OIDC issuer URL.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -928,7 +928,7 @@ type OidcInitParameters struct {
 
 type OidcObservation struct {
 
-	// based (GetWebIdentityToken) workload identity federation.
+	// (String) The Azure issuer URL.
 	// The OIDC issuer URL.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -943,7 +943,7 @@ type OidcObservation struct {
 
 type OidcParameters struct {
 
-	// based (GetWebIdentityToken) workload identity federation.
+	// (String) The Azure issuer URL.
 	// The OIDC issuer URL.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
@@ -1039,7 +1039,7 @@ type ParametersObservation struct {
 	// (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
 	LockTimeout []LockTimeoutObservation `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	LogEventLevel []LogEventLevelObservation `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
 	// (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Messages at the specified level (and at more severe levels) are ingested. For more information about log levels, see Setting log level. For more information, check LOG_LEVEL docs.
@@ -1448,7 +1448,7 @@ type ServiceUserInitParameters struct {
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -1745,7 +1745,7 @@ type ServiceUserObservation struct {
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -2100,7 +2100,7 @@ type ServiceUserParameters struct {
 	// +kubebuilder:validation:Optional
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
+	// (String)
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	// +kubebuilder:validation:Optional
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`

@@ -7,16 +7,16 @@
 package v1alpha1
 
 // Hub marks this type as a conversion hub.
-func (tr *AccountRole) Hub() {}
+func (tr *ClusterAccountRole) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *AccountRoleGrant) Hub() {}
+func (tr *ClusterAccountRoleGrant) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *AccountRolePrivilegeGrant) Hub() {}
+func (tr *ClusterAccountRolePrivilegeGrant) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ServiceUser) Hub() {}
+func (tr *ClusterServiceUser) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *User) Hub() {}
+func (tr *ClusterUser) Hub() {}

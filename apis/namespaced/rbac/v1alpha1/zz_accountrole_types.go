@@ -70,7 +70,6 @@ type ShowOutputObservation struct {
 	// (Boolean)
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
-	// (Boolean)
 	IsFromOrganizationUserGroup *bool `json:"isFromOrganizationUserGroup,omitempty" tf:"is_from_organization_user_group,omitempty"`
 
 	// (Boolean)

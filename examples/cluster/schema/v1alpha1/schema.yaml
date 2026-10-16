@@ -1,5 +1,5 @@
 apiVersion: schema.snowflake.bronze-deer.de/v1alpha1
-kind: Schema
+kind: ClusterSchema
 metadata:
   annotations:
     meta.upbound.io/example-id: schema/v1alpha1/schema

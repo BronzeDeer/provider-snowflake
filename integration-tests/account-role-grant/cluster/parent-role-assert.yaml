@@ -1,5 +1,5 @@
 apiVersion: rbac.snowflake.bronze-deer.de/v1alpha1
-kind: AccountRole
+kind: ClusterAccountRole
 metadata:
   name: (join('-', [$testName, 'parent']))
 status:

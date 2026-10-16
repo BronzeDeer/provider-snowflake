@@ -8,52 +8,52 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
-// GetCondition of this Warehouse.
-func (mg *Warehouse) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this ClusterWarehouse.
+func (mg *ClusterWarehouse) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this Warehouse.
-func (mg *Warehouse) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this ClusterWarehouse.
+func (mg *ClusterWarehouse) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this Warehouse.
-func (mg *Warehouse) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this ClusterWarehouse.
+func (mg *ClusterWarehouse) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this Warehouse.
-func (mg *Warehouse) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this ClusterWarehouse.
+func (mg *ClusterWarehouse) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetWriteConnectionSecretToReference of this Warehouse.
-func (mg *Warehouse) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this ClusterWarehouse.
+func (mg *ClusterWarehouse) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this Warehouse.
-func (mg *Warehouse) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this ClusterWarehouse.
+func (mg *ClusterWarehouse) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this Warehouse.
-func (mg *Warehouse) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this ClusterWarehouse.
+func (mg *ClusterWarehouse) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this Warehouse.
-func (mg *Warehouse) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this ClusterWarehouse.
+func (mg *ClusterWarehouse) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this Warehouse.
-func (mg *Warehouse) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this ClusterWarehouse.
+func (mg *ClusterWarehouse) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetWriteConnectionSecretToReference of this Warehouse.
-func (mg *Warehouse) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this ClusterWarehouse.
+func (mg *ClusterWarehouse) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
