@@ -5,6 +5,9 @@
     nixpkgs-terraform.url = "github:stackbuilders/nixpkgs-terraform"; # Allows us to fetch old pre-BSL terraform binaries
     nixpkgs-terraform.inputs.nixpkgs.follows = "nixpkgs";
 
+    llm-jail.url = "github:braiins/llm-jail";
+    llm-jail.inputs.nixpkgs.follows = "nixpkgs";
+
     # Using git+https over https url rather than gitlab api, since the gitlab: scheme chokes on correctly parsing sub-groups in owners
     nono-nix.url = "git+https://gitlab.com/gitlab-org/nix/nono.nix.git";
   };
@@ -16,6 +19,7 @@
       flake-utils,
       nixpkgs-terraform,
       nono-nix,
+      llm-jail,
     }:
     # Nix supports many different os/arch combinations, but in practice we mostly care about support x86_64 and arm for linux and darwin (macOS)
     # The list maintained by as "defaultSystems" is exactly this, i.e. ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"]
@@ -69,7 +73,7 @@
             with pkgs;
             [
 
-              go
+              go_1_27
               gopls
               govulncheck
               gotools
@@ -85,7 +89,7 @@
               kyverno-chainsaw
 
               kind
-
+              
               yq-go
 
             ]
@@ -104,6 +108,8 @@
 
         };
         defaultPackage = devShells.default; # Allow nix build to also pick up the shell by default
+
+        apps.llms = llm-jail.apps.${system};
       }
     );
 }

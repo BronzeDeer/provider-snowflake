@@ -6,54 +6,54 @@
 
 package v1alpha1
 
-import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+import xpv2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 
 // GetCondition of this ClusterDatabase.
-func (mg *ClusterDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+func (mg *ClusterDatabase) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
 // GetDeletionPolicy of this ClusterDatabase.
-func (mg *ClusterDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
+func (mg *ClusterDatabase) GetDeletionPolicy() xpv2.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
 // GetManagementPolicies of this ClusterDatabase.
-func (mg *ClusterDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+func (mg *ClusterDatabase) GetManagementPolicies() xpv2.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ClusterDatabase.
-func (mg *ClusterDatabase) GetProviderConfigReference() *xpv1.Reference {
+func (mg *ClusterDatabase) GetProviderConfigReference() *xpv2.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
 // GetWriteConnectionSecretToReference of this ClusterDatabase.
-func (mg *ClusterDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+func (mg *ClusterDatabase) GetWriteConnectionSecretToReference() *xpv2.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
 // SetConditions of this ClusterDatabase.
-func (mg *ClusterDatabase) SetConditions(c ...xpv1.Condition) {
+func (mg *ClusterDatabase) SetConditions(c ...xpv2.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
 // SetDeletionPolicy of this ClusterDatabase.
-func (mg *ClusterDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+func (mg *ClusterDatabase) SetDeletionPolicy(r xpv2.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
 // SetManagementPolicies of this ClusterDatabase.
-func (mg *ClusterDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+func (mg *ClusterDatabase) SetManagementPolicies(r xpv2.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ClusterDatabase.
-func (mg *ClusterDatabase) SetProviderConfigReference(r *xpv1.Reference) {
+func (mg *ClusterDatabase) SetProviderConfigReference(r *xpv2.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
 // SetWriteConnectionSecretToReference of this ClusterDatabase.
-func (mg *ClusterDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+func (mg *ClusterDatabase) SetWriteConnectionSecretToReference(r *xpv2.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

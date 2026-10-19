@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.19.0
+    controller-gen.kubebuilder.io/version: v0.20.0
   name: serviceusers.rbac.snowflake.m.bronze-deer.de
 spec:
   group: rbac.snowflake.m.bronze-deer.de
@@ -347,7 +347,7 @@ spec:
                                 type: string
                               issuer:
                                 description: |-
-                                  (String) The Azure issuer URL.
+                                  based (GetWebIdentityToken) workload identity federation.
                                   The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
                                 type: string
                             type: object
@@ -360,7 +360,7 @@ spec:
                             properties:
                               issuer:
                                 description: |-
-                                  (String) The Azure issuer URL.
+                                  based (GetWebIdentityToken) workload identity federation.
                                   The Azure issuer URL.
                                 type: string
                               subject:
@@ -391,7 +391,7 @@ spec:
                             properties:
                               issuer:
                                 description: |-
-                                  (String) The Azure issuer URL.
+                                  based (GetWebIdentityToken) workload identity federation.
                                   The OIDC issuer URL.
                                 type: string
                               oidcAudienceList:
@@ -491,7 +491,7 @@ spec:
                     type: number
                   logEventLevel:
                     description: |-
-                      (String)
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
                       Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
                     type: string
                   logLevel:
@@ -989,7 +989,7 @@ spec:
                                 type: string
                               issuer:
                                 description: |-
-                                  (String) The Azure issuer URL.
+                                  based (GetWebIdentityToken) workload identity federation.
                                   The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
                                 type: string
                             type: object
@@ -1002,7 +1002,7 @@ spec:
                             properties:
                               issuer:
                                 description: |-
-                                  (String) The Azure issuer URL.
+                                  based (GetWebIdentityToken) workload identity federation.
                                   The Azure issuer URL.
                                 type: string
                               subject:
@@ -1033,7 +1033,7 @@ spec:
                             properties:
                               issuer:
                                 description: |-
-                                  (String) The Azure issuer URL.
+                                  based (GetWebIdentityToken) workload identity federation.
                                   The OIDC issuer URL.
                                 type: string
                               oidcAudienceList:
@@ -1133,7 +1133,7 @@ spec:
                     type: number
                   logEventLevel:
                     description: |-
-                      (String)
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
                       Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
                     type: string
                   logLevel:
@@ -1519,7 +1519,7 @@ spec:
                                 type: string
                               issuer:
                                 description: |-
-                                  (String) The Azure issuer URL.
+                                  based (GetWebIdentityToken) workload identity federation.
                                   The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
                                 type: string
                             type: object
@@ -1532,7 +1532,7 @@ spec:
                             properties:
                               issuer:
                                 description: |-
-                                  (String) The Azure issuer URL.
+                                  based (GetWebIdentityToken) workload identity federation.
                                   The Azure issuer URL.
                                 type: string
                               subject:
@@ -1563,7 +1563,7 @@ spec:
                             properties:
                               issuer:
                                 description: |-
-                                  (String) The Azure issuer URL.
+                                  based (GetWebIdentityToken) workload identity federation.
                                   The OIDC issuer URL.
                                 type: string
                               oidcAudienceList:
@@ -1657,7 +1657,7 @@ spec:
                     type: number
                   logEventLevel:
                     description: |-
-                      (String)
+                      insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
                       Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
                     type: string
                   logLevel:
@@ -2310,7 +2310,9 @@ spec:
                             type: object
                           type: array
                         logEventLevel:
-                          description: (String)
+                          description: 'insensitive): TRACE | DEBUG | INFO | WARN
+                            | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL
+                            docs.'
                           items:
                             properties:
                               default:
@@ -3481,6 +3483,13 @@ spec:
                 x-kubernetes-list-map-keys:
                 - type
                 x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
               observedGeneration:
                 description: |-
                   ObservedGeneration is the latest metadata.generation

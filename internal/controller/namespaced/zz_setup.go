@@ -64,3 +64,24 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 	}
 	return nil
 }
+
+// SetupWebhookWithManager registers conversion webhooks for all resource kinds in the group.
+func SetupWebhookWithManager(mgr ctrl.Manager) error {
+	for _, setup := range []func(ctrl.Manager) error{
+		database.SetupWebhookWithManager,
+		procedurepython.SetupWebhookWithManager,
+		providerconfig.SetupWebhookWithManager,
+		accountrole.SetupWebhookWithManager,
+		accountrolegrant.SetupWebhookWithManager,
+		accountroleprivilegegrant.SetupWebhookWithManager,
+		serviceuser.SetupWebhookWithManager,
+		user.SetupWebhookWithManager,
+		schema.SetupWebhookWithManager,
+		warehouse.SetupWebhookWithManager,
+	} {
+		if err := setup(mgr); err != nil {
+			return err
+		}
+	}
+	return nil
+}

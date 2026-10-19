@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterDatabaseInitParameters struct {
@@ -31,9 +31,11 @@ type ClusterDatabaseInitParameters struct {
 	// Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
 	DefaultDdlCollation *string `json:"defaultDdlCollation,omitempty" tf:"default_ddl_collation,omitempty"`
 
+	// (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	DefaultNotebookComputePoolCPU *string `json:"defaultNotebookComputePoolCpu,omitempty" tf:"default_notebook_compute_pool_cpu,omitempty"`
 
+	// (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	DefaultNotebookComputePoolGpu *string `json:"defaultNotebookComputePoolGpu,omitempty" tf:"default_notebook_compute_pool_gpu,omitempty"`
 
@@ -53,6 +55,7 @@ type ClusterDatabaseInitParameters struct {
 	// Specifies the database as transient. Transient databases do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss.
 	IsTransient *bool `json:"isTransient,omitempty" tf:"is_transient,omitempty"`
 
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -123,9 +126,11 @@ type ClusterDatabaseObservation struct {
 	// Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
 	DefaultDdlCollation *string `json:"defaultDdlCollation,omitempty" tf:"default_ddl_collation,omitempty"`
 
+	// (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	DefaultNotebookComputePoolCPU *string `json:"defaultNotebookComputePoolCpu,omitempty" tf:"default_notebook_compute_pool_cpu,omitempty"`
 
+	// (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	DefaultNotebookComputePoolGpu *string `json:"defaultNotebookComputePoolGpu,omitempty" tf:"default_notebook_compute_pool_gpu,omitempty"`
 
@@ -152,6 +157,7 @@ type ClusterDatabaseObservation struct {
 	// Specifies the database as transient. Transient databases do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss.
 	IsTransient *bool `json:"isTransient,omitempty" tf:"is_transient,omitempty"`
 
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -226,10 +232,12 @@ type ClusterDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultDdlCollation *string `json:"defaultDdlCollation,omitempty" tf:"default_ddl_collation,omitempty"`
 
+	// (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// +kubebuilder:validation:Optional
 	DefaultNotebookComputePoolCPU *string `json:"defaultNotebookComputePoolCpu,omitempty" tf:"default_notebook_compute_pool_cpu,omitempty"`
 
+	// (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// +kubebuilder:validation:Optional
 	DefaultNotebookComputePoolGpu *string `json:"defaultNotebookComputePoolGpu,omitempty" tf:"default_notebook_compute_pool_gpu,omitempty"`
@@ -254,6 +262,7 @@ type ClusterDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	IsTransient *bool `json:"isTransient,omitempty" tf:"is_transient,omitempty"`
 
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
 	// +kubebuilder:validation:Optional
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
@@ -391,8 +400,8 @@ type ReplicationParameters struct {
 
 // ClusterDatabaseSpec defines the desired state of ClusterDatabase
 type ClusterDatabaseSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterDatabaseParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterDatabaseParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -408,8 +417,8 @@ type ClusterDatabaseSpec struct {
 
 // ClusterDatabaseStatus defines the observed state of ClusterDatabase.
 type ClusterDatabaseStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterDatabaseObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterDatabaseObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

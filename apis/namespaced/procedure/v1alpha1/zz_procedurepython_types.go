@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ArgumentsInitParameters struct {
@@ -198,7 +197,7 @@ type ParametersObservation struct {
 	// (Boolean) Enable stdout/stderr fast path logging for anonyous stored procs. This is a public parameter (similar to LOG_LEVEL). For more information, check ENABLE_CONSOLE_OUTPUT docs.
 	EnableConsoleOutput []EnableConsoleOutputObservation `json:"enableConsoleOutput,omitempty" tf:"enable_console_output,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	LogEventLevel []LogEventLevelObservation `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
 	// (String) LOG_LEVEL to use when filtering events For more information, check LOG_LEVEL docs.
@@ -231,11 +230,11 @@ type ProcedurePythonInitParameters struct {
 
 	// Reference to a Database in database to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseRef *v1.NamespacedReference `json:"databaseRef,omitempty" tf:"-"`
+	DatabaseRef *v2.NamespacedReference `json:"databaseRef,omitempty" tf:"-"`
 
 	// Selector for a Database in database to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseSelector *v1.NamespacedSelector `json:"databaseSelector,omitempty" tf:"-"`
+	DatabaseSelector *v2.NamespacedSelector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// (Boolean) Enable stdout/stderr fast path logging for anonyous stored procs. This is a public parameter (similar to LOG_LEVEL). For more information, check ENABLE_CONSOLE_OUTPUT docs.
 	// Enable stdout/stderr fast path logging for anonyous stored procs. This is a public parameter (similar to LOG_LEVEL). For more information, check [ENABLE_CONSOLE_OUTPUT docs](https://docs.snowflake.com/en/sql-reference/parameters#enable-console-output).
@@ -262,7 +261,7 @@ type ProcedurePythonInitParameters struct {
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies that the procedure is secure. For more information about secure procedures, see [Protecting Sensitive Information with Secure UDFs and Stored Procedures](https://docs.snowflake.com/en/developer-guide/secure-udf-procedure). Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	IsSecure *string `json:"isSecure,omitempty" tf:"is_secure,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -306,11 +305,11 @@ type ProcedurePythonInitParameters struct {
 
 	// Reference to a Schema in schema to populate schema.
 	// +kubebuilder:validation:Optional
-	SchemaRef *v1.NamespacedReference `json:"schemaRef,omitempty" tf:"-"`
+	SchemaRef *v2.NamespacedReference `json:"schemaRef,omitempty" tf:"-"`
 
 	// Selector for a Schema in schema to populate schema.
 	// +kubebuilder:validation:Optional
-	SchemaSelector *v1.NamespacedSelector `json:"schemaSelector,omitempty" tf:"-"`
+	SchemaSelector *v2.NamespacedSelector `json:"schemaSelector,omitempty" tf:"-"`
 
 	// (Block Set) Assigns the names of secrets to variables so that you can use the variables to reference the secrets when retrieving information from secrets in handler code. Secrets you specify here must be allowed by the external access integration specified as a value of this CREATE FUNCTION command’s EXTERNAL_ACCESS_INTEGRATIONS parameter. (see below for nested schema)
 	// Assigns the names of [secrets](https://docs.snowflake.com/en/sql-reference/sql/create-secret) to variables so that you can use the variables to reference the secrets when retrieving information from secrets in handler code. Secrets you specify here must be allowed by the [external access integration](https://docs.snowflake.com/en/sql-reference/sql/create-external-access-integration) specified as a value of this CREATE FUNCTION command’s EXTERNAL_ACCESS_INTEGRATIONS parameter.
@@ -371,7 +370,7 @@ type ProcedurePythonObservation struct {
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies that the procedure is secure. For more information about secure procedures, see [Protecting Sensitive Information with Secure UDFs and Stored Procedures](https://docs.snowflake.com/en/developer-guide/secure-udf-procedure). Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	IsSecure *string `json:"isSecure,omitempty" tf:"is_secure,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -457,11 +456,11 @@ type ProcedurePythonParameters struct {
 
 	// Reference to a Database in database to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseRef *v1.NamespacedReference `json:"databaseRef,omitempty" tf:"-"`
+	DatabaseRef *v2.NamespacedReference `json:"databaseRef,omitempty" tf:"-"`
 
 	// Selector for a Database in database to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseSelector *v1.NamespacedSelector `json:"databaseSelector,omitempty" tf:"-"`
+	DatabaseSelector *v2.NamespacedSelector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// (Boolean) Enable stdout/stderr fast path logging for anonyous stored procs. This is a public parameter (similar to LOG_LEVEL). For more information, check ENABLE_CONSOLE_OUTPUT docs.
 	// Enable stdout/stderr fast path logging for anonyous stored procs. This is a public parameter (similar to LOG_LEVEL). For more information, check [ENABLE_CONSOLE_OUTPUT docs](https://docs.snowflake.com/en/sql-reference/parameters#enable-console-output).
@@ -494,7 +493,7 @@ type ProcedurePythonParameters struct {
 	// +kubebuilder:validation:Optional
 	IsSecure *string `json:"isSecure,omitempty" tf:"is_secure,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	// +kubebuilder:validation:Optional
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
@@ -548,11 +547,11 @@ type ProcedurePythonParameters struct {
 
 	// Reference to a Schema in schema to populate schema.
 	// +kubebuilder:validation:Optional
-	SchemaRef *v1.NamespacedReference `json:"schemaRef,omitempty" tf:"-"`
+	SchemaRef *v2.NamespacedReference `json:"schemaRef,omitempty" tf:"-"`
 
 	// Selector for a Schema in schema to populate schema.
 	// +kubebuilder:validation:Optional
-	SchemaSelector *v1.NamespacedSelector `json:"schemaSelector,omitempty" tf:"-"`
+	SchemaSelector *v2.NamespacedSelector `json:"schemaSelector,omitempty" tf:"-"`
 
 	// (Block Set) Assigns the names of secrets to variables so that you can use the variables to reference the secrets when retrieving information from secrets in handler code. Secrets you specify here must be allowed by the external access integration specified as a value of this CREATE FUNCTION command’s EXTERNAL_ACCESS_INTEGRATIONS parameter. (see below for nested schema)
 	// Assigns the names of [secrets](https://docs.snowflake.com/en/sql-reference/sql/create-secret) to variables so that you can use the variables to reference the secrets when retrieving information from secrets in handler code. Secrets you specify here must be allowed by the [external access integration](https://docs.snowflake.com/en/sql-reference/sql/create-external-access-integration) specified as a value of this CREATE FUNCTION command’s EXTERNAL_ACCESS_INTEGRATIONS parameter.
@@ -705,8 +704,8 @@ type ProcedurePythonSpec struct {
 
 // ProcedurePythonStatus defines the observed state of ProcedurePython.
 type ProcedurePythonStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ProcedurePythonObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ProcedurePythonObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

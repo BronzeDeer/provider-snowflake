@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterAccountRoleGrantInitParameters struct {
@@ -66,8 +66,8 @@ type ClusterAccountRoleGrantParameters struct {
 
 // ClusterAccountRoleGrantSpec defines the desired state of ClusterAccountRoleGrant
 type ClusterAccountRoleGrantSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterAccountRoleGrantParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterAccountRoleGrantParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -83,8 +83,8 @@ type ClusterAccountRoleGrantSpec struct {
 
 // ClusterAccountRoleGrantStatus defines the observed state of ClusterAccountRoleGrant.
 type ClusterAccountRoleGrantStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterAccountRoleGrantObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterAccountRoleGrantObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

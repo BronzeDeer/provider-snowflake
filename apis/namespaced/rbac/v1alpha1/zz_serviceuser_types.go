@@ -10,8 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
-	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type AbortDetachedQueryInitParameters struct {
@@ -68,7 +67,7 @@ type AwsInitParameters struct {
 	// The ARN of the AWS IAM role to use for workload identity federation.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// (String) The Azure issuer URL.
+	// based (GetWebIdentityToken) workload identity federation.
 	// The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 }
@@ -79,7 +78,7 @@ type AwsObservation struct {
 	// The ARN of the AWS IAM role to use for workload identity federation.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// (String) The Azure issuer URL.
+	// based (GetWebIdentityToken) workload identity federation.
 	// The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 }
@@ -91,7 +90,7 @@ type AwsParameters struct {
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn" tf:"arn,omitempty"`
 
-	// (String) The Azure issuer URL.
+	// based (GetWebIdentityToken) workload identity federation.
 	// The AWS issuer URL. Required for JWT-based (GetWebIdentityToken) workload identity federation.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
@@ -99,7 +98,7 @@ type AwsParameters struct {
 
 type AzureInitParameters struct {
 
-	// (String) The Azure issuer URL.
+	// based (GetWebIdentityToken) workload identity federation.
 	// The Azure issuer URL.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -110,7 +109,7 @@ type AzureInitParameters struct {
 
 type AzureObservation struct {
 
-	// (String) The Azure issuer URL.
+	// based (GetWebIdentityToken) workload identity federation.
 	// The Azure issuer URL.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -121,7 +120,7 @@ type AzureObservation struct {
 
 type AzureParameters struct {
 
-	// (String) The Azure issuer URL.
+	// based (GetWebIdentityToken) workload identity federation.
 	// The Azure issuer URL.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
@@ -913,7 +912,7 @@ type OdbcTreatDecimalAsIntParameters struct {
 
 type OidcInitParameters struct {
 
-	// (String) The Azure issuer URL.
+	// based (GetWebIdentityToken) workload identity federation.
 	// The OIDC issuer URL.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -928,7 +927,7 @@ type OidcInitParameters struct {
 
 type OidcObservation struct {
 
-	// (String) The Azure issuer URL.
+	// based (GetWebIdentityToken) workload identity federation.
 	// The OIDC issuer URL.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -943,7 +942,7 @@ type OidcObservation struct {
 
 type OidcParameters struct {
 
-	// (String) The Azure issuer URL.
+	// based (GetWebIdentityToken) workload identity federation.
 	// The OIDC issuer URL.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
@@ -1039,7 +1038,7 @@ type ParametersObservation struct {
 	// (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
 	LockTimeout []LockTimeoutObservation `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	LogEventLevel []LogEventLevelObservation `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
 	// (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Messages at the specified level (and at more severe levels) are ingested. For more information about log levels, see Setting log level. For more information, check LOG_LEVEL docs.
@@ -1365,11 +1364,11 @@ type ServiceUserInitParameters struct {
 
 	// Reference to a AccountRole in rbac to populate defaultRole.
 	// +kubebuilder:validation:Optional
-	DefaultRoleRef *v1.NamespacedReference `json:"defaultRoleRef,omitempty" tf:"-"`
+	DefaultRoleRef *v2.NamespacedReference `json:"defaultRoleRef,omitempty" tf:"-"`
 
 	// Selector for a AccountRole in rbac to populate defaultRole.
 	// +kubebuilder:validation:Optional
-	DefaultRoleSelector *v1.NamespacedSelector `json:"defaultRoleSelector,omitempty" tf:"-"`
+	DefaultRoleSelector *v2.NamespacedSelector `json:"defaultRoleSelector,omitempty" tf:"-"`
 
 	// insensitive): DEFAULT | NONE | ALL. More information can be found in doc.
 	// (Default: `DEFAULT`) Specifies the secondary roles that are active for the user’s session upon login. Valid values are (case-insensitive): `DEFAULT` | `NONE` | `ALL`. More information can be found in [doc](https://docs.snowflake.com/en/sql-reference/sql/create-user#optional-object-properties-objectproperties).
@@ -1382,11 +1381,11 @@ type ServiceUserInitParameters struct {
 
 	// Reference to a Warehouse in warehouse to populate defaultWarehouse.
 	// +kubebuilder:validation:Optional
-	DefaultWarehouseRef *v1.NamespacedReference `json:"defaultWarehouseRef,omitempty" tf:"-"`
+	DefaultWarehouseRef *v2.NamespacedReference `json:"defaultWarehouseRef,omitempty" tf:"-"`
 
 	// Selector for a Warehouse in warehouse to populate defaultWarehouse.
 	// +kubebuilder:validation:Optional
-	DefaultWarehouseSelector *v1.NamespacedSelector `json:"defaultWarehouseSelector,omitempty" tf:"-"`
+	DefaultWarehouseSelector *v2.NamespacedSelector `json:"defaultWarehouseSelector,omitempty" tf:"-"`
 
 	// party services to authenticate as this user. Only applicable for service users and legacy service users. This field can be only used when USER_ENABLE_DEFAULT_WORKLOAD_IDENTITY option is specified in provider block in the experimental_features_enabled field. If this feature is not enabled, attempting to set this field will result in an error. The provider will not get WIF information from Snowflake. (see below for nested schema)
 	// Configures the default workload identity for the user. This is used for workload identity federation to allow third-party services to authenticate as this user. Only applicable for service users and legacy service users. This field can be only used when `USER_ENABLE_DEFAULT_WORKLOAD_IDENTITY` option is specified in provider block in the [`experimental_features_enabled`](../#experimental_features_enabled-1) field. If this feature is not enabled, attempting to set this field will result in an error. The provider will not get WIF information from Snowflake.
@@ -1402,7 +1401,7 @@ type ServiceUserInitParameters struct {
 
 	// (String, Sensitive) Email address for the user.
 	// Email address for the user.
-	EmailSecretRef *v1.LocalSecretKeySelector `json:"emailSecretRef,omitempty" tf:"-"`
+	EmailSecretRef *v2.LocalSecretKeySelector `json:"emailSecretRef,omitempty" tf:"-"`
 
 	// (Boolean) Specifies whether to set the schema for unloaded Parquet files based on the logical column data types (i.e. the types in the unload SQL query or source table) or on the unloaded column values (i.e. the smallest data types and precision that support the values in the output columns of the unload SQL statement or source table). For more information, check ENABLE_UNLOAD_PHYSICAL_TYPE_OPTIMIZATION docs.
 	// Specifies whether to set the schema for unloaded Parquet files based on the logical column data types (i.e. the types in the unload SQL query or source table) or on the unloaded column values (i.e. the smallest data types and precision that support the values in the output columns of the unload SQL statement or source table). For more information, check [ENABLE_UNLOAD_PHYSICAL_TYPE_OPTIMIZATION docs](https://docs.snowflake.com/en/sql-reference/parameters#enable-unload-physical-type-optimization).
@@ -1448,7 +1447,7 @@ type ServiceUserInitParameters struct {
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -1458,7 +1457,7 @@ type ServiceUserInitParameters struct {
 
 	// insensitive.
 	// The name users use to log in. If not supplied, snowflake will use name instead. Login names are always case-insensitive.
-	LoginNameSecretRef *v1.LocalSecretKeySelector `json:"loginNameSecretRef,omitempty" tf:"-"`
+	LoginNameSecretRef *v2.LocalSecretKeySelector `json:"loginNameSecretRef,omitempty" tf:"-"`
 
 	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. Note because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`-1`)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. **Note** because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
@@ -1745,7 +1744,7 @@ type ServiceUserObservation struct {
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -2000,11 +1999,11 @@ type ServiceUserParameters struct {
 
 	// Reference to a AccountRole in rbac to populate defaultRole.
 	// +kubebuilder:validation:Optional
-	DefaultRoleRef *v1.NamespacedReference `json:"defaultRoleRef,omitempty" tf:"-"`
+	DefaultRoleRef *v2.NamespacedReference `json:"defaultRoleRef,omitempty" tf:"-"`
 
 	// Selector for a AccountRole in rbac to populate defaultRole.
 	// +kubebuilder:validation:Optional
-	DefaultRoleSelector *v1.NamespacedSelector `json:"defaultRoleSelector,omitempty" tf:"-"`
+	DefaultRoleSelector *v2.NamespacedSelector `json:"defaultRoleSelector,omitempty" tf:"-"`
 
 	// insensitive): DEFAULT | NONE | ALL. More information can be found in doc.
 	// (Default: `DEFAULT`) Specifies the secondary roles that are active for the user’s session upon login. Valid values are (case-insensitive): `DEFAULT` | `NONE` | `ALL`. More information can be found in [doc](https://docs.snowflake.com/en/sql-reference/sql/create-user#optional-object-properties-objectproperties).
@@ -2019,11 +2018,11 @@ type ServiceUserParameters struct {
 
 	// Reference to a Warehouse in warehouse to populate defaultWarehouse.
 	// +kubebuilder:validation:Optional
-	DefaultWarehouseRef *v1.NamespacedReference `json:"defaultWarehouseRef,omitempty" tf:"-"`
+	DefaultWarehouseRef *v2.NamespacedReference `json:"defaultWarehouseRef,omitempty" tf:"-"`
 
 	// Selector for a Warehouse in warehouse to populate defaultWarehouse.
 	// +kubebuilder:validation:Optional
-	DefaultWarehouseSelector *v1.NamespacedSelector `json:"defaultWarehouseSelector,omitempty" tf:"-"`
+	DefaultWarehouseSelector *v2.NamespacedSelector `json:"defaultWarehouseSelector,omitempty" tf:"-"`
 
 	// party services to authenticate as this user. Only applicable for service users and legacy service users. This field can be only used when USER_ENABLE_DEFAULT_WORKLOAD_IDENTITY option is specified in provider block in the experimental_features_enabled field. If this feature is not enabled, attempting to set this field will result in an error. The provider will not get WIF information from Snowflake. (see below for nested schema)
 	// Configures the default workload identity for the user. This is used for workload identity federation to allow third-party services to authenticate as this user. Only applicable for service users and legacy service users. This field can be only used when `USER_ENABLE_DEFAULT_WORKLOAD_IDENTITY` option is specified in provider block in the [`experimental_features_enabled`](../#experimental_features_enabled-1) field. If this feature is not enabled, attempting to set this field will result in an error. The provider will not get WIF information from Snowflake.
@@ -2043,7 +2042,7 @@ type ServiceUserParameters struct {
 	// (String, Sensitive) Email address for the user.
 	// Email address for the user.
 	// +kubebuilder:validation:Optional
-	EmailSecretRef *v1.LocalSecretKeySelector `json:"emailSecretRef,omitempty" tf:"-"`
+	EmailSecretRef *v2.LocalSecretKeySelector `json:"emailSecretRef,omitempty" tf:"-"`
 
 	// (Boolean) Specifies whether to set the schema for unloaded Parquet files based on the logical column data types (i.e. the types in the unload SQL query or source table) or on the unloaded column values (i.e. the smallest data types and precision that support the values in the output columns of the unload SQL statement or source table). For more information, check ENABLE_UNLOAD_PHYSICAL_TYPE_OPTIMIZATION docs.
 	// Specifies whether to set the schema for unloaded Parquet files based on the logical column data types (i.e. the types in the unload SQL query or source table) or on the unloaded column values (i.e. the smallest data types and precision that support the values in the output columns of the unload SQL statement or source table). For more information, check [ENABLE_UNLOAD_PHYSICAL_TYPE_OPTIMIZATION docs](https://docs.snowflake.com/en/sql-reference/parameters#enable-unload-physical-type-optimization).
@@ -2100,7 +2099,7 @@ type ServiceUserParameters struct {
 	// +kubebuilder:validation:Optional
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	// +kubebuilder:validation:Optional
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
@@ -2113,7 +2112,7 @@ type ServiceUserParameters struct {
 	// insensitive.
 	// The name users use to log in. If not supplied, snowflake will use name instead. Login names are always case-insensitive.
 	// +kubebuilder:validation:Optional
-	LoginNameSecretRef *v1.LocalSecretKeySelector `json:"loginNameSecretRef,omitempty" tf:"-"`
+	LoginNameSecretRef *v2.LocalSecretKeySelector `json:"loginNameSecretRef,omitempty" tf:"-"`
 
 	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. Note because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`-1`)) Specifies the number of minutes until the temporary lock on the user login is cleared. To protect against unauthorized user login, Snowflake places a temporary lock on a user after five consecutive unsuccessful login attempts. When creating a user, this property can be set to prevent them from logging in until the specified amount of time passes. To remove a lock immediately for a user, specify a value of 0 for this parameter. **Note** because this value changes continuously after setting it, the provider is currently NOT handling the external changes to it. External changes for this field won't be detected.
@@ -2933,8 +2932,8 @@ type ServiceUserSpec struct {
 
 // ServiceUserStatus defines the observed state of ServiceUser.
 type ServiceUserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServiceUserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ServiceUserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

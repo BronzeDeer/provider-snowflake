@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterAccountRoleInitParameters struct {
@@ -69,6 +69,7 @@ type ShowOutputObservation struct {
 	// (Boolean)
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
+	// (Boolean)
 	IsFromOrganizationUserGroup *bool `json:"isFromOrganizationUserGroup,omitempty" tf:"is_from_organization_user_group,omitempty"`
 
 	// (Boolean)
@@ -86,8 +87,8 @@ type ShowOutputParameters struct {
 
 // ClusterAccountRoleSpec defines the desired state of ClusterAccountRole
 type ClusterAccountRoleSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterAccountRoleParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterAccountRoleParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -103,8 +104,8 @@ type ClusterAccountRoleSpec struct {
 
 // ClusterAccountRoleStatus defines the observed state of ClusterAccountRole.
 type ClusterAccountRoleStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterAccountRoleObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterAccountRoleObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

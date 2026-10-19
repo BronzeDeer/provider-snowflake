@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type ClusterUserInitParameters struct {
@@ -89,11 +89,11 @@ type ClusterUserInitParameters struct {
 
 	// Reference to a ClusterAccountRole in rbac to populate defaultRole.
 	// +kubebuilder:validation:Optional
-	DefaultRoleRef *v1.Reference `json:"defaultRoleRef,omitempty" tf:"-"`
+	DefaultRoleRef *v2.Reference `json:"defaultRoleRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterAccountRole in rbac to populate defaultRole.
 	// +kubebuilder:validation:Optional
-	DefaultRoleSelector *v1.Selector `json:"defaultRoleSelector,omitempty" tf:"-"`
+	DefaultRoleSelector *v2.Selector `json:"defaultRoleSelector,omitempty" tf:"-"`
 
 	// insensitive): DEFAULT | NONE | ALL. More information can be found in doc.
 	// (Default: `DEFAULT`) Specifies the secondary roles that are active for the user’s session upon login. Valid values are (case-insensitive): `DEFAULT` | `NONE` | `ALL`. More information can be found in [doc](https://docs.snowflake.com/en/sql-reference/sql/create-user#optional-object-properties-objectproperties).
@@ -106,11 +106,11 @@ type ClusterUserInitParameters struct {
 
 	// Reference to a ClusterWarehouse in warehouse to populate defaultWarehouse.
 	// +kubebuilder:validation:Optional
-	DefaultWarehouseRef *v1.Reference `json:"defaultWarehouseRef,omitempty" tf:"-"`
+	DefaultWarehouseRef *v2.Reference `json:"defaultWarehouseRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterWarehouse in warehouse to populate defaultWarehouse.
 	// +kubebuilder:validation:Optional
-	DefaultWarehouseSelector *v1.Selector `json:"defaultWarehouseSelector,omitempty" tf:"-"`
+	DefaultWarehouseSelector *v2.Selector `json:"defaultWarehouseSelector,omitempty" tf:"-"`
 
 	// uses special value that cannot be set in the configuration manually (default)) Allows enabling or disabling multi-factor authentication. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value. External changes for this field won't be detected.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Allows enabling or disabling [multi-factor authentication](https://docs.snowflake.com/en/user-guide/security-mfa). Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value. External changes for this field won't be detected.
@@ -126,7 +126,7 @@ type ClusterUserInitParameters struct {
 
 	// (String, Sensitive) Email address for the user.
 	// Email address for the user.
-	EmailSecretRef *v1.SecretKeySelector `json:"emailSecretRef,omitempty" tf:"-"`
+	EmailSecretRef *v2.SecretKeySelector `json:"emailSecretRef,omitempty" tf:"-"`
 
 	// (Boolean) Specifies whether to set the schema for unloaded Parquet files based on the logical column data types (i.e. the types in the unload SQL query or source table) or on the unloaded column values (i.e. the smallest data types and precision that support the values in the output columns of the unload SQL statement or source table). For more information, check ENABLE_UNLOAD_PHYSICAL_TYPE_OPTIMIZATION docs.
 	// Specifies whether to set the schema for unloaded Parquet files based on the logical column data types (i.e. the types in the unload SQL query or source table) or on the unloaded column values (i.e. the smallest data types and precision that support the values in the output columns of the unload SQL statement or source table). For more information, check [ENABLE_UNLOAD_PHYSICAL_TYPE_OPTIMIZATION docs](https://docs.snowflake.com/en/sql-reference/parameters#enable-unload-physical-type-optimization).
@@ -146,7 +146,7 @@ type ClusterUserInitParameters struct {
 
 	// (String, Sensitive) First name of the user.
 	// First name of the user.
-	FirstNameSecretRef *v1.SecretKeySelector `json:"firstNameSecretRef,omitempty" tf:"-"`
+	FirstNameSecretRef *v2.SecretKeySelector `json:"firstNameSecretRef,omitempty" tf:"-"`
 
 	// (String) Display format for GEOGRAPHY values. For more information, check GEOGRAPHY_OUTPUT_FORMAT docs.
 	// Display format for [GEOGRAPHY values](https://docs.snowflake.com/en/sql-reference/data-types-geospatial.html#label-data-types-geography). For more information, check [GEOGRAPHY_OUTPUT_FORMAT docs](https://docs.snowflake.com/en/sql-reference/parameters#geography-output-format).
@@ -174,13 +174,13 @@ type ClusterUserInitParameters struct {
 
 	// (String, Sensitive) Last name of the user.
 	// Last name of the user.
-	LastNameSecretRef *v1.SecretKeySelector `json:"lastNameSecretRef,omitempty" tf:"-"`
+	LastNameSecretRef *v2.SecretKeySelector `json:"lastNameSecretRef,omitempty" tf:"-"`
 
 	// (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -190,11 +190,11 @@ type ClusterUserInitParameters struct {
 
 	// insensitive.
 	// The name users use to log in. If not supplied, snowflake will use name instead. Login names are always case-insensitive.
-	LoginNameSecretRef *v1.SecretKeySelector `json:"loginNameSecretRef,omitempty" tf:"-"`
+	LoginNameSecretRef *v2.SecretKeySelector `json:"loginNameSecretRef,omitempty" tf:"-"`
 
 	// (String, Sensitive) Middle name of the user.
 	// Middle name of the user.
-	MiddleNameSecretRef *v1.SecretKeySelector `json:"middleNameSecretRef,omitempty" tf:"-"`
+	MiddleNameSecretRef *v2.SecretKeySelector `json:"middleNameSecretRef,omitempty" tf:"-"`
 
 	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`-1`)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
@@ -225,7 +225,7 @@ type ClusterUserInitParameters struct {
 	OdbcTreatDecimalAsInt *bool `json:"odbcTreatDecimalAsInt,omitempty" tf:"odbc_treat_decimal_as_int,omitempty"`
 
 	// Password for the user. Use carefully. External changes for this field won't be detected.
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// (Boolean) Specifies whether to prevent data unload operations to internal (Snowflake) stages using COPY INTO  statements. For more information, check PREVENT_UNLOAD_TO_INTERNAL_STAGES docs.
 	// Specifies whether to prevent data unload operations to internal (Snowflake) stages using [COPY INTO <location>](https://docs.snowflake.com/en/sql-reference/sql/copy-into-location) statements. For more information, check [PREVENT_UNLOAD_TO_INTERNAL_STAGES docs](https://docs.snowflake.com/en/sql-reference/parameters#prevent-unload-to-internal-stages).
@@ -492,7 +492,7 @@ type ClusterUserObservation struct {
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -755,11 +755,11 @@ type ClusterUserParameters struct {
 
 	// Reference to a ClusterAccountRole in rbac to populate defaultRole.
 	// +kubebuilder:validation:Optional
-	DefaultRoleRef *v1.Reference `json:"defaultRoleRef,omitempty" tf:"-"`
+	DefaultRoleRef *v2.Reference `json:"defaultRoleRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterAccountRole in rbac to populate defaultRole.
 	// +kubebuilder:validation:Optional
-	DefaultRoleSelector *v1.Selector `json:"defaultRoleSelector,omitempty" tf:"-"`
+	DefaultRoleSelector *v2.Selector `json:"defaultRoleSelector,omitempty" tf:"-"`
 
 	// insensitive): DEFAULT | NONE | ALL. More information can be found in doc.
 	// (Default: `DEFAULT`) Specifies the secondary roles that are active for the user’s session upon login. Valid values are (case-insensitive): `DEFAULT` | `NONE` | `ALL`. More information can be found in [doc](https://docs.snowflake.com/en/sql-reference/sql/create-user#optional-object-properties-objectproperties).
@@ -774,11 +774,11 @@ type ClusterUserParameters struct {
 
 	// Reference to a ClusterWarehouse in warehouse to populate defaultWarehouse.
 	// +kubebuilder:validation:Optional
-	DefaultWarehouseRef *v1.Reference `json:"defaultWarehouseRef,omitempty" tf:"-"`
+	DefaultWarehouseRef *v2.Reference `json:"defaultWarehouseRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterWarehouse in warehouse to populate defaultWarehouse.
 	// +kubebuilder:validation:Optional
-	DefaultWarehouseSelector *v1.Selector `json:"defaultWarehouseSelector,omitempty" tf:"-"`
+	DefaultWarehouseSelector *v2.Selector `json:"defaultWarehouseSelector,omitempty" tf:"-"`
 
 	// uses special value that cannot be set in the configuration manually (default)) Allows enabling or disabling multi-factor authentication. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value. External changes for this field won't be detected.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Allows enabling or disabling [multi-factor authentication](https://docs.snowflake.com/en/user-guide/security-mfa). Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value. External changes for this field won't be detected.
@@ -798,7 +798,7 @@ type ClusterUserParameters struct {
 	// (String, Sensitive) Email address for the user.
 	// Email address for the user.
 	// +kubebuilder:validation:Optional
-	EmailSecretRef *v1.SecretKeySelector `json:"emailSecretRef,omitempty" tf:"-"`
+	EmailSecretRef *v2.SecretKeySelector `json:"emailSecretRef,omitempty" tf:"-"`
 
 	// (Boolean) Specifies whether to set the schema for unloaded Parquet files based on the logical column data types (i.e. the types in the unload SQL query or source table) or on the unloaded column values (i.e. the smallest data types and precision that support the values in the output columns of the unload SQL statement or source table). For more information, check ENABLE_UNLOAD_PHYSICAL_TYPE_OPTIMIZATION docs.
 	// Specifies whether to set the schema for unloaded Parquet files based on the logical column data types (i.e. the types in the unload SQL query or source table) or on the unloaded column values (i.e. the smallest data types and precision that support the values in the output columns of the unload SQL statement or source table). For more information, check [ENABLE_UNLOAD_PHYSICAL_TYPE_OPTIMIZATION docs](https://docs.snowflake.com/en/sql-reference/parameters#enable-unload-physical-type-optimization).
@@ -823,7 +823,7 @@ type ClusterUserParameters struct {
 	// (String, Sensitive) First name of the user.
 	// First name of the user.
 	// +kubebuilder:validation:Optional
-	FirstNameSecretRef *v1.SecretKeySelector `json:"firstNameSecretRef,omitempty" tf:"-"`
+	FirstNameSecretRef *v2.SecretKeySelector `json:"firstNameSecretRef,omitempty" tf:"-"`
 
 	// (String) Display format for GEOGRAPHY values. For more information, check GEOGRAPHY_OUTPUT_FORMAT docs.
 	// Display format for [GEOGRAPHY values](https://docs.snowflake.com/en/sql-reference/data-types-geospatial.html#label-data-types-geography). For more information, check [GEOGRAPHY_OUTPUT_FORMAT docs](https://docs.snowflake.com/en/sql-reference/parameters#geography-output-format).
@@ -858,14 +858,14 @@ type ClusterUserParameters struct {
 	// (String, Sensitive) Last name of the user.
 	// Last name of the user.
 	// +kubebuilder:validation:Optional
-	LastNameSecretRef *v1.SecretKeySelector `json:"lastNameSecretRef,omitempty" tf:"-"`
+	LastNameSecretRef *v2.SecretKeySelector `json:"lastNameSecretRef,omitempty" tf:"-"`
 
 	// (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
 	// Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check [LOCK_TIMEOUT docs](https://docs.snowflake.com/en/sql-reference/parameters#lock-timeout).
 	// +kubebuilder:validation:Optional
 	LockTimeout *float64 `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`. For more information, check [LOG_EVENT_LEVEL docs](https://docs.snowflake.com/en/sql-reference/parameters#log-event-level).
 	// +kubebuilder:validation:Optional
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
@@ -878,12 +878,12 @@ type ClusterUserParameters struct {
 	// insensitive.
 	// The name users use to log in. If not supplied, snowflake will use name instead. Login names are always case-insensitive.
 	// +kubebuilder:validation:Optional
-	LoginNameSecretRef *v1.SecretKeySelector `json:"loginNameSecretRef,omitempty" tf:"-"`
+	LoginNameSecretRef *v2.SecretKeySelector `json:"loginNameSecretRef,omitempty" tf:"-"`
 
 	// (String, Sensitive) Middle name of the user.
 	// Middle name of the user.
 	// +kubebuilder:validation:Optional
-	MiddleNameSecretRef *v1.SecretKeySelector `json:"middleNameSecretRef,omitempty" tf:"-"`
+	MiddleNameSecretRef *v2.SecretKeySelector `json:"middleNameSecretRef,omitempty" tf:"-"`
 
 	// uses special value that cannot be set in the configuration manually (-1)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`-1`)) Specifies the number of minutes to temporarily bypass MFA for the user. This property can be used to allow a MFA-enrolled user to temporarily bypass MFA during login in the event that their MFA device is not available. External changes for this field won't be detected.
@@ -922,7 +922,7 @@ type ClusterUserParameters struct {
 
 	// Password for the user. Use carefully. External changes for this field won't be detected.
 	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+	PasswordSecretRef *v2.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// (Boolean) Specifies whether to prevent data unload operations to internal (Snowflake) stages using COPY INTO  statements. For more information, check PREVENT_UNLOAD_TO_INTERNAL_STAGES docs.
 	// Specifies whether to prevent data unload operations to internal (Snowflake) stages using [COPY INTO <location>](https://docs.snowflake.com/en/sql-reference/sql/copy-into-location) statements. For more information, check [PREVENT_UNLOAD_TO_INTERNAL_STAGES docs](https://docs.snowflake.com/en/sql-reference/parameters#prevent-unload-to-internal-stages).
@@ -1155,7 +1155,7 @@ type ClusterUserParametersObservation struct {
 	// (Number) Number of seconds to wait while trying to lock a resource, before timing out and aborting the statement. For more information, check LOCK_TIMEOUT docs.
 	LockTimeout []ParametersLockTimeoutObservation `json:"lockTimeout,omitempty" tf:"lock_timeout,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF. For more information, check LOG_EVENT_LEVEL docs.
 	LogEventLevel []ParametersLogEventLevelObservation `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
 	// (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Messages at the specified level (and at more severe levels) are ingested. For more information about log levels, see Setting log level. For more information, check LOG_LEVEL docs.
@@ -2774,8 +2774,8 @@ type ParametersWeekStartParameters struct {
 
 // ClusterUserSpec defines the desired state of ClusterUser
 type ClusterUserSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterUserParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterUserParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -2791,8 +2791,8 @@ type ClusterUserSpec struct {
 
 // ClusterUserStatus defines the observed state of ClusterUser.
 type ClusterUserStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterUserObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterUserObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

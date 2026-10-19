@@ -10,7 +10,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
+	v2 "github.com/crossplane/crossplane/apis/v2/core/v2"
 )
 
 type CatalogInitParameters struct {
@@ -58,19 +58,21 @@ type ClusterSchemaInitParameters struct {
 
 	// Reference to a ClusterDatabase in database to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseRef *v1.Reference `json:"databaseRef,omitempty" tf:"-"`
+	DatabaseRef *v2.Reference `json:"databaseRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterDatabase in database to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
+	DatabaseSelector *v2.Selector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// (String) Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see collation specification.
 	// Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
 	DefaultDdlCollation *string `json:"defaultDdlCollation,omitempty" tf:"default_ddl_collation,omitempty"`
 
+	// (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	DefaultNotebookComputePoolCPU *string `json:"defaultNotebookComputePoolCpu,omitempty" tf:"default_notebook_compute_pool_cpu,omitempty"`
 
+	// (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	DefaultNotebookComputePoolGpu *string `json:"defaultNotebookComputePoolGpu,omitempty" tf:"default_notebook_compute_pool_gpu,omitempty"`
 
@@ -86,7 +88,7 @@ type ClusterSchemaInitParameters struct {
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies the schema as transient. Transient schemas do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	IsTransient *string `json:"isTransient,omitempty" tf:"is_transient,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -169,9 +171,11 @@ type ClusterSchemaObservation struct {
 	// Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
 	DefaultDdlCollation *string `json:"defaultDdlCollation,omitempty" tf:"default_ddl_collation,omitempty"`
 
+	// (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	DefaultNotebookComputePoolCPU *string `json:"defaultNotebookComputePoolCpu,omitempty" tf:"default_notebook_compute_pool_cpu,omitempty"`
 
+	// (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	DefaultNotebookComputePoolGpu *string `json:"defaultNotebookComputePoolGpu,omitempty" tf:"default_notebook_compute_pool_gpu,omitempty"`
 
@@ -198,7 +202,7 @@ type ClusterSchemaObservation struct {
 	// (Default: fallback to Snowflake default - uses special value that cannot be set in the configuration manually (`default`)) Specifies the schema as transient. Transient schemas do not have a Fail-safe period so they do not incur additional storage costs once they leave Time Travel; however, this means they are also not protected by Fail-safe in the event of a data loss. Available options are: "true" or "false". When the value is not set in the configuration the provider will put "default" there which means to use the Snowflake default for this value.
 	IsTransient *string `json:"isTransient,omitempty" tf:"is_transient,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
@@ -292,21 +296,23 @@ type ClusterSchemaParameters struct {
 
 	// Reference to a ClusterDatabase in database to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseRef *v1.Reference `json:"databaseRef,omitempty" tf:"-"`
+	DatabaseRef *v2.Reference `json:"databaseRef,omitempty" tf:"-"`
 
 	// Selector for a ClusterDatabase in database to populate database.
 	// +kubebuilder:validation:Optional
-	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
+	DatabaseSelector *v2.Selector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// (String) Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see collation specification.
 	// Specifies a default collation specification for all schemas and tables added to the database. It can be overridden on schema or table level. For more information, see [collation specification](https://docs.snowflake.com/en/sql-reference/collation#label-collation-specification).
 	// +kubebuilder:validation:Optional
 	DefaultDdlCollation *string `json:"defaultDdlCollation,omitempty" tf:"default_ddl_collation,omitempty"`
 
+	// (String) Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// Sets the preferred CPU compute pool used for Notebooks on CPU Container Runtime.
 	// +kubebuilder:validation:Optional
 	DefaultNotebookComputePoolCPU *string `json:"defaultNotebookComputePoolCpu,omitempty" tf:"default_notebook_compute_pool_cpu,omitempty"`
 
+	// (String) Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// Sets the preferred GPU compute pool used for Notebooks on GPU Container Runtime.
 	// +kubebuilder:validation:Optional
 	DefaultNotebookComputePoolGpu *string `json:"defaultNotebookComputePoolGpu,omitempty" tf:"default_notebook_compute_pool_gpu,omitempty"`
@@ -326,7 +332,7 @@ type ClusterSchemaParameters struct {
 	// +kubebuilder:validation:Optional
 	IsTransient *string `json:"isTransient,omitempty" tf:"is_transient,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
 	// Specifies the severity level of log events (rows with record type EVENT) that should be ingested and made available in the active event table. Log events at the specified level (and at more severe levels) are ingested. For more information, see [LOG_EVENT_LEVEL](https://docs.snowflake.com/en/sql-reference/parameters#log_event_level). Valid values are (case-insensitive): `TRACE` | `DEBUG` | `INFO` | `WARN` | `ERROR` | `FATAL` | `OFF`.
 	// +kubebuilder:validation:Optional
 	LogEventLevel *string `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
@@ -608,7 +614,7 @@ type ParametersObservation struct {
 	// (String) The database parameter that specifies the default external volume to use for Iceberg tables. For more information, see EXTERNAL_VOLUME.
 	ExternalVolume []ExternalVolumeObservation `json:"externalVolume,omitempty" tf:"external_volume,omitempty"`
 
-	// (String)
+	// insensitive): TRACE | DEBUG | INFO | WARN | ERROR | FATAL | OFF.
 	LogEventLevel []LogEventLevelObservation `json:"logEventLevel,omitempty" tf:"log_event_level,omitempty"`
 
 	// (String) Specifies the severity level of messages that should be ingested and made available in the active event table. Valid options are: [TRACE DEBUG INFO WARN ERROR FATAL OFF]. Messages at the specified level (and at more severe levels) are ingested. For more information, see LOG_LEVEL.
@@ -935,8 +941,8 @@ type UserTaskTimeoutMsParameters struct {
 
 // ClusterSchemaSpec defines the desired state of ClusterSchema
 type ClusterSchemaSpec struct {
-	v1.ResourceSpec `json:",inline"`
-	ForProvider     ClusterSchemaParameters `json:"forProvider"`
+	v2.ClusterManagedResourceSpec `json:",inline"`
+	ForProvider                   ClusterSchemaParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -952,8 +958,8 @@ type ClusterSchemaSpec struct {
 
 // ClusterSchemaStatus defines the observed state of ClusterSchema.
 type ClusterSchemaStatus struct {
-	v1.ResourceStatus `json:",inline"`
-	AtProvider        ClusterSchemaObservation `json:"atProvider,omitempty"`
+	v2.ManagedResourceStatus `json:",inline"`
+	AtProvider               ClusterSchemaObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
